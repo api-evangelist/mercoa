@@ -1,0 +1,110 @@
+aid: mercoa
+name: Mercoa
+description: Mercoa is an embedded AP and AR platform that vertical SaaS companies use to launch AI-powered BillPay and invoicing inside their own products. The platform handles bill ingestion via intelligent email inboxes, vendor onboarding, approval workflows, payment scheduling, branded invoicing, AI-driven collection reminders, and disbursement across ACH, check, virtual card, and BNPL. Builders can choose React components, a hosted iFrame, or pure REST APIs and SDKs depending on how much UI control they need. Mercoa publishes official SDKs for TypeScript, Python, and Java and is backed by Y Combinator. Customers monetize Mercoa through per-user pricing, transaction fees, and premium payment option margins.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Mercoa
+  - Embedded Finance
+  - Accounts Payable
+  - Accounts Receivable
+  - BillPay
+  - Invoicing
+  - Payments
+  - Vertical SaaS
+  - Vendors
+  - Approvals
+  - Disbursements
+  - Virtual Cards
+url: https://raw.githubusercontent.com/api-evangelist/mercoa/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: mercoa:mercoa-api
+    name: Mercoa API
+    description: REST API and SDK suite for embedding accounts payable and accounts receivable into vertical SaaS platforms. Exposes resources for entities, users, invoices, bills, vendors, approval policies, payment methods, and disbursements, with webhooks for event-driven workflows. Mercoa offers official SDKs for TypeScript, Python, and Java, plus React components and a hosted iFrame for white-labeled AP/AR experiences.
+    humanURL: https://docs.mercoa.com/
+    baseURL: https://api.mercoa.com
+    tags:
+      - AP
+      - AR
+      - Invoices
+      - Bills
+      - Vendors
+      - Payments
+      - Approvals
+      - Entities
+    properties:
+      - type: Documentation
+        url: https://docs.mercoa.com/
+      - type: GettingStarted
+        url: https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-1-get-api-keys
+      - type: Authentication
+        url: https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-1-get-api-keys
+      - type: SourceCode
+        url: https://github.com/mercoa-finance
+      - type: SDK
+        url: https://github.com/mercoa-finance
+      - type: SignUp
+        url: https://mercoa.com/
+    features:
+      - name: Embedded AP Workflows
+        description: Ingest bills via email or upload, run them through approval workflows, and pay vendors from inside your own SaaS UI.
+      - name: Embedded AR Workflows
+        description: Generate branded invoices, automate AI-driven reminders, manage late fees, and accept payments inside your platform.
+      - name: AI Bill Capture and Categorization
+        description: Extract data from bills and auto-categorize line items for general ledger coding.
+      - name: Vendor Onboarding
+        description: Collect vendor payment details, tax forms, and KYC information through hosted or embedded flows.
+      - name: Multi-Method Disbursements
+        description: Pay vendors via ACH, check, virtual card, wire, and BNPL through a single API.
+      - name: Approval Policies
+        description: Define multi-step approval rules per entity, amount, vendor, or GL account.
+      - name: React Components and Hosted iFrame
+        description: Drop in prebuilt UI components or a hosted iFrame for fast time to market without giving up customization.
+      - name: Webhooks
+        description: Subscribe to invoice, payment, vendor, and approval events for downstream automation.
+      - name: Multi-Entity Support
+        description: Manage many child entities under one Mercoa organization, ideal for vertical SaaS serving thousands of small businesses.
+    useCases:
+      - name: Vertical SaaS BillPay
+        description: Add BillPay as a monetized feature inside vertical SaaS platforms for industries like construction, hospitality, or healthcare.
+      - name: Embedded Invoicing
+        description: Let platform customers send branded invoices and collect payments without leaving your product.
+      - name: Marketplace Payouts
+        description: Disburse funds to vendors and suppliers on marketplaces using ACH, virtual card, or check.
+      - name: Spend Approvals
+        description: Run approval workflows for bills above certain thresholds with audit trails.
+      - name: Embedded Finance Monetization
+        description: Earn revenue per user, per transaction, and on premium payment options like virtual cards.
+    integrations:
+      - name: QuickBooks Online
+      - name: NetSuite
+      - name: Xero
+      - name: Sage Intacct
+      - name: Plaid
+      - name: Stripe
+      - name: Unit
+      - name: ACH
+      - name: Check Printing
+      - name: Virtual Cards
+      - name: Slack
+      - name: Gmail
+    authentication:
+      - type: API Key
+        description: Backend API keys issued from the Mercoa Dashboard, used server-side; not for browser exposure.
+common:
+  - type: Website
+    url: https://mercoa.com/
+  - type: Documentation
+    url: https://docs.mercoa.com/
+  - type: SourceCode
+    url: https://github.com/mercoa-finance
+  - type: SignUp
+    url: https://mercoa.com/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
