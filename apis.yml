@@ -105,6 +105,8 @@ common:
     url: https://github.com/mercoa-finance
   - type: SignUp
     url: https://mercoa.com/
+  - type: LLMsTxt
+    url: https://docs.mercoa.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
