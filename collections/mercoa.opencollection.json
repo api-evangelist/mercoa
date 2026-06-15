@@ -1,0 +1,841 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mercoa API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List entity groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entityGroups"
+          },
+          "docs": "List entity groups"
+        },
+        {
+          "info": {
+            "name": "Create entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup"
+          },
+          "docs": "Create entity group"
+        },
+        {
+          "info": {
+            "name": "Get entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get entity group"
+        },
+        {
+          "info": {
+            "name": "Update entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update entity group"
+        },
+        {
+          "info": {
+            "name": "Delete entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete entity group"
+        },
+        {
+          "info": {
+            "name": "Generate entity group token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId/token",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate entity group token"
+        },
+        {
+          "info": {
+            "name": "Add entities to group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId/addEntities",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add entities to group"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entity"
+          },
+          "docs": "List entities"
+        },
+        {
+          "info": {
+            "name": "Create entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entity"
+          },
+          "docs": "Create entity"
+        },
+        {
+          "info": {
+            "name": "Get entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entity/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get entity"
+        },
+        {
+          "info": {
+            "name": "Update entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entity/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update entity"
+        },
+        {
+          "info": {
+            "name": "Delete entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/entity/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete entity"
+        },
+        {
+          "info": {
+            "name": "Accept Mercoa TOS for entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entity/:entityId/accept-tos",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accept Mercoa TOS for entity"
+        },
+        {
+          "info": {
+            "name": "Request KYB verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entity/:entityId/request-kyb",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Request KYB verification"
+        },
+        {
+          "info": {
+            "name": "Generate entity token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entity/:entityId/token",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate entity token"
+        },
+        {
+          "info": {
+            "name": "List payee counterparties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entity/:entityId/counterparties/payees",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List payee counterparties"
+        },
+        {
+          "info": {
+            "name": "List payor counterparties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entity/:entityId/counterparties/payors",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List payor counterparties"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payment methods for entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entity/:entityId/paymentMethods",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List payment methods for entity"
+        },
+        {
+          "info": {
+            "name": "Create payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entity/:entityId/paymentMethod",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create payment method"
+        },
+        {
+          "info": {
+            "name": "Get payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entity/:entityId/paymentMethod/:paymentMethodId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paymentMethodId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get payment method"
+        },
+        {
+          "info": {
+            "name": "Update payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mercoa.com/entity/:entityId/paymentMethod/:paymentMethodId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paymentMethodId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update payment method"
+        },
+        {
+          "info": {
+            "name": "Delete payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/entity/:entityId/paymentMethod/:paymentMethodId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paymentMethodId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete payment method"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List invoices across the organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoices"
+          },
+          "docs": "List invoices across the organization"
+        },
+        {
+          "info": {
+            "name": "Bulk create invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoices"
+          },
+          "docs": "Bulk create invoices"
+        },
+        {
+          "info": {
+            "name": "Bulk update invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mercoa.com/invoices"
+          },
+          "docs": "Bulk update invoices"
+        },
+        {
+          "info": {
+            "name": "Bulk approve invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoices/approve"
+          },
+          "docs": "Bulk approve invoices"
+        },
+        {
+          "info": {
+            "name": "Create invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice"
+          },
+          "docs": "Create invoice"
+        },
+        {
+          "info": {
+            "name": "Get invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get invoice"
+        },
+        {
+          "info": {
+            "name": "Update invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update invoice"
+        },
+        {
+          "info": {
+            "name": "Delete invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/invoice/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete invoice"
+        },
+        {
+          "info": {
+            "name": "List invoice events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/events",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List invoice events"
+        },
+        {
+          "info": {
+            "name": "Add approver to invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/add-approver",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add approver to invoice"
+        },
+        {
+          "info": {
+            "name": "Approve invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/approve",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve invoice"
+        },
+        {
+          "info": {
+            "name": "Reject invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/reject",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject invoice"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invoice Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List invoice templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice-templates"
+          },
+          "docs": "List invoice templates"
+        },
+        {
+          "info": {
+            "name": "Create invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice-template"
+          },
+          "docs": "Create invoice template"
+        },
+        {
+          "info": {
+            "name": "Get invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice-template/:invoiceTemplateId",
+            "params": [
+              {
+                "name": "invoiceTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get invoice template"
+        },
+        {
+          "info": {
+            "name": "Update invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice-template/:invoiceTemplateId",
+            "params": [
+              {
+                "name": "invoiceTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update invoice template"
+        },
+        {
+          "info": {
+            "name": "Delete invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/invoice-template/:invoiceTemplateId",
+            "params": [
+              {
+                "name": "invoiceTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete invoice template"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/transactions"
+          },
+          "docs": "List transactions"
+        },
+        {
+          "info": {
+            "name": "Get transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/transaction/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get transaction"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/organization"
+          },
+          "docs": "Get organization"
+        },
+        {
+          "info": {
+            "name": "Update organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/organization"
+          },
+          "docs": "Update organization"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OCR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Synchronously OCR an invoice document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/ocr"
+          },
+          "docs": "Synchronously OCR an invoice document"
+        },
+        {
+          "info": {
+            "name": "Submit OCR job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/ocr-async"
+          },
+          "docs": "Submit OCR job"
+        },
+        {
+          "info": {
+            "name": "Get OCR job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/ocr-async/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get OCR job"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Gateway",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process payment via gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/payment-gateway/process"
+          },
+          "docs": "Process payment via gateway"
+        },
+        {
+          "info": {
+            "name": "Validate payment via gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/payment-gateway/validate"
+          },
+          "docs": "Validate payment via gateway"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
