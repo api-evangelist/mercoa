@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/mercoa-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: token
+  description: |-
+    Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
+    are issued from the Mercoa Dashboard and are backend-only. JWTs scope
+    access to an entity or entity group.
+  sources:
+  - openapi/mercoa-openapi.yml

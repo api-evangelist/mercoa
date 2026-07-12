@@ -97,6 +97,10 @@ apis:
       - type: API Key
         description: Backend API keys issued from the Mercoa Dashboard, used server-side; not for browser exposure.
 common:
+  - type: DomainSecurity
+    url: security/mercoa-domain-security.yml
+  - type: Authentication
+    url: authentication/mercoa-authentication.yml
   - type: Website
     url: https://mercoa.com/
   - type: Documentation
@@ -107,6 +111,8 @@ common:
     url: https://mercoa.com/
   - type: LlmsText
     url: https://docs.mercoa.com/llms.txt
+  - url: https://mercoa.com/blog
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
