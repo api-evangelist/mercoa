@@ -97,6 +97,8 @@ apis:
       - type: API Key
         description: Backend API keys issued from the Mercoa Dashboard, used server-side; not for browser exposure.
 common:
+  - type: AgenticAccess
+    url: agentic-access/mercoa-agentic-access.yml
   - type: DomainSecurity
     url: security/mercoa-domain-security.yml
   - type: Authentication
