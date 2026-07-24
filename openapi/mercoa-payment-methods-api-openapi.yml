@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Mercoa Entities Payment Methods API
+  description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
+
+    workflows inside vertical SaaS platforms. This spec is a curated subset of
+
+    the canonical Mercoa OpenAPI document
+
+    (https://github.com/mercoa-finance/openapi). All requests authenticate with
+
+    a Bearer token (API key or JWT) in the Authorization header.
+
+    '
+  version: '1.0'
+  contact:
+    name: Mercoa
+    url: https://docs.mercoa.com/
+servers:
+- url: https://api.mercoa.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Payment Methods
+paths:
+  /entity/{entityId}/paymentMethods:
+    parameters:
+    - $ref: '#/components/parameters/EntityId'
+    get:
+      tags:
+      - Payment Methods
+      summary: List payment methods for entity
+      responses:
+        '200':
+          description: Payment methods
+  /entity/{entityId}/paymentMethod:
+    parameters:
+    - $ref: '#/components/parameters/EntityId'
+    post:
+      tags:
+      - Payment Methods
+      summary: Create payment method
+      responses:
+        '201':
+          description: Created
+  /entity/{entityId}/paymentMethod/{paymentMethodId}:
+    parameters:
+    - $ref: '#/components/parameters/EntityId'
+    - name: paymentMethodId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Payment Methods
+      summary: Get payment method
+      responses:
+        '200':
+          description: Payment method
+    put:
+      tags:
+      - Payment Methods
+      summary: Update payment method
+      responses:
+        '200':
+          description: Updated
+    delete:
+      tags:
+      - Payment Methods
+      summary: Delete payment method
+      responses:
+        '204':
+          description: Deleted
+components:
+  parameters:
+    EntityId:
+      name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+      description: 'Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
+
+        are issued from the Mercoa Dashboard and are backend-only. JWTs scope
+
+        access to an entity or entity group.
+
+        '

@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Mercoa Entities Invoice Templates API
+  description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
+
+    workflows inside vertical SaaS platforms. This spec is a curated subset of
+
+    the canonical Mercoa OpenAPI document
+
+    (https://github.com/mercoa-finance/openapi). All requests authenticate with
+
+    a Bearer token (API key or JWT) in the Authorization header.
+
+    '
+  version: '1.0'
+  contact:
+    name: Mercoa
+    url: https://docs.mercoa.com/
+servers:
+- url: https://api.mercoa.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Invoice Templates
+paths:
+  /invoice-templates:
+    get:
+      tags:
+      - Invoice Templates
+      summary: List invoice templates
+      responses:
+        '200':
+          description: Paginated templates
+  /invoice-template:
+    post:
+      tags:
+      - Invoice Templates
+      summary: Create invoice template
+      responses:
+        '201':
+          description: Created
+  /invoice-template/{invoiceTemplateId}:
+    parameters:
+    - name: invoiceTemplateId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Invoice Templates
+      summary: Get invoice template
+      responses:
+        '200':
+          description: Template
+    post:
+      tags:
+      - Invoice Templates
+      summary: Update invoice template
+      responses:
+        '200':
+          description: Updated
+    delete:
+      tags:
+      - Invoice Templates
+      summary: Delete invoice template
+      responses:
+        '204':
+          description: Deleted
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+      description: 'Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
+
+        are issued from the Mercoa Dashboard and are backend-only. JWTs scope
+
+        access to an entity or entity group.
+
+        '

@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: Mercoa Entities Payment Gateway API
+  description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
+
+    workflows inside vertical SaaS platforms. This spec is a curated subset of
+
+    the canonical Mercoa OpenAPI document
+
+    (https://github.com/mercoa-finance/openapi). All requests authenticate with
+
+    a Bearer token (API key or JWT) in the Authorization header.
+
+    '
+  version: '1.0'
+  contact:
+    name: Mercoa
+    url: https://docs.mercoa.com/
+servers:
+- url: https://api.mercoa.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Payment Gateway
+paths:
+  /payment-gateway/process:
+    post:
+      tags:
+      - Payment Gateway
+      summary: Process payment via gateway
+      responses:
+        '200':
+          description: Processed
+  /payment-gateway/validate:
+    post:
+      tags:
+      - Payment Gateway
+      summary: Validate payment via gateway
+      responses:
+        '200':
+          description: Validated
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+      description: 'Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
+
+        are issued from the Mercoa Dashboard and are backend-only. JWTs scope
+
+        access to an entity or entity group.
+
+        '

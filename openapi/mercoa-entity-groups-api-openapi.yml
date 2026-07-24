@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: Mercoa Entities Entity Groups API
+  description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
+
+    workflows inside vertical SaaS platforms. This spec is a curated subset of
+
+    the canonical Mercoa OpenAPI document
+
+    (https://github.com/mercoa-finance/openapi). All requests authenticate with
+
+    a Bearer token (API key or JWT) in the Authorization header.
+
+    '
+  version: '1.0'
+  contact:
+    name: Mercoa
+    url: https://docs.mercoa.com/
+servers:
+- url: https://api.mercoa.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Entity Groups
+paths:
+  /entityGroups:
+    get:
+      tags:
+      - Entity Groups
+      summary: List entity groups
+      responses:
+        '200':
+          description: Paginated entity groups
+  /entityGroup:
+    post:
+      tags:
+      - Entity Groups
+      summary: Create entity group
+      responses:
+        '201':
+          description: Created
+  /entityGroup/{entityGroupId}:
+    parameters:
+    - $ref: '#/components/parameters/EntityGroupId'
+    get:
+      tags:
+      - Entity Groups
+      summary: Get entity group
+      responses:
+        '200':
+          description: Entity group
+    post:
+      tags:
+      - Entity Groups
+      summary: Update entity group
+      responses:
+        '200':
+          description: Updated
+    delete:
+      tags:
+      - Entity Groups
+      summary: Delete entity group
+      responses:
+        '204':
+          description: Deleted
+  /entityGroup/{entityGroupId}/token:
+    parameters:
+    - $ref: '#/components/parameters/EntityGroupId'
+    post:
+      tags:
+      - Entity Groups
+      summary: Generate entity group token
+      responses:
+        '201':
+          description: Token
+  /entityGroup/{entityGroupId}/addEntities:
+    parameters:
+    - $ref: '#/components/parameters/EntityGroupId'
+    post:
+      tags:
+      - Entity Groups
+      summary: Add entities to group
+      responses:
+        '200':
+          description: Updated group
+components:
+  parameters:
+    EntityGroupId:
+      name: entityGroupId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+      description: 'Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
+
+        are issued from the Mercoa Dashboard and are backend-only. JWTs scope
+
+        access to an entity or entity group.
+
+        '
