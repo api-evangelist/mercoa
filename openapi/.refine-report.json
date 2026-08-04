@@ -1,0 +1,30 @@
+{
+  "provider": "mercoa",
+  "sources": [
+    "mercoa-entities-api-openapi.yml",
+    "mercoa-entity-groups-api-openapi.yml",
+    "mercoa-invoice-templates-api-openapi.yml",
+    "mercoa-invoices-api-openapi.yml",
+    "mercoa-ocr-api-openapi.yml",
+    "mercoa-organization-api-openapi.yml",
+    "mercoa-payment-gateway-api-openapi.yml",
+    "mercoa-payment-methods-api-openapi.yml",
+    "mercoa-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "mercoa-entities-api-openapi.yml",
+    "mercoa-entity-groups-api-openapi.yml",
+    "mercoa-invoice-templates-api-openapi.yml",
+    "mercoa-invoices-api-openapi.yml",
+    "mercoa-ocr-api-openapi.yml",
+    "mercoa-organization-api-openapi.yml",
+    "mercoa-payment-gateway-api-openapi.yml",
+    "mercoa-payment-methods-api-openapi.yml",
+    "mercoa-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
