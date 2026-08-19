@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mercoa Entities Payment Gateway API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Gateway",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process payment via gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/payment-gateway/process"
+          },
+          "docs": "Process payment via gateway"
+        },
+        {
+          "info": {
+            "name": "Validate payment via gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/payment-gateway/validate"
+          },
+          "docs": "Validate payment via gateway"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

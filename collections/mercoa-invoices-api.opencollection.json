@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mercoa Entities Invoices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List invoices across the organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoices"
+          },
+          "docs": "List invoices across the organization"
+        },
+        {
+          "info": {
+            "name": "Bulk create invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoices"
+          },
+          "docs": "Bulk create invoices"
+        },
+        {
+          "info": {
+            "name": "Bulk update invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mercoa.com/invoices"
+          },
+          "docs": "Bulk update invoices"
+        },
+        {
+          "info": {
+            "name": "Bulk approve invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoices/approve"
+          },
+          "docs": "Bulk approve invoices"
+        },
+        {
+          "info": {
+            "name": "Create invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice"
+          },
+          "docs": "Create invoice"
+        },
+        {
+          "info": {
+            "name": "Get invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get invoice"
+        },
+        {
+          "info": {
+            "name": "Update invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update invoice"
+        },
+        {
+          "info": {
+            "name": "Delete invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/invoice/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete invoice"
+        },
+        {
+          "info": {
+            "name": "List invoice events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/events",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List invoice events"
+        },
+        {
+          "info": {
+            "name": "Add approver to invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/add-approver",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add approver to invoice"
+        },
+        {
+          "info": {
+            "name": "Approve invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/approve",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve invoice"
+        },
+        {
+          "info": {
+            "name": "Reject invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice/:invoiceId/reject",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject invoice"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

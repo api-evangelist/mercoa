@@ -1,0 +1,31 @@
+# Mercoa | Documentation
+
+## Instructions for AI Agents
+
+- For clean Markdown of any page, append `.md` to the page URL
+- For section-specific indexes, append `/llms.txt` to any section URL
+- For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.mercoa.com/_mcp/server
+
+## Products
+
+- [Home](https://docs.mercoa.com/home/llms.txt)
+  - [Home](https://docs.mercoa.com/home.md)
+- [CardPay Agent](https://docs.mercoa.com/virtual-card-agent/llms.txt): Pay any invoice with a virtual card
+  - [Introduction](https://docs.mercoa.com/virtual-card-agent/introduction.md)
+  - [How it Works](https://docs.mercoa.com/virtual-card-agent/how-it-works.md)
+  - [Integrating your BillPay / AP](https://docs.mercoa.com/virtual-card-agent/integrating-with-your-billpay.md)
+  - [Overview](https://docs.mercoa.com/virtual-card-agent/validate-card-acceptance/validate-card-acceptance.md)
+  - [Validation Workflow](https://docs.mercoa.com/virtual-card-agent/validate-card-acceptance/validation-workflow.md)
+- [Embedded AP/AR](https://docs.mercoa.com/embedded-ap-ar/llms.txt): Everything you need to launch your AP/AR program
+  - [Overview](https://docs.mercoa.com/embedded-ap-ar/home/overview.md)
+  - [Step 1: API Keys and Concepts](https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-1-get-api-keys.md)
+  - [Step 2: Backend Integration](https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-2-backend-integration.md)
+  - [Step 3: Frontend Integration](https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-3-frontend-integration.md)
+  - [Overview](https://docs.mercoa.com/embedded-ap-ar/home/common-concepts/concepts.md)
+- [SDKs](https://docs.mercoa.com/sdks/llms.txt): SDKs for all major programming languages
+  - [Javascript (Node/Browser)](https://docs.mercoa.com/sdks/javascript.md)
+  - [Python](https://docs.mercoa.com/sdks/python.md)
+  - [Go](https://docs.mercoa.com/sdks/go.md)
+  - [Java](https://docs.mercoa.com/sdks/java.md)
+- [React Library](https://docs.mercoa.com/react-library/llms.txt): React components for building payment UIs
+  - [Overview](https://docs.mercoa.com/react-library/overview.md)

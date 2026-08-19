@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mercoa Entities OCR API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OCR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Synchronously OCR an invoice document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/ocr"
+          },
+          "docs": "Synchronously OCR an invoice document"
+        },
+        {
+          "info": {
+            "name": "Submit OCR job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/ocr-async"
+          },
+          "docs": "Submit OCR job"
+        },
+        {
+          "info": {
+            "name": "Get OCR job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/ocr-async/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get OCR job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

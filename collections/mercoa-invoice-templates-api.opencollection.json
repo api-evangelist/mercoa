@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mercoa Entities Invoice Templates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoice Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List invoice templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice-templates"
+          },
+          "docs": "List invoice templates"
+        },
+        {
+          "info": {
+            "name": "Create invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice-template"
+          },
+          "docs": "Create invoice template"
+        },
+        {
+          "info": {
+            "name": "Get invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/invoice-template/:invoiceTemplateId",
+            "params": [
+              {
+                "name": "invoiceTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get invoice template"
+        },
+        {
+          "info": {
+            "name": "Update invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/invoice-template/:invoiceTemplateId",
+            "params": [
+              {
+                "name": "invoiceTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update invoice template"
+        },
+        {
+          "info": {
+            "name": "Delete invoice template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/invoice-template/:invoiceTemplateId",
+            "params": [
+              {
+                "name": "invoiceTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete invoice template"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

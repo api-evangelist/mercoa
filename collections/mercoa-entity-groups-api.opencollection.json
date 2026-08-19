@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mercoa Entities Entity Groups API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List entity groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entityGroups"
+          },
+          "docs": "List entity groups"
+        },
+        {
+          "info": {
+            "name": "Create entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup"
+          },
+          "docs": "Create entity group"
+        },
+        {
+          "info": {
+            "name": "Get entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get entity group"
+        },
+        {
+          "info": {
+            "name": "Update entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update entity group"
+        },
+        {
+          "info": {
+            "name": "Delete entity group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete entity group"
+        },
+        {
+          "info": {
+            "name": "Generate entity group token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId/token",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate entity group token"
+        },
+        {
+          "info": {
+            "name": "Add entities to group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mercoa.com/entityGroup/:entityGroupId/addEntities",
+            "params": [
+              {
+                "name": "entityGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add entities to group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
