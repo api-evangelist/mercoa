@@ -23,6 +23,19 @@ tags:
   - Embedded Finance
   - Accounts Payable
   - Accounts Receivable
+  - Bill Pay
+  - Invoicing
+  - Payments
+  - Vertical SaaS
+  - Vendors
+  - Approvals
+  - Disbursements
+  - Virtual Cards
+tags_raw:
+  - Mercoa
+  - Embedded Finance
+  - Accounts Payable
+  - Accounts Receivable
   - BillPay
   - Invoicing
   - Payments
@@ -213,6 +226,8 @@ apis:
   humanURL: https://docs.mercoa.com/
   baseURL: https://api.mercoa.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
