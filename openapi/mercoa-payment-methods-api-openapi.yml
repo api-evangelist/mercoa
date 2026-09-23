@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mercoa Entities Payment Methods API
+  title: Mercoa Payment Methods API
   description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
 
     workflows inside vertical SaaS platforms. This spec is a curated subset of
@@ -9,9 +9,7 @@ info:
 
     (https://github.com/mercoa-finance/openapi). All requests authenticate with
 
-    a Bearer token (API key or JWT) in the Authorization header.
-
-    '
+    a Bearer token (API key or JWT) in the Authorization header.'
   version: '1.0'
   contact:
     name: Mercoa
@@ -34,6 +32,8 @@ paths:
       responses:
         '200':
           description: Payment methods
+      operationId: getEntityByEntityIdPaymentMethods
+      x-operation-id-source: derived
   /entity/{entityId}/paymentMethod:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -44,6 +44,8 @@ paths:
       responses:
         '201':
           description: Created
+      operationId: postEntityByEntityIdPaymentMethod
+      x-operation-id-source: derived
   /entity/{entityId}/paymentMethod/{paymentMethodId}:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -59,6 +61,8 @@ paths:
       responses:
         '200':
           description: Payment method
+      operationId: getEntityByEntityIdPaymentMethodByPaymentMethodId
+      x-operation-id-source: derived
     put:
       tags:
       - Payment Methods
@@ -66,6 +70,8 @@ paths:
       responses:
         '200':
           description: Updated
+      operationId: putEntityByEntityIdPaymentMethodByPaymentMethodId
+      x-operation-id-source: derived
     delete:
       tags:
       - Payment Methods
@@ -73,6 +79,8 @@ paths:
       responses:
         '204':
           description: Deleted
+      operationId: deleteEntityByEntityIdPaymentMethodByPaymentMethodId
+      x-operation-id-source: derived
 components:
   parameters:
     EntityId:

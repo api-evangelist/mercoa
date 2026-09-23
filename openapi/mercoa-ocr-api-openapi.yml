@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mercoa Entities OCR API
+  title: Mercoa OCR API
   description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
 
     workflows inside vertical SaaS platforms. This spec is a curated subset of
@@ -9,9 +9,7 @@ info:
 
     (https://github.com/mercoa-finance/openapi). All requests authenticate with
 
-    a Bearer token (API key or JWT) in the Authorization header.
-
-    '
+    a Bearer token (API key or JWT) in the Authorization header.'
   version: '1.0'
   contact:
     name: Mercoa
@@ -32,6 +30,8 @@ paths:
       responses:
         '200':
           description: OCR result
+      operationId: postOcr
+      x-operation-id-source: derived
   /ocr-async:
     post:
       tags:
@@ -40,6 +40,8 @@ paths:
       responses:
         '202':
           description: Job submitted
+      operationId: postOcrAsync
+      x-operation-id-source: derived
   /ocr-async/{jobId}:
     parameters:
     - name: jobId
@@ -54,6 +56,8 @@ paths:
       responses:
         '200':
           description: Job status
+      operationId: getOcrAsyncByJobId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

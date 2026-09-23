@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Mercoa Entities API
   description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
@@ -9,9 +9,7 @@ info:
 
     (https://github.com/mercoa-finance/openapi). All requests authenticate with
 
-    a Bearer token (API key or JWT) in the Authorization header.
-
-    '
+    a Bearer token (API key or JWT) in the Authorization header.'
   version: '1.0'
   contact:
     name: Mercoa
@@ -32,6 +30,8 @@ paths:
       responses:
         '200':
           description: Paginated entities
+      operationId: getEntity
+      x-operation-id-source: derived
     post:
       tags:
       - Entities
@@ -39,6 +39,8 @@ paths:
       responses:
         '201':
           description: Created
+      operationId: postEntity
+      x-operation-id-source: derived
   /entity/{entityId}:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -49,6 +51,8 @@ paths:
       responses:
         '200':
           description: Entity
+      operationId: getEntityByEntityId
+      x-operation-id-source: derived
     post:
       tags:
       - Entities
@@ -56,6 +60,8 @@ paths:
       responses:
         '200':
           description: Updated
+      operationId: postEntityByEntityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Entities
@@ -63,6 +69,8 @@ paths:
       responses:
         '204':
           description: Deleted
+      operationId: deleteEntityByEntityId
+      x-operation-id-source: derived
   /entity/{entityId}/accept-tos:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -73,6 +81,8 @@ paths:
       responses:
         '200':
           description: TOS accepted
+      operationId: postEntityByEntityIdAcceptTos
+      x-operation-id-source: derived
   /entity/{entityId}/request-kyb:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -83,6 +93,8 @@ paths:
       responses:
         '200':
           description: Request submitted
+      operationId: postEntityByEntityIdRequestKyb
+      x-operation-id-source: derived
   /entity/{entityId}/token:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -93,6 +105,8 @@ paths:
       responses:
         '201':
           description: Token
+      operationId: postEntityByEntityIdToken
+      x-operation-id-source: derived
   /entity/{entityId}/counterparties/payees:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -103,6 +117,8 @@ paths:
       responses:
         '200':
           description: Paginated payees
+      operationId: getEntityByEntityIdCounterpartiesPayees
+      x-operation-id-source: derived
   /entity/{entityId}/counterparties/payors:
     parameters:
     - $ref: '#/components/parameters/EntityId'
@@ -113,6 +129,8 @@ paths:
       responses:
         '200':
           description: Paginated payors
+      operationId: getEntityByEntityIdCounterpartiesPayors
+      x-operation-id-source: derived
 components:
   parameters:
     EntityId:

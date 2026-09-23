@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mercoa Entities Invoices API
+  title: Mercoa Invoices API
   description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
 
     workflows inside vertical SaaS platforms. This spec is a curated subset of
@@ -9,9 +9,7 @@ info:
 
     (https://github.com/mercoa-finance/openapi). All requests authenticate with
 
-    a Bearer token (API key or JWT) in the Authorization header.
-
-    '
+    a Bearer token (API key or JWT) in the Authorization header.'
   version: '1.0'
   contact:
     name: Mercoa
@@ -32,6 +30,8 @@ paths:
       responses:
         '200':
           description: Paginated invoices
+      operationId: getInvoices
+      x-operation-id-source: derived
     post:
       tags:
       - Invoices
@@ -39,6 +39,8 @@ paths:
       responses:
         '201':
           description: Created
+      operationId: postInvoices
+      x-operation-id-source: derived
     put:
       tags:
       - Invoices
@@ -46,6 +48,8 @@ paths:
       responses:
         '200':
           description: Updated
+      operationId: putInvoices
+      x-operation-id-source: derived
   /invoices/approve:
     post:
       tags:
@@ -54,6 +58,8 @@ paths:
       responses:
         '200':
           description: Approved
+      operationId: postInvoicesApprove
+      x-operation-id-source: derived
   /invoice:
     post:
       tags:
@@ -62,6 +68,8 @@ paths:
       responses:
         '201':
           description: Created
+      operationId: postInvoice
+      x-operation-id-source: derived
   /invoice/{invoiceId}:
     parameters:
     - $ref: '#/components/parameters/InvoiceId'
@@ -72,6 +80,8 @@ paths:
       responses:
         '200':
           description: Invoice
+      operationId: getInvoiceByInvoiceId
+      x-operation-id-source: derived
     post:
       tags:
       - Invoices
@@ -79,6 +89,8 @@ paths:
       responses:
         '200':
           description: Updated
+      operationId: postInvoiceByInvoiceId
+      x-operation-id-source: derived
     delete:
       tags:
       - Invoices
@@ -86,6 +98,8 @@ paths:
       responses:
         '204':
           description: Deleted
+      operationId: deleteInvoiceByInvoiceId
+      x-operation-id-source: derived
   /invoice/{invoiceId}/events:
     parameters:
     - $ref: '#/components/parameters/InvoiceId'
@@ -96,6 +110,8 @@ paths:
       responses:
         '200':
           description: Events
+      operationId: getInvoiceByInvoiceIdEvents
+      x-operation-id-source: derived
   /invoice/{invoiceId}/add-approver:
     parameters:
     - $ref: '#/components/parameters/InvoiceId'
@@ -106,6 +122,8 @@ paths:
       responses:
         '200':
           description: Added
+      operationId: postInvoiceByInvoiceIdAddApprover
+      x-operation-id-source: derived
   /invoice/{invoiceId}/approve:
     parameters:
     - $ref: '#/components/parameters/InvoiceId'
@@ -116,6 +134,8 @@ paths:
       responses:
         '200':
           description: Approved
+      operationId: postInvoiceByInvoiceIdApprove
+      x-operation-id-source: derived
   /invoice/{invoiceId}/reject:
     parameters:
     - $ref: '#/components/parameters/InvoiceId'
@@ -126,6 +146,8 @@ paths:
       responses:
         '200':
           description: Rejected
+      operationId: postInvoiceByInvoiceIdReject
+      x-operation-id-source: derived
 components:
   parameters:
     InvoiceId:

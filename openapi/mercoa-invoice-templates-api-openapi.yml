@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mercoa Entities Invoice Templates API
+  title: Mercoa Invoice Templates API
   description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
 
     workflows inside vertical SaaS platforms. This spec is a curated subset of
@@ -9,9 +9,7 @@ info:
 
     (https://github.com/mercoa-finance/openapi). All requests authenticate with
 
-    a Bearer token (API key or JWT) in the Authorization header.
-
-    '
+    a Bearer token (API key or JWT) in the Authorization header.'
   version: '1.0'
   contact:
     name: Mercoa
@@ -32,6 +30,8 @@ paths:
       responses:
         '200':
           description: Paginated templates
+      operationId: getInvoiceTemplates
+      x-operation-id-source: derived
   /invoice-template:
     post:
       tags:
@@ -40,6 +40,8 @@ paths:
       responses:
         '201':
           description: Created
+      operationId: postInvoiceTemplate
+      x-operation-id-source: derived
   /invoice-template/{invoiceTemplateId}:
     parameters:
     - name: invoiceTemplateId
@@ -54,6 +56,8 @@ paths:
       responses:
         '200':
           description: Template
+      operationId: getInvoiceTemplateByInvoiceTemplateId
+      x-operation-id-source: derived
     post:
       tags:
       - Invoice Templates
@@ -61,6 +65,8 @@ paths:
       responses:
         '200':
           description: Updated
+      operationId: postInvoiceTemplateByInvoiceTemplateId
+      x-operation-id-source: derived
     delete:
       tags:
       - Invoice Templates
@@ -68,6 +74,8 @@ paths:
       responses:
         '204':
           description: Deleted
+      operationId: deleteInvoiceTemplateByInvoiceTemplateId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

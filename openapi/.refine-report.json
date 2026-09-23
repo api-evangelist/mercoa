@@ -1,15 +1,7 @@
 {
   "provider": "mercoa",
   "sources": [
-    "mercoa-entities-api-openapi.yml",
-    "mercoa-entity-groups-api-openapi.yml",
-    "mercoa-invoice-templates-api-openapi.yml",
-    "mercoa-invoices-api-openapi.yml",
-    "mercoa-ocr-api-openapi.yml",
-    "mercoa-organization-api-openapi.yml",
-    "mercoa-payment-gateway-api-openapi.yml",
-    "mercoa-payment-methods-api-openapi.yml",
-    "mercoa-transactions-api-openapi.yml"
+    "_original/mercoa-openapi.yml"
   ],
   "outputs": [
     "mercoa-entities-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "mercoa-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "mercoa-entities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-entity-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-invoice-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-ocr-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-payment-gateway-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-payment-methods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mercoa-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

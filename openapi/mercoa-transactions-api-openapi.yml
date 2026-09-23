@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mercoa Entities Transactions API
+  title: Mercoa Transactions API
   description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
 
     workflows inside vertical SaaS platforms. This spec is a curated subset of
@@ -9,9 +9,7 @@ info:
 
     (https://github.com/mercoa-finance/openapi). All requests authenticate with
 
-    a Bearer token (API key or JWT) in the Authorization header.
-
-    '
+    a Bearer token (API key or JWT) in the Authorization header.'
   version: '1.0'
   contact:
     name: Mercoa
@@ -32,6 +30,8 @@ paths:
       responses:
         '200':
           description: Paginated transactions
+      operationId: getTransactions
+      x-operation-id-source: derived
   /transaction/{transactionId}:
     parameters:
     - name: transactionId
@@ -46,6 +46,8 @@ paths:
       responses:
         '200':
           description: Transaction
+      operationId: getTransactionByTransactionId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:
