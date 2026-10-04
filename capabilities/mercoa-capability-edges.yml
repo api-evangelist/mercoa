@@ -1,0 +1,26 @@
+slug: mercoa
+provider: Mercoa
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Invoices
+  spec_file: mercoa-invoices-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.7
+  evidence: POST /invoice/{invoiceId}/add-approver — Add approver to invoice; POST /invoice/{invoiceId}/approve
+    — Approve invoice; POST /invoices/approve — Bulk approve invoices
+  reason: Invoice lifecycle with approver assignment, approval and rejection is bill/invoice processing
+    in the vendor's 'embedded accounts payable' workflow, i.e. Accounts Payable Management; some residual
+    chance the same objects serve the AR side.
