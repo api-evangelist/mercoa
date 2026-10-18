@@ -73,6 +73,15 @@ apis:
   baseURL: https://api.mercoa.com
   tags:
   - AP
+  - Augmented Reality
+  - Invoices
+  - Bills
+  - Vendors
+  - Payments
+  - Approvals
+  - Entities
+  tags_raw:
+  - AP
   - AR
   - Invoices
   - Bills
