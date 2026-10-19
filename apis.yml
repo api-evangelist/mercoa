@@ -162,46 +162,6 @@ apis:
   - type: API Key
     description: >-
       Backend API keys issued from the Mercoa Dashboard, used server-side; not for browser exposure.
-- aid: mercoa:mercoa-entities-api
-  name: Mercoa Entities API
-  description: The Entities API from Mercoa — 7 operation(s) for entities.
-  humanURL: https://docs.mercoa.com/
-  baseURL: https://api.mercoa.com
-  tags:
-  - Entities
-  properties:
-  - type: OpenAPI
-    url: openapi/mercoa-entities-api-openapi.yml
-- aid: mercoa:mercoa-entity-groups-api
-  name: Mercoa Entity Groups API
-  description: The Entity Groups API from Mercoa — 5 operation(s) for entity groups.
-  humanURL: https://docs.mercoa.com/
-  baseURL: https://api.mercoa.com
-  tags:
-  - Entity Groups
-  properties:
-  - type: OpenAPI
-    url: openapi/mercoa-entity-groups-api-openapi.yml
-- aid: mercoa:mercoa-invoice-templates-api
-  name: Mercoa Invoice Templates API
-  description: The Invoice Templates API from Mercoa — 3 operation(s) for invoice templates.
-  humanURL: https://docs.mercoa.com/
-  baseURL: https://api.mercoa.com
-  tags:
-  - Invoice Templates
-  properties:
-  - type: OpenAPI
-    url: openapi/mercoa-invoice-templates-api-openapi.yml
-- aid: mercoa:mercoa-invoices-api
-  name: Mercoa Invoices API
-  description: The Invoices API from Mercoa — 8 operation(s) for invoices.
-  humanURL: https://docs.mercoa.com/
-  baseURL: https://api.mercoa.com
-  tags:
-  - Invoices
-  properties:
-  - type: OpenAPI
-    url: openapi/mercoa-invoices-api-openapi.yml
 - aid: mercoa:mercoa-ocr-api
   name: Mercoa OCR API
   description: The OCR API from Mercoa — 3 operation(s) for ocr.
@@ -222,16 +182,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/mercoa-organization-api-openapi.yml
-- aid: mercoa:mercoa-payment-gateway-api
-  name: Mercoa Payment Gateway API
-  description: The Payment Gateway API from Mercoa — 2 operation(s) for payment gateway.
-  humanURL: https://docs.mercoa.com/
-  baseURL: https://api.mercoa.com
-  tags:
-  - Payment Gateway
-  properties:
-  - type: OpenAPI
-    url: openapi/mercoa-payment-gateway-api-openapi.yml
 - aid: mercoa:mercoa-payment-methods-api
   name: Mercoa Payment Methods API
   description: The Payment Methods API from Mercoa — 3 operation(s) for payment methods.
@@ -242,18 +192,501 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/mercoa-payment-methods-api-openapi.yml
-- aid: mercoa:mercoa-transactions-api
-  name: Mercoa Transactions API
-  description: The Transactions API from Mercoa — 2 operation(s) for transactions.
+- aid: mercoa:mercoa-api-reference-api
+  name: Mercoa API Reference API
+  description: The API Reference API from Mercoa — 0 operation(s) for api reference.
   humanURL: https://docs.mercoa.com/
   baseURL: https://api.mercoa.com
   tags:
-  - Transaction
-  tags_raw:
-  - Transactions
+  - API Reference
   properties:
   - type: OpenAPI
-    url: openapi/mercoa-transactions-api-openapi.yml
+    url: openapi/mercoa-api-reference-api-openapi.yml
+- aid: mercoa:mercoa-bank-lookup-api
+  name: Mercoa Bank Lookup API
+  description: The bank-lookup API from Mercoa — 1 operation(s) for bank-lookup.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - bank-lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-bank-lookup-api-openapi.yml
+- aid: mercoa:mercoa-calculate-api
+  name: Mercoa Calculate API
+  description: The calculate API from Mercoa — 2 operation(s) for calculate.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - calculate
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-calculate-api-openapi.yml
+- aid: mercoa:mercoa-custom-payment-method-schema-api
+  name: Mercoa Custom Payment Method Schema API
+  description: >-
+    The custom-payment-method-schema API from Mercoa — 2 operation(s) for custom-payment-method-schema.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - custom-payment-method-schema
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-custom-payment-method-schema-api-openapi.yml
+- aid: mercoa:mercoa-entity-api
+  name: Mercoa Entity API
+  description: The entity API from Mercoa — 7 operation(s) for entity.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-api-openapi.yml
+- aid: mercoa:mercoa-entity-approval-policy-api
+  name: Mercoa entity > approval-policy API
+  description: >-
+    The entity > approval-policy API from Mercoa — 5 operation(s) for entity > approval-policy.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > approval-policy
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-approval-policy-api-openapi.yml
+- aid: mercoa:mercoa-entity-bnpl-api
+  name: Mercoa entity > bnpl API
+  description: The entity > bnpl API from Mercoa — 1 operation(s) for entity > bnpl.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > bnpl
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-bnpl-api-openapi.yml
+- aid: mercoa:mercoa-entity-bulk-api
+  name: Mercoa entity > bulk API
+  description: The entity > bulk API from Mercoa — 2 operation(s) for entity > bulk.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-bulk-api-openapi.yml
+- aid: mercoa:mercoa-entity-counterparty-api
+  name: Mercoa entity > counterparty API
+  description: The entity > counterparty API from Mercoa — 6 operation(s) for entity > counterparty.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > counterparty
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-counterparty-api-openapi.yml
+- aid: mercoa:mercoa-entity-counterparty-bulk-api
+  name: Mercoa entity > counterparty > bulk API
+  description: >-
+    The entity > counterparty > bulk API from Mercoa — 2 operation(s) for entity > counterparty > bulk.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > counterparty > bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-counterparty-bulk-api-openapi.yml
+- aid: mercoa:mercoa-entity-counterparty-vendor-credit-api
+  name: Mercoa entity > counterparty > vendor-credit API
+  description: >-
+    The entity > counterparty > vendor-credit API from Mercoa — 4 operation(s) for entity > counterparty
+    > vendor-credit.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > counterparty > vendor-credit
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-counterparty-vendor-credit-api-openapi.yml
+- aid: mercoa:mercoa-entity-customization-api
+  name: Mercoa entity > customization API
+  description: The entity > customization API from Mercoa — 1 operation(s) for entity > customization.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > customization
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-customization-api-openapi.yml
+- aid: mercoa:mercoa-entity-document-api
+  name: Mercoa entity > document API
+  description: The entity > document API from Mercoa — 3 operation(s) for entity > document.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > document
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-document-api-openapi.yml
+- aid: mercoa:mercoa-entity-email-log-api
+  name: Mercoa entity > email-log API
+  description: The entity > email-log API from Mercoa — 2 operation(s) for entity > email-log.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > email-log
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-email-log-api-openapi.yml
+- aid: mercoa:mercoa-entity-email-template-api
+  name: Mercoa entity > email-template API
+  description: >-
+    The entity > email-template API from Mercoa — 3 operation(s) for entity > email-template.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > email-template
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-email-template-api-openapi.yml
+- aid: mercoa:mercoa-entity-external-accounting-system-api
+  name: Mercoa entity > external-accounting-system API
+  description: >-
+    The entity > external-accounting-system API from Mercoa — 4 operation(s) for entity > external-accounting-system.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > external-accounting-system
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-external-accounting-system-api-openapi.yml
+- aid: mercoa:mercoa-entity-group-api
+  name: Mercoa Entity Group API
+  description: The entity-group API from Mercoa — 6 operation(s) for entity-group.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity-group
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-group-api-openapi.yml
+- aid: mercoa:mercoa-entity-group-counterparty-api
+  name: Mercoa entity-group > counterparty API
+  description: >-
+    The entity-group > counterparty API from Mercoa — 4 operation(s) for entity-group > counterparty.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity-group > counterparty
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-group-counterparty-api-openapi.yml
+- aid: mercoa:mercoa-entity-group-invoice-api
+  name: Mercoa entity-group > invoice API
+  description: The entity-group > invoice API from Mercoa — 3 operation(s) for entity-group > invoice.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity-group > invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-group-invoice-api-openapi.yml
+- aid: mercoa:mercoa-entity-group-user-api
+  name: Mercoa entity-group > user API
+  description: The entity-group > user API from Mercoa — 5 operation(s) for entity-group > user.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity-group > user
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-group-user-api-openapi.yml
+- aid: mercoa:mercoa-entity-invoice-api
+  name: Mercoa entity > invoice API
+  description: The entity > invoice API from Mercoa — 3 operation(s) for entity > invoice.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-invoice-api-openapi.yml
+- aid: mercoa:mercoa-entity-metadata-api
+  name: Mercoa entity > metadata API
+  description: The entity > metadata API from Mercoa — 2 operation(s) for entity > metadata.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-metadata-api-openapi.yml
+- aid: mercoa:mercoa-entity-notification-policy-api
+  name: Mercoa entity > notification-policy API
+  description: >-
+    The entity > notification-policy API from Mercoa — 2 operation(s) for entity > notification-policy.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > notification-policy
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-notification-policy-api-openapi.yml
+- aid: mercoa:mercoa-entity-payment-method-api
+  name: Mercoa entity > payment-method API
+  description: >-
+    The entity > payment-method API from Mercoa — 6 operation(s) for entity > payment-method.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > payment-method
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-payment-method-api-openapi.yml
+- aid: mercoa:mercoa-entity-payment-method-bank-account-api
+  name: Mercoa entity > payment-method > bank-account API
+  description: >-
+    The entity > payment-method > bank-account API from Mercoa — 1 operation(s) for entity > payment-method
+    > bank-account.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > payment-method > bank-account
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-payment-method-bank-account-api-openapi.yml
+- aid: mercoa:mercoa-entity-payment-method-wallet-api
+  name: Mercoa entity > payment-method > wallet API
+  description: >-
+    The entity > payment-method > wallet API from Mercoa — 3 operation(s) for entity > payment-method
+    > wallet.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > payment-method > wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-payment-method-wallet-api-openapi.yml
+- aid: mercoa:mercoa-entity-representative-api
+  name: Mercoa entity > representative API
+  description: >-
+    The entity > representative API from Mercoa — 3 operation(s) for entity > representative.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > representative
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-representative-api-openapi.yml
+- aid: mercoa:mercoa-entity-user-api
+  name: Mercoa entity > user API
+  description: The entity > user API from Mercoa — 4 operation(s) for entity > user.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > user
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-user-api-openapi.yml
+- aid: mercoa:mercoa-entity-user-notification-policy-api
+  name: Mercoa entity > user > notification-policy API
+  description: >-
+    The entity > user > notification-policy API from Mercoa — 2 operation(s) for entity > user > notification-policy.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > user > notification-policy
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-user-notification-policy-api-openapi.yml
+- aid: mercoa:mercoa-entity-user-notifications-api
+  name: Mercoa entity > user > notifications API
+  description: >-
+    The entity > user > notifications API from Mercoa — 2 operation(s) for entity > user > notifications.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - entity > user > notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-entity-user-notifications-api-openapi.yml
+- aid: mercoa:mercoa-invoice-api
+  name: Mercoa Invoice API
+  description: The invoice API from Mercoa — 4 operation(s) for invoice.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-api-openapi.yml
+- aid: mercoa:mercoa-invoice-approval-api
+  name: Mercoa invoice > approval API
+  description: The invoice > approval API from Mercoa — 3 operation(s) for invoice > approval.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > approval
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-approval-api-openapi.yml
+- aid: mercoa:mercoa-invoice-bnpl-api
+  name: Mercoa invoice > bnpl API
+  description: The invoice > bnpl API from Mercoa — 2 operation(s) for invoice > bnpl.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > bnpl
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-bnpl-api-openapi.yml
+- aid: mercoa:mercoa-invoice-bulk-api
+  name: Mercoa invoice > bulk API
+  description: The invoice > bulk API from Mercoa — 3 operation(s) for invoice > bulk.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-bulk-api-openapi.yml
+- aid: mercoa:mercoa-invoice-collection-api
+  name: Mercoa invoice > collection API
+  description: The invoice > collection API from Mercoa — 2 operation(s) for invoice > collection.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > collection
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-collection-api-openapi.yml
+- aid: mercoa:mercoa-invoice-comment-api
+  name: Mercoa invoice > comment API
+  description: The invoice > comment API from Mercoa — 3 operation(s) for invoice > comment.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > comment
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-comment-api-openapi.yml
+- aid: mercoa:mercoa-invoice-document-api
+  name: Mercoa invoice > document API
+  description: The invoice > document API from Mercoa — 7 operation(s) for invoice > document.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > document
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-document-api-openapi.yml
+- aid: mercoa:mercoa-invoice-line-item-api
+  name: Mercoa invoice > line-item API
+  description: The invoice > line-item API from Mercoa — 1 operation(s) for invoice > line-item.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > line-item
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-line-item-api-openapi.yml
+- aid: mercoa:mercoa-invoice-payment-links-api
+  name: Mercoa invoice > payment-links API
+  description: >-
+    The invoice > payment-links API from Mercoa — 4 operation(s) for invoice > payment-links.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice > payment-links
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-payment-links-api-openapi.yml
+- aid: mercoa:mercoa-invoice-template-api
+  name: Mercoa Invoice Template API
+  description: The invoice-template API from Mercoa — 3 operation(s) for invoice-template.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice-template
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-template-api-openapi.yml
+- aid: mercoa:mercoa-invoice-template-approval-api
+  name: Mercoa invoice-template > approval API
+  description: >-
+    The invoice-template > approval API from Mercoa — 3 operation(s) for invoice-template > approval.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice-template > approval
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-template-approval-api-openapi.yml
+- aid: mercoa:mercoa-invoice-template-document-api
+  name: Mercoa invoice-template > document API
+  description: >-
+    The invoice-template > document API from Mercoa — 6 operation(s) for invoice-template > document.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice-template > document
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-template-document-api-openapi.yml
+- aid: mercoa:mercoa-invoice-template-line-item-api
+  name: Mercoa invoice-template > line-item API
+  description: >-
+    The invoice-template > line-item API from Mercoa — 1 operation(s) for invoice-template > line-item.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - invoice-template > line-item
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-invoice-template-line-item-api-openapi.yml
+- aid: mercoa:mercoa-organization-notification-configuration-api
+  name: Mercoa organization > notification-configuration API
+  description: >-
+    The organization > notification-configuration API from Mercoa — 2 operation(s) for organization >
+    notification-configuration.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - organization > notification-configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-organization-notification-configuration-api-openapi.yml
+- aid: mercoa:mercoa-payment-gateway-process-api
+  name: Mercoa payment-gateway > process API
+  description: >-
+    The payment-gateway > process API from Mercoa — 3 operation(s) for payment-gateway > process.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - payment-gateway > process
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-payment-gateway-process-api-openapi.yml
+- aid: mercoa:mercoa-payment-gateway-validate-api
+  name: Mercoa payment-gateway > validate API
+  description: >-
+    The payment-gateway > validate API from Mercoa — 3 operation(s) for payment-gateway > validate.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - payment-gateway > validate
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-payment-gateway-validate-api-openapi.yml
+- aid: mercoa:mercoa-transaction-api
+  name: Mercoa Transaction API
+  description: The transaction API from Mercoa — 3 operation(s) for transaction.
+  humanURL: https://docs.mercoa.com/
+  baseURL: https://api.mercoa.com
+  tags:
+  - transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/mercoa-transaction-api-openapi.yml
 common:
   - type: Plans
     url: plans/mercoa-plans-pricing.yml

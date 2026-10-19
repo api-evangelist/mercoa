@@ -1,0 +1,778 @@
+openapi: 3.2.0
+info:
+  title: Reference entity > email-template API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity > email-template
+paths:
+  /entity/{entityId}/email-templates:
+    get:
+      operationId: entity_emailTemplate_getAll
+      summary: Get all email templates
+      description: Get all email templates for the entity
+      tags:
+      - entity > email-template
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/entityTypes_EmailTemplateResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/email-template:
+    post:
+      operationId: entity_emailTemplate_create
+      summary: Create entity email template
+      tags:
+      - entity > email-template
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EmailTemplateResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EmailTemplateRequest'
+      security:
+      - default: []
+  /entity/{entityId}/email-template/{emailTemplateId}:
+    get:
+      operationId: entity_emailTemplate_get
+      summary: Get entity email template
+      tags:
+      - entity > email-template
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: emailTemplateId
+        in: path
+        description: Email Template ID or Email Template ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EmailTemplateId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EmailTemplateResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    put:
+      operationId: entity_emailTemplate_update
+      summary: Update entity email template
+      tags:
+      - entity > email-template
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: emailTemplateId
+        in: path
+        description: Email Template ID or Email Template ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EmailTemplateId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EmailTemplateResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EmailTemplateRequest'
+      security:
+      - default: []
+    delete:
+      operationId: entity_emailTemplate_delete
+      summary: Delete entity email template
+      description: Delete entity email template. This will also remove the email template from all entities.
+      tags:
+      - entity > email-template
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: emailTemplateId
+        in: path
+        description: Email Template ID or Email Template ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EmailTemplateId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    entityTypes_EmailTemplateType:
+      type: string
+      enum:
+      - PAYMENT
+      - DISBURSEMENT
+      title: EmailTemplateType
+    entityTypes_EmailTemplateResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EmailTemplateId'
+        entityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity that this email template is associated with.
+        templateType:
+          $ref: '#/components/schemas/entityTypes_EmailTemplateType'
+        name:
+          type: string
+          description: The name of the email template.
+        subject:
+          type: string
+          description: The subject of the email template.
+        content:
+          type: string
+          description: The HTML content of the email template.
+        isDefault:
+          type: boolean
+          description: True if this email template is the default template for new invoices.
+      required:
+      - id
+      - entityId
+      - templateType
+      - name
+      - subject
+      - content
+      - isDefault
+      title: EmailTemplateResponse
+    entityTypes_EmailTemplateId:
+      type: string
+      title: EmailTemplateId
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    entityTypes_EmailTemplateRequest:
+      type: object
+      properties:
+        templateType:
+          $ref: '#/components/schemas/entityTypes_EmailTemplateType'
+        name:
+          type: string
+          description: The name of the email template.
+        subject:
+          type: string
+          description: The subject of the email template.
+        content:
+          type: string
+          description: The HTML content of the email template.
+        isDefault:
+          type: boolean
+          description: If true, this email template will be used as the default template for new invoices.
+      required:
+      - templateType
+      - name
+      - subject
+      - content
+      title: EmailTemplateRequest
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

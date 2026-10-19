@@ -1,0 +1,720 @@
+openapi: 3.2.0
+info:
+  title: Reference payment-gateway > validate API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: payment-gateway > validate
+paths:
+  /payment-gateway/validation-jobs:
+    get:
+      operationId: paymentGateway_validate_find
+      summary: Find Validation Jobs
+      description: Search payment gateway validation jobs
+      tags:
+      - payment-gateway > validate
+      parameters:
+      - name: status
+        in: query
+        description: Filter jobs by status
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayJobStatus'
+      - name: startDate
+        in: query
+        description: Start date filter for job creation time
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: End date filter for job creation time
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: orderBy
+        in: query
+        description: Field to order jobs by. Defaults to CREATED_AT.
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayJobOrderByField'
+      - name: orderDirection
+        in: query
+        description: Direction to order jobs by. Defaults to desc.
+        required: false
+        schema:
+          $ref: '#/components/schemas/commons_OrderDirection'
+      - name: limit
+        in: query
+        description: Number of jobs to return. Limit can range between 1 and 100, and the default is 10.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the job to start after. If not provided, the first page of jobs will be returned.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentGatewayTypes_SearchPaymentGatewayValidationJobsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /payment-gateway/validate:
+    post:
+      operationId: paymentGateway_validate_create
+      summary: Create Validation Job
+      description: Create a job to validate a payment gateway
+      tags:
+      - payment-gateway > validate
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayRequest'
+      security:
+      - default: []
+  /payment-gateway/validate/{jobId}:
+    get:
+      operationId: paymentGateway_validate_get
+      summary: Get Validation Job
+      description: Get the status of a payment gateway validation job
+      tags:
+      - payment-gateway > validate
+      parameters:
+      - name: jobId
+        in: path
+        description: The ID of the payment gateway validation job
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    paymentGatewayTypes_PaymentGatewayJobOrderByField:
+      type: string
+      enum:
+      - CREATED_AT
+      - UPDATED_AT
+      - STATUS
+      title: PaymentGatewayJobOrderByField
+    paymentGatewayTypes_ValidatePaymentGatewayCardFee:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - percentage
+            description: 'Discriminator value: percentage'
+          value:
+            type: number
+            format: double
+            description: The fee percentage in bps. For example, if the fee is 2.5% and the payment amount is $100, set this to 250.
+        required:
+        - type
+        - value
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - flat
+            description: 'Discriminator value: flat'
+          value:
+            type: number
+            format: double
+            description: The fee amount in major units of the invoice currency. For example, if the fee is a flat $2.50, set this to 2.5.
+        required:
+        - type
+        - value
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - none
+            description: 'Discriminator value: none'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ValidatePaymentGatewayCardFee
+    commons_OrderDirection:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      title: OrderDirection
+    paymentGatewayTypes_PaymentGatewayJobStatus:
+      type: string
+      enum:
+      - PENDING
+      - COMPLETED
+      - FAILED
+      title: PaymentGatewayJobStatus
+    paymentGatewayTypes_ValidatePaymentGatewayRequest:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+          document:
+            type: string
+            description: The invoice document PDF to extract the payment gateway from. Must be in base64 format or a publicly accessible URL.
+        required:
+        - type
+        - document
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - html
+            description: 'Discriminator value: html'
+          html:
+            type: string
+            description: The HTML from an email to extract the payment gateway from
+        required:
+        - type
+        - html
+      discriminator:
+        propertyName: type
+      title: ValidatePaymentGatewayRequest
+    paymentGatewayTypes_ValidatePaymentGatewayCardAcceptance:
+      type: string
+      enum:
+      - ACCEPTED
+      - NOT_ACCEPTED
+      - UNKNOWN
+      title: ValidatePaymentGatewayCardAcceptance
+    paymentGatewayTypes_SearchPaymentGatewayValidationJobsResponse:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayResponse'
+          description: List of payment gateway validation jobs matching the search criteria
+        hasMore:
+          type: boolean
+          description: Whether there are more jobs available beyond the current page
+      required:
+      - jobs
+      - hasMore
+      title: SearchPaymentGatewayValidationJobsResponse
+    paymentGatewayTypes_ValidatePaymentGatewayResponse:
+      oneOf:
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - pending
+            description: 'Discriminator value: pending'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway validation job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - success
+            description: 'Discriminator value: success'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway validation job
+          paymentGatewayUrl:
+            type: string
+            description: The payment gateway URL that was found in the document
+          card:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayCardResponse'
+            description: Data on the card payments that were extracted from the gateway
+          invoiceAmount:
+            type: number
+            format: double
+            description: The invoice amount detected from the invoice
+          gatewayAmount:
+            type: number
+            format: double
+            description: The amount displayed on the payment gateway (may include fees)
+          vendorName:
+            type: string
+            description: The vendor name
+          requiredData:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayRequiredData'
+            description: Information about what data is required to proceed with payment
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - failed
+            description: 'Discriminator value: failed'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway validation job
+          errorType:
+            $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayError'
+            description: The error that occurred during the payment gateway validation job
+          errorMessage:
+            type: string
+            description: The error message that occurred during the payment gateway validation job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - errorType
+        - createdAt
+        - updatedAt
+      discriminator:
+        propertyName: jobStatus
+      title: ValidatePaymentGatewayResponse
+    paymentGatewayTypes_PaymentGatewayError:
+      type: string
+      enum:
+      - NO_VALID_PAYMENT_GATEWAY_FOUND
+      - PAYMENT_GATEWAY_UNSUPPORTED
+      - CARD_DETAILS_INVALID
+      - CARD_DECLINED
+      - INVOICE_AMOUNT_MISMATCH
+      title: PaymentGatewayError
+    paymentGatewayTypes_ValidatePaymentGatewayRequiredData:
+      type: object
+      properties:
+        needsAccountNumber:
+          type: boolean
+          description: Whether the payment gateway requires an account number to proceed
+        needsPostalCode:
+          type: boolean
+          description: Whether the payment gateway requires a postal code to proceed
+        needsEmail:
+          type: boolean
+          description: Whether the payment gateway requires an email address to proceed
+        needsAccountHolderFirstName:
+          type: boolean
+          description: Whether the payment gateway requires the account holder's first name to proceed
+        needsAccountHolderLastName:
+          type: boolean
+          description: Whether the payment gateway requires the account holder's last name to proceed
+        needsFullServiceAddress:
+          type: boolean
+          description: Whether the payment gateway requires a full service address to proceed
+        needsPhoneNumber:
+          type: boolean
+          description: Whether the payment gateway requires a phone number to proceed
+      title: ValidatePaymentGatewayRequiredData
+    paymentGatewayTypes_ValidatePaymentGatewayCardResponse:
+      type: object
+      properties:
+        eligibility:
+          $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayCardAcceptance'
+          description: Whether the payment gateway accepts card payments
+        fee:
+          $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayCardFee'
+          description: The fee that was extracted from the gateway
+      required:
+      - eligibility
+      - fee
+      title: ValidatePaymentGatewayCardResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

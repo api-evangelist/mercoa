@@ -1,0 +1,1258 @@
+openapi: 3.2.0
+info:
+  title: Reference payment-gateway > process API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: payment-gateway > process
+paths:
+  /payment-gateway/process-jobs:
+    get:
+      operationId: paymentGateway_process_find
+      summary: Find Process Jobs
+      description: Search payment gateway process jobs
+      tags:
+      - payment-gateway > process
+      parameters:
+      - name: status
+        in: query
+        description: Filter jobs by status
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayJobStatus'
+      - name: startDate
+        in: query
+        description: Start date filter for job creation time
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: End date filter for job creation time
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: orderBy
+        in: query
+        description: Field to order jobs by. Defaults to CREATED_AT.
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayJobOrderByField'
+      - name: orderDirection
+        in: query
+        description: Direction to order jobs by. Defaults to desc.
+        required: false
+        schema:
+          $ref: '#/components/schemas/commons_OrderDirection'
+      - name: limit
+        in: query
+        description: Number of jobs to return. Limit can range between 1 and 100, and the default is 10.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the job to start after. If not provided, the first page of jobs will be returned.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentGatewayTypes_SearchPaymentGatewayProcessJobsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /payment-gateway/process:
+    post:
+      operationId: paymentGateway_process_create
+      summary: Create Process Job
+      description: Create a job to process a payment through a payment gateway
+      tags:
+      - payment-gateway > process
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayRequest'
+      security:
+      - default: []
+  /payment-gateway/process/{jobId}:
+    get:
+      operationId: paymentGateway_process_get
+      summary: Get Process Job
+      description: Get the status of a payment gateway processing job
+      tags:
+      - payment-gateway > process
+      parameters:
+      - name: jobId
+        in: path
+        description: The ID of the payment gateway processing job
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    paymentGatewayTypes_ProcessPaymentGatewayCardDetails:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - direct
+            description: 'Discriminator value: direct'
+          firstName:
+            type: string
+            description: The first name of the card user
+          lastName:
+            type: string
+            description: The last name of the card user
+          postalCode:
+            type: string
+            description: The postal code of the address of the card
+          country:
+            $ref: '#/components/schemas/commons_CountryCode'
+            description: The country of the address of the card
+          cardType:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardType'
+            description: The type of card (credit or debit). Defaults to debit.
+          phoneNumber:
+            type: string
+            description: The phone number of the card user
+          email:
+            type: string
+            description: The email of the card user
+          fullAddress:
+            type: string
+            description: The full address of the card user
+          achDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayAchDetails'
+            description: The details of the fallback ACH account to use for the payment. This will be used if a fee is charged for card processing.
+          cardNumber:
+            type: string
+            description: The number of the card to use for the payment
+          expirationMonth:
+            type: integer
+            description: The month of the expiration date of the card to use for the payment. This must be a number between 1 and 12.
+          expirationYear:
+            type: integer
+            description: The year of the expiration date of the card to use for the payment. This must be the full year, not the last two digits.
+          cvv:
+            type: string
+            description: The CVV of the card to use for the payment
+        required:
+        - type
+        - firstName
+        - lastName
+        - postalCode
+        - country
+        - cardNumber
+        - expirationMonth
+        - expirationYear
+        - cvv
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - iframe
+            description: 'Discriminator value: iframe'
+          firstName:
+            type: string
+            description: The first name of the card user
+          lastName:
+            type: string
+            description: The last name of the card user
+          postalCode:
+            type: string
+            description: The postal code of the address of the card
+          country:
+            $ref: '#/components/schemas/commons_CountryCode'
+            description: The country of the address of the card
+          cardType:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardType'
+            description: The type of card (credit or debit). Defaults to debit.
+          phoneNumber:
+            type: string
+            description: The phone number of the card user
+          email:
+            type: string
+            description: The email of the card user
+          fullAddress:
+            type: string
+            description: The full address of the card user
+          achDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayAchDetails'
+            description: The details of the fallback ACH account to use for the payment. This will be used if a fee is charged for card processing.
+          iframeUrl:
+            type: string
+            description: The URL of the iframe that render the virtual card details
+        required:
+        - type
+        - firstName
+        - lastName
+        - postalCode
+        - country
+        - iframeUrl
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - stripeIssuing
+            description: 'Discriminator value: stripeIssuing'
+          firstName:
+            type: string
+            description: The first name of the card user
+          lastName:
+            type: string
+            description: The last name of the card user
+          postalCode:
+            type: string
+            description: The postal code of the address of the card
+          country:
+            $ref: '#/components/schemas/commons_CountryCode'
+            description: The country of the address of the card
+          cardType:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardType'
+            description: The type of card (credit or debit). Defaults to debit.
+          phoneNumber:
+            type: string
+            description: The phone number of the card user
+          email:
+            type: string
+            description: The email of the card user
+          fullAddress:
+            type: string
+            description: The full address of the card user
+          achDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayAchDetails'
+            description: The details of the fallback ACH account to use for the payment. This will be used if a fee is charged for card processing.
+          stripeCardId:
+            type: string
+            description: The Stripe Issuing card ID
+          stripePublishableKey:
+            type: string
+            description: The Stripe publishable key for the Issuing Elements
+          stripeAccountId:
+            type: string
+            description: The Stripe account ID (optional, used for connected accounts)
+          ephemeralKeyEndpoint:
+            $ref: '#/components/schemas/paymentGatewayTypes_EphemeralKeyEndpoint'
+            description: The endpoint configuration for generating ephemeral keys. Expects a JSON response with a `ephemeralKeySecret` field.
+        required:
+        - type
+        - firstName
+        - lastName
+        - postalCode
+        - country
+        - stripeCardId
+        - stripePublishableKey
+        - ephemeralKeyEndpoint
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - lithic
+            description: 'Discriminator value: lithic'
+          firstName:
+            type: string
+            description: The first name of the card user
+          lastName:
+            type: string
+            description: The last name of the card user
+          postalCode:
+            type: string
+            description: The postal code of the address of the card
+          country:
+            $ref: '#/components/schemas/commons_CountryCode'
+            description: The country of the address of the card
+          cardType:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardType'
+            description: The type of card (credit or debit). Defaults to debit.
+          phoneNumber:
+            type: string
+            description: The phone number of the card user
+          email:
+            type: string
+            description: The email of the card user
+          fullAddress:
+            type: string
+            description: The full address of the card user
+          achDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayAchDetails'
+            description: The details of the fallback ACH account to use for the payment. This will be used if a fee is charged for card processing.
+          embedRequest:
+            type: string
+            description: The base64-encoded embed request for the Lithic virtual card
+          hmac:
+            type: string
+            description: The HMAC signature for the embed request
+        required:
+        - type
+        - firstName
+        - lastName
+        - postalCode
+        - country
+        - embedRequest
+        - hmac
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - marqetaJs
+            description: 'Discriminator value: marqetaJs'
+          firstName:
+            type: string
+            description: The first name of the card user
+          lastName:
+            type: string
+            description: The last name of the card user
+          postalCode:
+            type: string
+            description: The postal code of the address of the card
+          country:
+            $ref: '#/components/schemas/commons_CountryCode'
+            description: The country of the address of the card
+          cardType:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardType'
+            description: The type of card (credit or debit). Defaults to debit.
+          phoneNumber:
+            type: string
+            description: The phone number of the card user
+          email:
+            type: string
+            description: The email of the card user
+          fullAddress:
+            type: string
+            description: The full address of the card user
+          achDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayAchDetails'
+            description: The details of the fallback ACH account to use for the payment. This will be used if a fee is charged for card processing.
+          cardToken:
+            type: string
+            description: The Marqeta card token for the virtual card
+          clientAccessToken:
+            type: string
+            description: The Marqeta client access token for Marqeta.js authentication
+        required:
+        - type
+        - firstName
+        - lastName
+        - postalCode
+        - country
+        - cardToken
+        - clientAccessToken
+      discriminator:
+        propertyName: type
+      title: ProcessPaymentGatewayCardDetails
+    paymentGatewayTypes_PaymentGatewayJobOrderByField:
+      type: string
+      enum:
+      - CREATED_AT
+      - UPDATED_AT
+      - STATUS
+      title: PaymentGatewayJobOrderByField
+    commons_OrderDirection:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      title: OrderDirection
+    paymentGatewayTypes_PaymentGatewayJobStatus:
+      type: string
+      enum:
+      - PENDING
+      - COMPLETED
+      - FAILED
+      title: PaymentGatewayJobStatus
+    paymentGatewayTypes_ProcessPaymentGatewayResponse:
+      oneOf:
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - pending
+            description: 'Discriminator value: pending'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway processing job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - success
+            description: 'Discriminator value: success'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway processing job
+          receiptUrl:
+            type: string
+            description: The URL of the receipt that was downloaded from the payment gateway
+          invoiceAmount:
+            type: number
+            format: double
+            description: The invoice amount detected from the payment gateway
+          gatewayAmount:
+            type: number
+            format: double
+            description: The amount displayed on the payment gateway (may include fees)
+          vendorName:
+            type: string
+            description: The vendor name detected from the payment gateway
+          requiredData:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayRequiredData'
+            description: Information about what data is required to proceed with payment
+          attempts:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayAttempt'
+            description: List of payment gateway attempts for this job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - attempts
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - failed
+            description: 'Discriminator value: failed'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway processing job
+          errorType:
+            $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayError'
+            description: The error that occurred during the payment gateway processing job
+          errorMessage:
+            type: string
+            description: The error message that occurred during the payment gateway processing job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - errorType
+        - createdAt
+        - updatedAt
+      discriminator:
+        propertyName: jobStatus
+      title: ProcessPaymentGatewayResponse
+    paymentMethodTypes_BankType:
+      type: string
+      enum:
+      - CHECKING
+      - SAVINGS
+      - UNKNOWN
+      title: BankType
+    commons_CountryCode:
+      type: string
+      enum:
+      - AF
+      - AL
+      - DZ
+      - AS
+      - AD
+      - AO
+      - AI
+      - AQ
+      - AG
+      - AR
+      - AM
+      - AW
+      - AU
+      - AT
+      - AZ
+      - BS
+      - BH
+      - BD
+      - BB
+      - BY
+      - BE
+      - BZ
+      - BJ
+      - BM
+      - BT
+      - BO
+      - BQ
+      - BA
+      - BW
+      - BV
+      - BR
+      - IO
+      - BN
+      - BG
+      - BF
+      - BI
+      - KH
+      - CM
+      - CA
+      - CV
+      - KY
+      - CF
+      - TD
+      - CL
+      - CN
+      - CX
+      - CC
+      - CO
+      - KM
+      - CG
+      - CD
+      - CK
+      - CR
+      - HR
+      - CU
+      - CW
+      - CY
+      - CZ
+      - CI
+      - DK
+      - DJ
+      - DM
+      - DO
+      - EC
+      - EG
+      - SV
+      - GQ
+      - ER
+      - EE
+      - SZ
+      - ET
+      - FK
+      - FO
+      - FJ
+      - FI
+      - FR
+      - GF
+      - PF
+      - TF
+      - GA
+      - GM
+      - GE
+      - DE
+      - GH
+      - GI
+      - GR
+      - GL
+      - GD
+      - GP
+      - GU
+      - GT
+      - GG
+      - GN
+      - GW
+      - GY
+      - HT
+      - HM
+      - VA
+      - HN
+      - HK
+      - HU
+      - IS
+      - IN
+      - ID
+      - IR
+      - IQ
+      - IE
+      - IM
+      - IL
+      - IT
+      - JM
+      - JP
+      - JE
+      - JO
+      - KZ
+      - KE
+      - KI
+      - KP
+      - KR
+      - KW
+      - KG
+      - LA
+      - LV
+      - LB
+      - LS
+      - LR
+      - LY
+      - LI
+      - LT
+      - LU
+      - MO
+      - MK
+      - MG
+      - MW
+      - MY
+      - MV
+      - ML
+      - MT
+      - MH
+      - MQ
+      - MR
+      - MU
+      - YT
+      - MX
+      - FM
+      - MD
+      - MC
+      - MN
+      - ME
+      - MS
+      - MA
+      - MZ
+      - MM
+      - NA
+      - NR
+      - NP
+      - NL
+      - NC
+      - NZ
+      - NI
+      - NE
+      - NG
+      - NU
+      - NF
+      - MP
+      - 'NO'
+      - OM
+      - PK
+      - PW
+      - PS
+      - PA
+      - PG
+      - PY
+      - PE
+      - PH
+      - PN
+      - PL
+      - PT
+      - PR
+      - QA
+      - RO
+      - RU
+      - RW
+      - RE
+      - BL
+      - SH
+      - KN
+      - LC
+      - MF
+      - PM
+      - VC
+      - WS
+      - SM
+      - ST
+      - SA
+      - SN
+      - RS
+      - SC
+      - SL
+      - SG
+      - SX
+      - SK
+      - SI
+      - SB
+      - SO
+      - ZA
+      - GS
+      - SS
+      - ES
+      - LK
+      - SD
+      - SR
+      - SJ
+      - SE
+      - CH
+      - SY
+      - TW
+      - TJ
+      - TZ
+      - TH
+      - TL
+      - TG
+      - TK
+      - TO
+      - TT
+      - TN
+      - TR
+      - TM
+      - TC
+      - TV
+      - UG
+      - UA
+      - AE
+      - GB
+      - US
+      - UM
+      - UY
+      - UZ
+      - VU
+      - VE
+      - VN
+      - VG
+      - VI
+      - WF
+      - EH
+      - YE
+      - ZM
+      - ZW
+      - AX
+      title: CountryCode
+    paymentGatewayTypes_EphemeralKeyEndpoint:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL endpoint to call for generating ephemeral keys
+        method:
+          type: string
+          default: POST
+          description: The HTTP method to use for the request
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+          description: The headers to include in the request. Supports variables {{cardId}}, {{nonce}}, and {{accountId}} that will be replaced with actual values.
+        postBody:
+          type: string
+          description: The body to include in the POST request. Supports variables {{cardId}}, {{nonce}}, and {{accountId}} that will be replaced with actual values.
+      required:
+      - url
+      - method
+      - headers
+      title: EphemeralKeyEndpoint
+    paymentGatewayTypes_ProcessPaymentGatewayCardType:
+      type: string
+      enum:
+      - credit
+      - debit
+      title: ProcessPaymentGatewayCardType
+    paymentGatewayTypes_ProcessPaymentGatewayRequest:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+          document:
+            type: string
+            description: The invoice document PDF to extract the payment gateway from. Must be in base64 format or a publicly accessible URL.
+          cardDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardDetails'
+            description: The details of the card to use for the payment
+        required:
+        - type
+        - document
+        - cardDetails
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - html
+            description: 'Discriminator value: html'
+          html:
+            type: string
+            description: The HTML from an email to extract the payment gateway from
+          cardDetails:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayCardDetails'
+            description: The details of the card to use for the payment
+        required:
+        - type
+        - html
+        - cardDetails
+      discriminator:
+        propertyName: type
+      title: ProcessPaymentGatewayRequest
+    paymentGatewayTypes_ProcessPaymentGatewayAchDetails:
+      type: object
+      properties:
+        routingNumber:
+          type: string
+          description: The routing number of the ACH account
+        accountNumber:
+          type: string
+          description: The account number of the ACH account
+        accountName:
+          type: string
+          description: The name on the ACH account
+        accountType:
+          $ref: '#/components/schemas/paymentMethodTypes_BankType'
+          description: The type of bank account (checking or savings)
+      required:
+      - routingNumber
+      - accountNumber
+      title: ProcessPaymentGatewayAchDetails
+    paymentGatewayTypes_PaymentGatewayError:
+      type: string
+      enum:
+      - NO_VALID_PAYMENT_GATEWAY_FOUND
+      - PAYMENT_GATEWAY_UNSUPPORTED
+      - CARD_DETAILS_INVALID
+      - CARD_DECLINED
+      - INVOICE_AMOUNT_MISMATCH
+      title: PaymentGatewayError
+    paymentGatewayTypes_ValidatePaymentGatewayRequiredData:
+      type: object
+      properties:
+        needsAccountNumber:
+          type: boolean
+          description: Whether the payment gateway requires an account number to proceed
+        needsPostalCode:
+          type: boolean
+          description: Whether the payment gateway requires a postal code to proceed
+        needsEmail:
+          type: boolean
+          description: Whether the payment gateway requires an email address to proceed
+        needsAccountHolderFirstName:
+          type: boolean
+          description: Whether the payment gateway requires the account holder's first name to proceed
+        needsAccountHolderLastName:
+          type: boolean
+          description: Whether the payment gateway requires the account holder's last name to proceed
+        needsFullServiceAddress:
+          type: boolean
+          description: Whether the payment gateway requires a full service address to proceed
+        needsPhoneNumber:
+          type: boolean
+          description: Whether the payment gateway requires a phone number to proceed
+      title: ValidatePaymentGatewayRequiredData
+    paymentGatewayTypes_PaymentGatewayAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the payment gateway attempt
+        status:
+          $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayJobStatus'
+          description: The status of the attempt
+        amount:
+          type: number
+          format: double
+          description: The amount processed in this attempt
+        receiptUrl:
+          type: string
+          description: The URL of the receipt for this attempt
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the attempt was created
+      required:
+      - id
+      - status
+      - createdAt
+      title: PaymentGatewayAttempt
+    paymentGatewayTypes_SearchPaymentGatewayProcessJobsResponse:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayResponse'
+          description: List of payment gateway process jobs matching the search criteria
+        hasMore:
+          type: boolean
+          description: Whether there are more jobs available beyond the current page
+      required:
+      - jobs
+      - hasMore
+      title: SearchPaymentGatewayProcessJobsResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

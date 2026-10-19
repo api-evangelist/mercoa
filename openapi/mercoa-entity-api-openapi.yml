@@ -1,0 +1,3251 @@
+openapi: 3.2.0
+info:
+  title: Reference Entity API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: Entity
+paths:
+  /entity:
+    get:
+      operationId: entity_find
+      summary: Search entities
+      description: Search all entities with the given filters. If no filters are provided, all entities will be returned.
+      tags:
+      - Entity
+      parameters:
+      - name: paymentMethods
+        in: query
+        description: If true, will include entity payment methods as part of the response
+        required: false
+        schema:
+          type: boolean
+      - name: isCustomer
+        in: query
+        description: If true, only entities with a direct relationship to the requesting organization will be returned. If false or not provided, all entities will be returned.
+        required: false
+        schema:
+          type: boolean
+      - name: foreignId
+        in: query
+        description: ID used to identify this entity in your system
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+      - name: isPayee
+        in: query
+        description: 'If true, entities that are marked as payees will be returned.
+
+          If false or not provided, entities that are marked as payees will not be returned.'
+        required: false
+        schema:
+          type: boolean
+      - name: isPayor
+        in: query
+        description: 'If true or not provided, entities that are marked as payors will be returned.
+
+          If false, entities that are marked as payors will not be returned.'
+        required: false
+        schema:
+          type: boolean
+      - name: name
+        in: query
+        description: Use search instead. Deprecated. Filter entities by name. Partial matches are supported.
+        required: false
+        schema:
+          type: string
+        deprecated: true
+      - name: search
+        in: query
+        description: Find entities by name, email, emailTo, entity ID, or foreign ID. Partial matches are supported for name, email, and emailTo. Exact matches are used for entity ID and foreign ID.
+        required: false
+        schema:
+          type: string
+      - name: metadata
+        in: query
+        description: Filter entities by simple key/value metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
+        required: false
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_MetadataFilter'
+      - name: returnMetadata
+        in: query
+        description: Return simple key/value metadata for the specified keys for the entities. For more complex metadata, use the Metadata API.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of entities to return. Limit can range between 1 and 100, and the default is 10.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the entity to start after. If not provided, the first page of entities will be returned.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_FindEntityResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    post:
+      operationId: entity_create
+      summary: Create entity
+      tags:
+      - Entity
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EntityResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityRequest'
+      security:
+      - default: []
+  /entity/{entityId}:
+    get:
+      operationId: entity_get
+      summary: Get entity
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: returnMetadata
+        in: query
+        description: Return simple key/value metadata for the specified keys for the entities. For more complex metadata, use the Metadata API.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EntityResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    post:
+      operationId: entity_update
+      summary: Update entity
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EntityResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityUpdateRequest'
+      security:
+      - default: []
+    delete:
+      operationId: entity_delete
+      summary: Delete entity
+      description: Will archive the entity. This action cannot be undone, and the entity will no longer be available for use. The foreignId on the entity will be cleared as well.
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/accept-tos:
+    post:
+      operationId: entity_acceptTermsOfService
+      summary: Accept Terms of Service
+      description: This endpoint is used to indicate acceptance of Mercoa's terms of service for an entity. Send a request to this endpoint only after the entity has accepted the Mercoa ToS. Entities must accept Mercoa ToS before they can be send or pay invoices using Mercoa's payment rails.
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/request-kyb:
+    post:
+      operationId: entity_initiateKyb
+      summary: Initiate KYB
+      description: 'This endpoint is used to initiate KYB for an entity.
+
+        Send a request to this endpoint only after the entity has accepted the Mercoa ToS,
+
+        all representatives have been added, and all required fields have been filled out.'
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/token:
+    post:
+      operationId: entity_getToken
+      summary: Generate JWT Token
+      description: 'Generate a JWT token for an entity with the given options. This token can be used to authenticate the entity in the Mercoa API and iFrame.
+
+
+        We recommend using this endpoint. This will enable features such as approvals and comments.'
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_TokenGenerationOptions'
+      security:
+      - default: []
+  /entity/{entityId}/onboarding:
+    get:
+      operationId: entity_getOnboardingLink
+      summary: Generate Onboarding Link
+      description: Generate an onboarding link for the entity.
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: type
+        in: query
+        description: The type of onboarding link to generate. If not provided, the default is payee. The onboarding options are determined by your organization's onboarding configuration.
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityOnboardingLinkType'
+      - name: expiresIn
+        in: query
+        description: Expressed in seconds or a string describing a time span. The default is 24h.
+        required: false
+        schema:
+          type: string
+      - name: connectedEntityId
+        in: query
+        description: The ID of the entity to connect to. If onboarding a payee, this should be the payor entity ID. If onboarding a payor, this should be the payee entity ID. If no connected entity ID is provided, the onboarding link will be for a standalone entity.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: redirectToPortal
+        in: query
+        description: If true, the onboarding link will redirect to the vendor/customer portal if the entity is already onboarded. If false, the onboarding link will not redirect to the portal. The default is false.
+        required: false
+        schema:
+          type: boolean
+      - name: vendorPortalOptions
+        in: query
+        description: The options for the vendor portal.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_VendorPortalOptions'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    post:
+      operationId: entity_sendOnboardingLink
+      summary: Send Onboarding Email
+      description: Send an email with a onboarding link to the entity. The email will be sent to the email address associated with the entity.
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: type
+        in: query
+        description: The type of onboarding link to generate. If not provided, the default is payee. The onboarding options are determined by your organization's onboarding configuration.
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityOnboardingLinkType'
+      - name: expiresIn
+        in: query
+        description: Expressed in seconds or a string describing a time span. The default is 7 days.
+        required: false
+        schema:
+          type: string
+      - name: connectedEntityId
+        in: query
+        description: The ID of the entity to connect to. If onboarding a payee, this should be the payor entity ID. If onboarding a payor, this should be the payee entity ID. If no connected entity ID is provided, the onboarding link will be for a standalone entity.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: redirectToPortal
+        in: query
+        description: If true, the onboarding link will redirect to the vendor/customer portal if the entity is already onboarded. If false, the onboarding link will not redirect to the portal. The default is false.
+        required: false
+        schema:
+          type: boolean
+      - name: vendorPortalOptions
+        in: query
+        description: The options for the vendor portal.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_VendorPortalOptions'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/events:
+    get:
+      operationId: entity_events
+      summary: Events
+      description: Get all events for an entity
+      tags:
+      - Entity
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: startDate
+        in: query
+        description: Start date filter. If not provided, events from the start of time will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: End date filter. If not provided, events to the end of time will be returned.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        description: Number of events to return. Limit can range between 1 and 100, and the default is 50.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the event to start after. If not provided, the first page of events will be returned.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityEventId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EntityEventsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    entityTypes_TaxID:
+      type: object
+      properties:
+        ein:
+          $ref: '#/components/schemas/entityTypes_Ein'
+      required:
+      - ein
+      title: TaxID
+    entityTypes_IndividualProfileRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/commons_FullName'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        birthDate:
+          $ref: '#/components/schemas/commons_BirthDate'
+        governmentID:
+          $ref: '#/components/schemas/commons_IndividualGovernmentID'
+      required:
+      - name
+      title: IndividualProfileRequest
+    entityTypes_EntityEvent:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityEventId'
+          description: The ID of the event
+        data:
+          $ref: '#/components/schemas/entityTypes_EntityResponse'
+          description: The payment method data at the time of the event
+        webhookIds:
+          type: array
+          items:
+            type: string
+          description: The list of webhook IDs associated with this event
+        userId:
+          $ref: '#/components/schemas/entityTypes_EntityUserId'
+          description: The ID of the user who triggered the event
+        updatedByEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity that updated the payment method
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the event was created
+      required:
+      - id
+      - data
+      - webhookIds
+      - createdAt
+      title: EntityEvent
+    paymentMethodTypes_CustomPaymentMethodSchemaField:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        type:
+          $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaFieldType'
+        optional:
+          type: boolean
+          description: Indicates whether this field is optional
+        useAsAccountName:
+          type: boolean
+          description: Indicates whether this field should be used as the name of the payment method. Only one field can be used as the name. Will set the accountName field of the payment method to the value of this field.
+        useAsAccountNumber:
+          type: boolean
+          description: Indicates whether this field should be used as the account number of the payment method. Only one field can be used as the account number. Will set the accountNumber field of the payment method to the value of this field.
+        options:
+          type: array
+          items:
+            type: string
+          description: When type is 'select', provide options that can be selected
+      required:
+      - name
+      - type
+      - optional
+      title: CustomPaymentMethodSchemaField
+    entityTypes_TokenGenerationStyleOptions:
+      type: object
+      properties:
+        primaryColor:
+          type: string
+      required:
+      - primaryColor
+      title: TokenGenerationStyleOptions
+    paymentMethodTypes_CardType:
+      type: string
+      enum:
+      - credit
+      - debit
+      - prepaid
+      - unknown
+      title: CardType
+    paymentMethodTypes_CardBrand:
+      type: string
+      enum:
+      - AmericanExpress
+      - Discover
+      - Mastercard
+      - Visa
+      title: CardBrand
+    entityTypes_IndividualProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/commons_FullName'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        birthDateProvided:
+          type: boolean
+        governmentIDProvided:
+          type: boolean
+      required:
+      - name
+      - birthDateProvided
+      - governmentIDProvided
+      title: IndividualProfileResponse
+    entityTypes_EntityCreationRequest:
+      type: object
+      properties:
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system. This ID must be unique across all entities in your system.
+        emailTo:
+          type: string
+          description: Sets the email address to which to send invoices to be added to the Invoice Inbox. Only provide the local-part/username of the email address, do not include the @domain.com
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias. Include the full email address.
+        isCustomer:
+          type: boolean
+          description: If this entity has a direct relationship with your organization (e.g your direct customer or client), set this to true. Otherwise, set to false (e.g your customer's vendors).
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileRequest'
+        isPayor:
+          type: boolean
+          description: If this entity will be paying invoices, set this to true.
+        isPayee:
+          type: boolean
+          description: If this entity will be receiving payments, set this to true.
+        isNetworkPayor:
+          type: boolean
+          description: Control if this entity should be available as a payor to any entity on your platform. If set to false, this entity will only be available as a payor to entities that have a direct relationship with this entity. Defaults to false.
+        isNetworkPayee:
+          type: boolean
+          description: Control if this entity should be available as a payee to any entity on your platform. If set to false, this entity will only be available as a payee to entities that have a direct relationship with this entity. Defaults to false.
+        logo:
+          type: string
+          description: Base64 data URL of the entity logo. Must be in the `data:image/*;base64,XXXX` format. We recommend a PNG image under 100KB. Supported file types are `png`, `jpeg`, `gif`, `svg`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+      required:
+      - isCustomer
+      - accountType
+      - profile
+      - isPayor
+      - isPayee
+      title: EntityCreationRequest
+    entityTypes_EntityUserId:
+      type: string
+      title: EntityUserId
+    paymentMethodTypes_BankStatus:
+      type: string
+      enum:
+      - NEW
+      - VERIFIED
+      - VERIFICATION_FAILED
+      - PENDING
+      - ERRORED
+      title: BankStatus
+    entityTypes_TokenGenerationOptions:
+      type: object
+      properties:
+        expiresIn:
+          type: string
+          description: Expressed in seconds or a string describing a time span. The default is 1h.
+        invoice:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationInvoiceOptions'
+        pages:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationPagesOptions'
+        style:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationStyleOptions'
+        vendors:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationVendorOptions'
+        entity:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationEntityOptions'
+        sessionId:
+          type: string
+          description: Optional session ID to use for the token. If not provided, this token will not be associated with a session.
+      title: TokenGenerationOptions
+    commons_BirthDate:
+      type: object
+      properties:
+        day:
+          type: string
+        month:
+          type: string
+        year:
+          type: string
+      title: BirthDate
+    entityTypes_LineItemAvailabilities:
+      type: string
+      enum:
+      - DISABLED
+      - OPTIONAL
+      - REQUIRED
+      title: LineItemAvailabilities
+    entityTypes_EntityWithPaymentMethodResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        name:
+          type: string
+        email:
+          type: string
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system
+        emailTo:
+          type: string
+          description: Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
+        isCustomer:
+          type: boolean
+          description: True if this entity has a direct relationship with your organization.
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileResponse'
+        logo:
+          type: string
+          description: URL for the entity logo
+        status:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+        oatfiStatus:
+          type: string
+          description: The OatFi status of this entity
+        oatfiUnderwritingResponse:
+          type: object
+          additionalProperties:
+            type: string
+          description: The OatFi underwriting response of this entity
+        acceptedTos:
+          type: boolean
+          description: True if this entity has accepted the terms of service.
+        isPayor:
+          type: boolean
+          description: True if this entity can pay invoices.
+        isPayee:
+          type: boolean
+          description: True if this entity can receive payments.
+        isNetworkPayor:
+          type: boolean
+          description: True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+        isNetworkPayee:
+          type: boolean
+          description: True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        paymentMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+      required:
+      - id
+      - name
+      - email
+      - isCustomer
+      - accountType
+      - profile
+      - status
+      - acceptedTos
+      - isPayor
+      - isPayee
+      - isNetworkPayor
+      - isNetworkPayee
+      - createdAt
+      - updatedAt
+      title: EntityWithPaymentMethodResponse
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    entityTypes_VendorPortalTab:
+      type: string
+      enum:
+      - HOME
+      - PROFILE
+      - INVOICES
+      - PAYMENT_METHODS
+      - VENDOR_CREDITS
+      title: VendorPortalTab
+    entityTypes_EntityOnboardingLinkType:
+      type: string
+      enum:
+      - PAYEE
+      - PAYOR
+      title: EntityOnboardingLinkType
+    paymentMethodTypes_WalletBalance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount in major units of the currency.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+      required:
+      - amount
+      - currency
+      title: WalletBalance
+    entityTypes_VendorPortalOptions:
+      type: object
+      properties:
+        tabs:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_VendorPortalTab'
+          description: The tabs to display in the vendor portal. If not provided, all tabs will be displayed.
+        defaultTab:
+          $ref: '#/components/schemas/entityTypes_VendorPortalTab'
+          description: The default tab to display in the vendor portal. If not provided, the HOME tab will be displayed.
+        welcomeMessage:
+          type: string
+          description: The welcome message to display in the vendor portal. If not provided, no welcome message will be displayed.
+      title: VendorPortalOptions
+    invoiceTypes_MetadataFilter:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          $ref: '#/components/schemas/commons_StringOrStringArray'
+          description: If multiple values are provided, the filter will match if any of the values match (OR filter). To filter for the absence of a key, use the value 'NULL'. To filter for the presence of a key, use the value 'NOT NULL'.
+      required:
+      - key
+      - value
+      title: MetadataFilter
+    entityTypes_FindEntityResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of entities for the given filters. This value is not limited by the limit parameter. It is provided so that you can determine how many pages of results are available.
+        hasMore:
+          type: boolean
+          description: True if there are more entities available for the given filters.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityWithPaymentMethodResponse'
+      required:
+      - count
+      - hasMore
+      - data
+      title: FindEntityResponse
+    entityTypes_BusinessProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        legalBusinessName:
+          type: string
+        businessType:
+          $ref: '#/components/schemas/entityTypes_BusinessType'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        doingBusinessAs:
+          type: string
+        website:
+          type: string
+        description:
+          type: string
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        ownersProvided:
+          type: boolean
+          description: True if all representatives have been provided for this business.
+        taxIDProvided:
+          type: boolean
+        taxId:
+          $ref: '#/components/schemas/entityTypes_TaxID'
+        formationDate:
+          type: string
+          format: date-time
+        industryCodes:
+          $ref: '#/components/schemas/entityTypes_IndustryCodes'
+        averageMonthlyTransactionVolume:
+          type: number
+          format: double
+        averageTransactionSize:
+          type: number
+          format: double
+        maxTransactionSize:
+          type: number
+          format: double
+      required:
+      - legalBusinessName
+      - taxIDProvided
+      title: BusinessProfileResponse
+    entityTypes_IndustryCodes:
+      type: object
+      properties:
+        mcc:
+          type: string
+      title: IndustryCodes
+    paymentMethodTypes_CustomPaymentMethodSchemaId:
+      type: string
+      title: CustomPaymentMethodSchemaId
+    entityTypes_TokenGenerationInvoiceOptions:
+      type: object
+      properties:
+        lineItems:
+          $ref: '#/components/schemas/entityTypes_LineItemAvailabilities'
+          description: Defaults to OPTIONAL. If set to REQUIRED, the user will be required to provide at least one line item when creating an invoice. If set to DISABLED, the user will not be able to provide line items when creating an invoice.
+        status:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceStatus'
+        recurring:
+          type: boolean
+          description: If true, recurring invoice templates will be available to the user.
+      required:
+      - status
+      title: TokenGenerationInvoiceOptions
+    entityTypes_EntityResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        name:
+          type: string
+        email:
+          type: string
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system
+        emailTo:
+          type: string
+          description: Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
+        isCustomer:
+          type: boolean
+          description: True if this entity has a direct relationship with your organization.
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileResponse'
+        logo:
+          type: string
+          description: URL for the entity logo
+        status:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+        oatfiStatus:
+          type: string
+          description: The OatFi status of this entity
+        oatfiUnderwritingResponse:
+          type: object
+          additionalProperties:
+            type: string
+          description: The OatFi underwriting response of this entity
+        acceptedTos:
+          type: boolean
+          description: True if this entity has accepted the terms of service.
+        isPayor:
+          type: boolean
+          description: True if this entity can pay invoices.
+        isPayee:
+          type: boolean
+          description: True if this entity can receive payments.
+        isNetworkPayor:
+          type: boolean
+          description: True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+        isNetworkPayee:
+          type: boolean
+          description: True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - email
+      - isCustomer
+      - accountType
+      - profile
+      - status
+      - acceptedTos
+      - isPayor
+      - isPayee
+      - isNetworkPayor
+      - isNetworkPayee
+      - createdAt
+      - updatedAt
+      title: EntityResponse
+    entityTypes_AccountType:
+      type: string
+      enum:
+      - business
+      - individual
+      title: AccountType
+    entityTypes_TokenGenerationEntityOptions:
+      type: object
+      properties:
+        enableMercoaPayments:
+          type: boolean
+          description: If true, will require entity to undergo KYB to use Mercoa payment rails and will capture required KYB data in the portal.
+      title: TokenGenerationEntityOptions
+    commons_Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateOrProvince:
+          type: string
+          description: State or province code. Must be in the format XX.
+        postalCode:
+          type: string
+          description: Postal code. Must be in the format XXXXX or XXXXX-XXXX.
+        country:
+          type: string
+      required:
+      - addressLine1
+      - city
+      - stateOrProvince
+      - postalCode
+      title: Address
+    entityTypes_TokenGenerationPagesOptions:
+      type: object
+      properties:
+        paymentMethods:
+          type: boolean
+        representatives:
+          type: boolean
+        notifications:
+          type: boolean
+        counterparties:
+          type: boolean
+        approvals:
+          type: boolean
+        emailLog:
+          type: boolean
+      title: TokenGenerationPagesOptions
+    invoiceTypes_InvoiceStatus:
+      type: string
+      enum:
+      - UNASSIGNED
+      - DRAFT
+      - NEW
+      - APPROVED
+      - SCHEDULED
+      - PENDING
+      - PAID
+      - ARCHIVED
+      - REFUSED
+      - CANCELED
+      - FAILED
+      title: InvoiceStatus
+    entityTypes_EntityStatus:
+      type: string
+      enum:
+      - unverified
+      - pending
+      - resubmit
+      - review
+      - verified
+      - failed
+      title: EntityStatus
+    entityTypes_BusinessProfileRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address for the business. Required for KYB.
+        legalBusinessName:
+          type: string
+        businessType:
+          $ref: '#/components/schemas/entityTypes_BusinessType'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+          description: Phone number for the business. Required for KYB.
+        doingBusinessAs:
+          type: string
+        website:
+          type: string
+          description: Website URL for the business. Must be in the format http://www.example.com. Required for KYB if description is not provided.
+        description:
+          type: string
+          description: Description of the business. Required for KYB if website is not provided.
+        address:
+          $ref: '#/components/schemas/commons_Address'
+          description: Address for the business. Required for KYB.
+        taxId:
+          $ref: '#/components/schemas/entityTypes_TaxID'
+          description: Tax ID for the business. Currently only EIN is supported. Required for KYB.
+        formationDate:
+          type: string
+          format: date-time
+          description: Date of business formation
+        industryCodes:
+          $ref: '#/components/schemas/entityTypes_IndustryCodes'
+          description: Industry code for the business. Required to collect funds.
+        averageMonthlyTransactionVolume:
+          type: number
+          format: double
+          description: Average monthly transaction volume for the business. Required to collect funds.
+        averageTransactionSize:
+          type: number
+          format: double
+          description: Average transaction size for the business. Required to collect funds.
+        maxTransactionSize:
+          type: number
+          format: double
+          description: Maximum transaction size for the business. Required to collect funds.
+      required:
+      - legalBusinessName
+      title: BusinessProfileRequest
+    entityTypes_EntityCloneRequest:
+      type: object
+      properties:
+        createFromId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID or ForeignId of the entity to clone.
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system. This ID must be unique across all entities in your system.
+        emailTo:
+          type: string
+          description: Sets the email address to which to send invoices to be added to the Invoice Inbox. Only provide the local-part/username of the email address, do not include the @domain.com
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias. Include the full email address.
+        logo:
+          type: string
+          description: Base64 data URL of the entity logo. Must be in the `data:image/*;base64,XXXX` format. We recommend a PNG image under 100KB. Supported file types are `png`, `jpeg`, `gif`, `svg`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+      required:
+      - createFromId
+      title: EntityCloneRequest
+    paymentMethodTypes_BankAccountCheckOptions:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: If true, will allow the user to print checks from this bank account
+        initialCheckNumber:
+          type: integer
+          description: If provided, will start the check number sequence at the provided number. If not provided, will start at 5000.
+        routingNumberOverride:
+          type: string
+          description: If provided, will print a check with the provided routing number instead of the one from the bank account
+        accountNumberOverride:
+          type: string
+          description: If provided, will print a check with the provided account number instead of the one from the bank account
+        accountHolderNameOverride:
+          type: string
+          description: If provided, will print a check with the provided account holder name instead of the payer name from the invoice
+        accountHolderAddressOverride:
+          $ref: '#/components/schemas/commons_Address'
+          description: If provided, will print a check with the provided account holder address instead of the payer address from the invoice
+        signatoryName:
+          type: string
+          description: Name of the person who's signature will be printed on the check.
+        signatureImage:
+          type: string
+          description: Base64 encoded image of the signature. If not provided, will use the signatoryName to generate a signature. Mercoa will automatically grayscale, resize, and convert the image to a PNG the image to fit on the check.
+        useSignatureImage:
+          type: boolean
+          description: If true, will print checks with the provided signatureImage. If false, will print checks with a generated signature from the signatoryName. If this parameter is not set the default behavior is to use the signatureImage if provided.
+      required:
+      - signatoryName
+      title: BankAccountCheckOptions
+    paymentMethodTypes_BankType:
+      type: string
+      enum:
+      - CHECKING
+      - SAVINGS
+      - UNKNOWN
+      title: BankType
+    paymentMethodTypes_CustomPaymentMethodSchemaResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaId'
+        name:
+          type: string
+        isSource:
+          type: boolean
+          description: This payment method can be used as a payment source for an invoice
+        isDestination:
+          type: boolean
+          description: This payment method can be used as a payment destination for an invoice
+        supportedCurrencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: List of currencies that this payment method supports.
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaField'
+        estimatedProcessingTime:
+          type: integer
+          description: Estimated time in days for this payment method to process a payments. 0 is an same-day payment methods, -1 is unknown processing time.
+        maxAmount:
+          type: number
+          format: double
+          description: The maximum amount that can be transferred from this payment method in a single transaction.
+        minAmount:
+          type: number
+          format: double
+          description: The minimum amount that can be transferred from this payment method in a single transaction. Default is 1.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - isSource
+      - isDestination
+      - supportedCurrencies
+      - fields
+      - estimatedProcessingTime
+      - createdAt
+      - updatedAt
+      title: CustomPaymentMethodSchemaResponse
+    commons_PhoneNumber:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+      - countryCode
+      - number
+      title: PhoneNumber
+    entityTypes_Ein:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Must be in the format XX-XXXXXXX.
+      required:
+      - number
+      title: Ein
+    entityTypes_EntityRequest:
+      oneOf:
+      - $ref: '#/components/schemas/entityTypes_EntityCreationRequest'
+      - $ref: '#/components/schemas/entityTypes_EntityCloneRequest'
+      title: EntityRequest
+    paymentMethodTypes_PaymentMethodResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          accountName:
+            type: string
+          bankName:
+            type: string
+          routingNumber:
+            type: string
+          accountNumber:
+            type: string
+          accountType:
+            $ref: '#/components/schemas/paymentMethodTypes_BankType'
+          status:
+            $ref: '#/components/schemas/paymentMethodTypes_BankStatus'
+          checkOptions:
+            $ref: '#/components/schemas/paymentMethodTypes_BankAccountCheckOptions'
+            description: If check printing is enabled for the account, will return the check options for this bank account
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - accountName
+        - bankName
+        - routingNumber
+        - accountNumber
+        - accountType
+        - status
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - card
+            description: 'Discriminator value: card'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          cardType:
+            $ref: '#/components/schemas/paymentMethodTypes_CardType'
+          cardBrand:
+            $ref: '#/components/schemas/paymentMethodTypes_CardBrand'
+          lastFour:
+            type: string
+          expMonth:
+            type: string
+          expYear:
+            type: string
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - cardType
+        - cardBrand
+        - lastFour
+        - expMonth
+        - expYear
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          payToTheOrderOf:
+            type: string
+          addressLine1:
+            type: string
+          addressLine2:
+            type: string
+          city:
+            type: string
+          stateOrProvince:
+            type: string
+          postalCode:
+            type: string
+          country:
+            type: string
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - payToTheOrderOf
+        - addressLine1
+        - city
+        - stateOrProvince
+        - postalCode
+        - country
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          foreignId:
+            type: string
+            description: ID for this payment method in your system
+          accountName:
+            type: string
+          accountNumber:
+            type: string
+          availableBalance:
+            type: number
+            format: double
+            description: The available balance for this payment method.
+          schemaId:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaId'
+            description: Payment method schema used for this payment method. Defines the fields that this payment method contains.
+          schema:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaResponse'
+          data:
+            type: object
+            additionalProperties:
+              type: string
+            description: Object of key/value pairs that matches the keys in the linked payment method schema.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - schemaId
+        - schema
+        - data
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          utilityId:
+            type: string
+            description: The ID of the utility that this payment method is linked to.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - utilityId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - wallet
+            description: 'Discriminator value: wallet'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          availableBalance:
+            $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+            description: The balance available for use in this wallet.
+          pendingBalance:
+            $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+            description: The in-flight balance into/out of this wallet.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - availableBalance
+        - pendingBalance
+      discriminator:
+        propertyName: type
+      title: PaymentMethodResponse
+    paymentMethodTypes_PaymentMethodId:
+      type: string
+      title: PaymentMethodId
+    entityTypes_EntityEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityEvent'
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - data
+      - count
+      - hasMore
+      title: EntityEventsResponse
+    entityTypes_ProfileResponse:
+      type: object
+      properties:
+        business:
+          $ref: '#/components/schemas/entityTypes_BusinessProfileResponse'
+          description: Will be set if the entity is a business
+        individual:
+          $ref: '#/components/schemas/entityTypes_IndividualProfileResponse'
+          description: Will be set if the entity is a individual
+      title: ProfileResponse
+    entityTypes_VendorNetwork:
+      type: string
+      enum:
+      - all
+      - platform
+      - entity
+      title: VendorNetwork
+    entityTypes_BusinessType:
+      type: string
+      enum:
+      - soleProprietorship
+      - unincorporatedAssociation
+      - trust
+      - publicCorporation
+      - privateCorporation
+      - llc
+      - partnership
+      - unincorporatedNonProfit
+      - incorporatedNonProfit
+      title: BusinessType
+    entityTypes_ProfileRequest:
+      type: object
+      properties:
+        business:
+          $ref: '#/components/schemas/entityTypes_BusinessProfileRequest'
+          description: If this entity is a business, set this field
+        individual:
+          $ref: '#/components/schemas/entityTypes_IndividualProfileRequest'
+          description: If this entity is a individual, set this field
+      title: ProfileRequest
+    commons_IndividualGovernmentID:
+      type: object
+      properties:
+        ssn:
+          type: string
+          description: Full Social Security Number. Must be in the format 123-45-6789.
+      required:
+      - ssn
+      title: IndividualGovernmentID
+    entityTypes_EntityEventId:
+      type: string
+      title: EntityEventId
+    paymentMethodTypes_CustomPaymentMethodSchemaFieldType:
+      type: string
+      enum:
+      - text
+      - number
+      - select
+      - date
+      - phone
+      - email
+      - url
+      - dynamicUrl
+      - embeddedUrl
+      - address
+      - usBankRoutingNumber
+      - usBankAccountNumber
+      title: CustomPaymentMethodSchemaFieldType
+    commons_FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        suffix:
+          type: string
+      required:
+      - firstName
+      - lastName
+      title: FullName
+    entityTypes_TokenGenerationVendorOptions:
+      type: object
+      properties:
+        disableCreation:
+          type: boolean
+          description: If true, the user will not be able to create new vendors.
+        network:
+          $ref: '#/components/schemas/entityTypes_VendorNetwork'
+      required:
+      - network
+      title: TokenGenerationVendorOptions
+    commons_StringOrStringArray:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      title: StringOrStringArray
+    entityTypes_EntityUpdateRequest:
+      type: object
+      properties:
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system. This ID must be unique across all entities in your system.
+        emailTo:
+          type: string
+          description: Sets the email address to which to send invoices to be added to the Invoice Inbox. Only provide the local-part/username of the email address, do not include the @domain.com
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias. Include the full email address.
+        isCustomer:
+          type: boolean
+          description: If this entity has a direct relationship with your organization (e.g your direct customer or client), set this to true. Otherwise, set to false (e.g your customer's vendors).
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileRequest'
+        isPayor:
+          type: boolean
+          description: If this entity will be paying invoices, set this to true.
+        isPayee:
+          type: boolean
+          description: If this entity will be receiving payments, set this to true.
+        isNetworkPayor:
+          type: boolean
+          description: Control if this entity should be available as a payor to any entity on your platform. If set to false, this entity will only be available as a payor to entities that have a direct relationship with this entity. Defaults to false.
+        isNetworkPayee:
+          type: boolean
+          description: Control if this entity should be available as a payee to any entity on your platform. If set to false, this entity will only be available as a payee to entities that have a direct relationship with this entity. Defaults to false.
+        logo:
+          type: string
+          description: Base64 data URL of the entity logo. Must be in the `data:image/*;base64,XXXX` format. We recommend a PNG image under 100KB. Supported file types are `png`, `jpeg`, `gif`, `svg`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        connectedEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity that this entity is connected to. This is used to trigger notifications to the connected entity when this entity is updated.
+      title: EntityUpdateRequest
+    paymentMethodTypes_CurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - CNY
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      title: CurrencyCode
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

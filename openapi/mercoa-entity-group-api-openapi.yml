@@ -1,0 +1,1618 @@
+openapi: 3.2.0
+info:
+  title: Reference Entity Group API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity-group
+paths:
+  /entityGroups:
+    get:
+      operationId: entityGroup_getAll
+      summary: Get All Groups
+      description: Get all entity groups. If using a JWT, will return all groups the entity is part of. If using an API key, will return all groups for the organization.
+      tags:
+      - entity-group
+      parameters:
+      - name: limit
+        in: query
+        description: The maximum number of results to return. Defaults to 1. Max is 20.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      - name: search
+        in: query
+        description: Search entity groups by name. This will perform a case-insensitive search on the group name.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityGroupTypes_EntityGroupFindResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entityGroup:
+    post:
+      operationId: entityGroup_create
+      summary: Create Group
+      description: Create an entity group
+      tags:
+      - entity-group
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityGroupTypes_EntityGroupResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityGroupTypes_EntityGroupCreateRequest'
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}:
+    get:
+      operationId: entityGroup_get
+      summary: Get Group
+      description: Get an entity group
+      tags:
+      - entity-group
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      - name: returnEntityMetadata
+        in: query
+        description: Return simple key/value metadata for the specified keys for the entities in the group. For more complex metadata, use the Metadata API.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityGroupTypes_EntityGroupResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    post:
+      operationId: entityGroup_update
+      summary: Update Group
+      description: Update an entity group
+      tags:
+      - entity-group
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityGroupTypes_EntityGroupResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityGroupTypes_EntityGroupUpdateRequest'
+      security:
+      - default: []
+    delete:
+      operationId: entityGroup_delete
+      summary: Delete Group
+      description: Delete an entity group
+      tags:
+      - entity-group
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}/token:
+    post:
+      operationId: entityGroup_getToken
+      summary: Generate JWT Token
+      description: 'Generate a JWT token for an entity group with the given options. This token can be used to authenticate to any entity in the entity group in the Mercoa API and iFrame.
+
+
+        We recommend using this endpoint. This will enable features such as approvals and comments.'
+      tags:
+      - entity-group
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_TokenGenerationOptions'
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}/addEntities:
+    post:
+      operationId: entityGroup_addEntities
+      summary: Add Entities
+      description: Add entities to an entity group
+      tags:
+      - entity-group
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityGroupTypes_EntityGroupResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityGroupTypes_EntityGroupAddEntitiesRequest'
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}/removeEntities:
+    post:
+      operationId: entityGroup_removeEntities
+      summary: Remove Entities
+      description: Remove entities from an entity group
+      tags:
+      - entity-group
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityGroupTypes_EntityGroupResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityGroupTypes_EntityGroupRemoveEntitiesRequest'
+      security:
+      - default: []
+components:
+  schemas:
+    entityTypes_TaxID:
+      type: object
+      properties:
+        ein:
+          $ref: '#/components/schemas/entityTypes_Ein'
+      required:
+      - ein
+      title: TaxID
+    entityGroupTypes_EntityGroupAddEntitiesRequest:
+      type: object
+      properties:
+        entityIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of entity IDs or foreign IDs to add to the group
+        copyUsersFrom:
+          $ref: '#/components/schemas/entityGroupTypes_EntityIdOrBoolean'
+          description: 'Entity ID / foreign ID of an entity currently in the group to copy users and roles from OR a boolean defining if users should be copied to the new entities.
+
+
+            If not provided or false, users and roles will not be copied.
+
+            If true, users and roles will be copied from the entity with the most users that has been updated most recently.
+
+            If a valid ID is provided, users and roles will be copied from the corresponding provided entity in the group.
+
+
+            Note: If users copied, any preexisting users will be left alone, and users with the same foreign ID will not be copied.'
+        filterRoles:
+          type: array
+          items:
+            type: string
+          description: List of roles to filter users by. If not provided, all users will be copied. If provided, only users with the provided roles will be copied.
+      required:
+      - entityIds
+      title: EntityGroupAddEntitiesRequest
+    entityTypes_TokenGenerationStyleOptions:
+      type: object
+      properties:
+        primaryColor:
+          type: string
+      required:
+      - primaryColor
+      title: TokenGenerationStyleOptions
+    entityTypes_IndividualProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/commons_FullName'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        birthDateProvided:
+          type: boolean
+        governmentIDProvided:
+          type: boolean
+      required:
+      - name
+      - birthDateProvided
+      - governmentIDProvided
+      title: IndividualProfileResponse
+    entityTypes_TokenGenerationOptions:
+      type: object
+      properties:
+        expiresIn:
+          type: string
+          description: Expressed in seconds or a string describing a time span. The default is 1h.
+        invoice:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationInvoiceOptions'
+        pages:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationPagesOptions'
+        style:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationStyleOptions'
+        vendors:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationVendorOptions'
+        entity:
+          $ref: '#/components/schemas/entityTypes_TokenGenerationEntityOptions'
+        sessionId:
+          type: string
+          description: Optional session ID to use for the token. If not provided, this token will not be associated with a session.
+      title: TokenGenerationOptions
+    entityTypes_LineItemAvailabilities:
+      type: string
+      enum:
+      - DISABLED
+      - OPTIONAL
+      - REQUIRED
+      title: LineItemAvailabilities
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    entityTypes_BusinessProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        legalBusinessName:
+          type: string
+        businessType:
+          $ref: '#/components/schemas/entityTypes_BusinessType'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        doingBusinessAs:
+          type: string
+        website:
+          type: string
+        description:
+          type: string
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        ownersProvided:
+          type: boolean
+          description: True if all representatives have been provided for this business.
+        taxIDProvided:
+          type: boolean
+        taxId:
+          $ref: '#/components/schemas/entityTypes_TaxID'
+        formationDate:
+          type: string
+          format: date-time
+        industryCodes:
+          $ref: '#/components/schemas/entityTypes_IndustryCodes'
+        averageMonthlyTransactionVolume:
+          type: number
+          format: double
+        averageTransactionSize:
+          type: number
+          format: double
+        maxTransactionSize:
+          type: number
+          format: double
+      required:
+      - legalBusinessName
+      - taxIDProvided
+      title: BusinessProfileResponse
+    entityTypes_IndustryCodes:
+      type: object
+      properties:
+        mcc:
+          type: string
+      title: IndustryCodes
+    entityGroupTypes_EntityGroupResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+        foreignId:
+          type: string
+        name:
+          type: string
+        emailToName:
+          type: string
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityResponse'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - id
+      - entities
+      - metadata
+      title: EntityGroupResponse
+    entityTypes_TokenGenerationInvoiceOptions:
+      type: object
+      properties:
+        lineItems:
+          $ref: '#/components/schemas/entityTypes_LineItemAvailabilities'
+          description: Defaults to OPTIONAL. If set to REQUIRED, the user will be required to provide at least one line item when creating an invoice. If set to DISABLED, the user will not be able to provide line items when creating an invoice.
+        status:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceStatus'
+        recurring:
+          type: boolean
+          description: If true, recurring invoice templates will be available to the user.
+      required:
+      - status
+      title: TokenGenerationInvoiceOptions
+    entityTypes_EntityResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        name:
+          type: string
+        email:
+          type: string
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system
+        emailTo:
+          type: string
+          description: Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
+        isCustomer:
+          type: boolean
+          description: True if this entity has a direct relationship with your organization.
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileResponse'
+        logo:
+          type: string
+          description: URL for the entity logo
+        status:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+        oatfiStatus:
+          type: string
+          description: The OatFi status of this entity
+        oatfiUnderwritingResponse:
+          type: object
+          additionalProperties:
+            type: string
+          description: The OatFi underwriting response of this entity
+        acceptedTos:
+          type: boolean
+          description: True if this entity has accepted the terms of service.
+        isPayor:
+          type: boolean
+          description: True if this entity can pay invoices.
+        isPayee:
+          type: boolean
+          description: True if this entity can receive payments.
+        isNetworkPayor:
+          type: boolean
+          description: True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+        isNetworkPayee:
+          type: boolean
+          description: True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - email
+      - isCustomer
+      - accountType
+      - profile
+      - status
+      - acceptedTos
+      - isPayor
+      - isPayee
+      - isNetworkPayor
+      - isNetworkPayee
+      - createdAt
+      - updatedAt
+      title: EntityResponse
+    entityTypes_AccountType:
+      type: string
+      enum:
+      - business
+      - individual
+      title: AccountType
+    entityGroupTypes_EntityGroupFindResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityGroupTypes_EntityGroupResponse'
+      required:
+      - count
+      - hasMore
+      - data
+      title: EntityGroupFindResponse
+    entityGroupTypes_EntityGroupUpdateRequest:
+      type: object
+      properties:
+        foreignId:
+          type: string
+        name:
+          type: string
+        emailToName:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata key/value pairs to associate with this group. Will overwrite existing metadata.
+      title: EntityGroupUpdateRequest
+    entityGroupTypes_EntityGroupRemoveEntitiesRequest:
+      type: object
+      properties:
+        entityIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of entity IDs or foreign IDs to remove from the group
+      required:
+      - entityIds
+      title: EntityGroupRemoveEntitiesRequest
+    entityTypes_TokenGenerationEntityOptions:
+      type: object
+      properties:
+        enableMercoaPayments:
+          type: boolean
+          description: If true, will require entity to undergo KYB to use Mercoa payment rails and will capture required KYB data in the portal.
+      title: TokenGenerationEntityOptions
+    commons_Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateOrProvince:
+          type: string
+          description: State or province code. Must be in the format XX.
+        postalCode:
+          type: string
+          description: Postal code. Must be in the format XXXXX or XXXXX-XXXX.
+        country:
+          type: string
+      required:
+      - addressLine1
+      - city
+      - stateOrProvince
+      - postalCode
+      title: Address
+    entityTypes_TokenGenerationPagesOptions:
+      type: object
+      properties:
+        paymentMethods:
+          type: boolean
+        representatives:
+          type: boolean
+        notifications:
+          type: boolean
+        counterparties:
+          type: boolean
+        approvals:
+          type: boolean
+        emailLog:
+          type: boolean
+      title: TokenGenerationPagesOptions
+    invoiceTypes_InvoiceStatus:
+      type: string
+      enum:
+      - UNASSIGNED
+      - DRAFT
+      - NEW
+      - APPROVED
+      - SCHEDULED
+      - PENDING
+      - PAID
+      - ARCHIVED
+      - REFUSED
+      - CANCELED
+      - FAILED
+      title: InvoiceStatus
+    entityTypes_EntityStatus:
+      type: string
+      enum:
+      - unverified
+      - pending
+      - resubmit
+      - review
+      - verified
+      - failed
+      title: EntityStatus
+    entityGroupTypes_EntityGroupId:
+      type: string
+      title: EntityGroupId
+    commons_PhoneNumber:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+      - countryCode
+      - number
+      title: PhoneNumber
+    entityTypes_Ein:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Must be in the format XX-XXXXXXX.
+      required:
+      - number
+      title: Ein
+    entityGroupTypes_EntityGroupCreateRequest:
+      type: object
+      properties:
+        foreignId:
+          type: string
+        name:
+          type: string
+        emailToName:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata key/value pairs to associate with this group. Will overwrite existing metadata.
+        entityIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of entity IDs or foreign IDs
+      title: EntityGroupCreateRequest
+    entityGroupTypes_EntityIdOrBoolean:
+      oneOf:
+      - type: boolean
+      - $ref: '#/components/schemas/entityTypes_EntityId'
+      title: EntityIdOrBoolean
+    entityTypes_ProfileResponse:
+      type: object
+      properties:
+        business:
+          $ref: '#/components/schemas/entityTypes_BusinessProfileResponse'
+          description: Will be set if the entity is a business
+        individual:
+          $ref: '#/components/schemas/entityTypes_IndividualProfileResponse'
+          description: Will be set if the entity is a individual
+      title: ProfileResponse
+    entityTypes_VendorNetwork:
+      type: string
+      enum:
+      - all
+      - platform
+      - entity
+      title: VendorNetwork
+    entityTypes_BusinessType:
+      type: string
+      enum:
+      - soleProprietorship
+      - unincorporatedAssociation
+      - trust
+      - publicCorporation
+      - privateCorporation
+      - llc
+      - partnership
+      - unincorporatedNonProfit
+      - incorporatedNonProfit
+      title: BusinessType
+    commons_FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        suffix:
+          type: string
+      required:
+      - firstName
+      - lastName
+      title: FullName
+    entityTypes_TokenGenerationVendorOptions:
+      type: object
+      properties:
+        disableCreation:
+          type: boolean
+          description: If true, the user will not be able to create new vendors.
+        network:
+          $ref: '#/components/schemas/entityTypes_VendorNetwork'
+      required:
+      - network
+      title: TokenGenerationVendorOptions
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

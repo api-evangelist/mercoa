@@ -1,0 +1,693 @@
+openapi: 3.2.0
+info:
+  title: Reference entity > payment-method > wallet API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity > payment-method > wallet
+paths:
+  /entity/{entityId}/paymentMethod/{paymentMethodId}/wallet-balance:
+    get:
+      operationId: entity_paymentMethod_wallet_getWalletBalance
+      summary: Get wallet balance
+      description: Get the available and pending balance of this entity's wallet. The specified payment method ID must refer to the entity's wallet.
+      tags:
+      - entity > payment-method > wallet
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: paymentMethodId
+        in: path
+        description: Payment Method ID or Payment Method ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentMethodTypes_WalletBalanceResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/paymentMethod/{paymentMethodId}/add-wallet-funds:
+    post:
+      operationId: entity_paymentMethod_wallet_addWalletFunds
+      summary: Add wallet funds
+      description: Add funds to this wallet from a bank account (this transfer is D+2). The source payment method ID must refer to a bank account.
+      tags:
+      - entity > payment-method > wallet
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: paymentMethodId
+        in: path
+        description: Payment Method ID or Payment Method ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: double
+                  description: The amount of the funds to add. If the entered amount has more decimal places than the currency supports, trailing decimals will be truncated.
+                currency:
+                  $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+                  description: The currency of the funds to add. (Defaults to USD, currently only USD is supported.)
+                sourcePaymentMethodId:
+                  $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+                  description: The ID of the bank account to add funds from. The source payment method ID must refer to a bank account.
+              required:
+              - amount
+              - sourcePaymentMethodId
+      security:
+      - default: []
+  /entity/{entityId}/paymentMethod/{paymentMethodId}/withdraw-wallet-funds:
+    post:
+      operationId: entity_paymentMethod_wallet_withdrawWalletFunds
+      summary: Withdraw wallet funds
+      description: Withdraw funds from this wallet to a bank account (this transfer is D+0). The destination payment method ID must refer to a bank account.
+      tags:
+      - entity > payment-method > wallet
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: paymentMethodId
+        in: path
+        description: Payment Method ID or Payment Method ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  format: double
+                  description: The amount of the funds to withdraw. If the entered amount has more decimal places than the currency supports, trailing decimals will be truncated.
+                currency:
+                  $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+                  description: The currency of the funds to withdraw. (Defaults to USD, currently only USD is supported.)
+                destinationPaymentMethodId:
+                  $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+                  description: The ID of the bank account to withdraw funds to. The destination payment method ID must refer to a bank account.
+              required:
+              - amount
+              - destinationPaymentMethodId
+      security:
+      - default: []
+components:
+  schemas:
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    paymentMethodTypes_WalletBalanceResponse:
+      type: object
+      properties:
+        paymentMethodId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          description: The ID of the wallet payment method.
+        entityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity that this wallet belongs to.
+        availableBalance:
+          $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+          description: The available balance in this wallet.
+        pendingBalance:
+          $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+          description: The pending balance in this wallet.
+      required:
+      - paymentMethodId
+      - entityId
+      - availableBalance
+      - pendingBalance
+      title: WalletBalanceResponse
+    paymentMethodTypes_PaymentMethodId:
+      type: string
+      title: PaymentMethodId
+    paymentMethodTypes_WalletBalance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount in major units of the currency.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+      required:
+      - amount
+      - currency
+      title: WalletBalance
+    paymentMethodTypes_CurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - CNY
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      title: CurrencyCode
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

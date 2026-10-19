@@ -1,0 +1,481 @@
+openapi: 3.2.0
+info:
+  title: Reference invoice > collection API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: invoice > collection
+paths:
+  /invoice/{invoiceId}/collection/next-action:
+    get:
+      operationId: invoice_collection_getNextAction
+      summary: Get Next Action
+      description: Get the collection agent's next action on this invoice. This endpoint will return an empty object if there is no action to return.
+      tags:
+      - invoice > collection
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice ID or Invoice ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/collectionTypes_ActionResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    patch:
+      operationId: invoice_collection_updateNextAction
+      summary: Update Next Action
+      description: Update the collection agent's next action on this invoice with natural language. Note that updating any APPROVED action will reset the action to SUGGESTED. This endpoint will throw an error if there is no action to update.
+      tags:
+      - invoice > collection
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice ID or Invoice ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/collectionTypes_ActionResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/collectionTypes_UpdateNextActionRequest'
+      security:
+      - default: []
+  /invoice/{invoiceId}/collection/next-action/approve:
+    patch:
+      operationId: invoice_collection_approveNextAction
+      summary: Approve Next Action
+      description: Approve the collection agent's next action on this invoice. This endpoint will throw an error if there is no action to approve.
+      tags:
+      - invoice > collection
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice ID or Invoice ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/collectionTypes_ActionResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    collectionTypes_ActionResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - email
+            description: 'Discriminator value: email'
+          id:
+            $ref: '#/components/schemas/collectionTypes_ActionId'
+          scheduledExecutionTime:
+            type: string
+            format: date-time
+            description: The UTC timestamp for when this action is scheduled for execution. Actual execution may be delayed by a few minutes due to processing time.
+          status:
+            $ref: '#/components/schemas/collectionTypes_ActionStatus'
+            description: The current lifecycle state of the action. SUGGESTED actions are pending approval, APPROVED actions will be executed, and COMPLETED actions have been executed.
+          subject:
+            type: string
+            description: The subject of the email
+          body:
+            type: string
+            description: The body of the email in plaintext
+        required:
+        - type
+        - id
+        - scheduledExecutionTime
+        - status
+        - subject
+        - body
+      discriminator:
+        propertyName: type
+      title: ActionResponse
+    collectionTypes_UpdateNextActionRequest:
+      type: object
+      properties:
+        feedback:
+          type: string
+          description: Natural language feedback to update the collection agent's next action
+      required:
+      - feedback
+      title: UpdateNextActionRequest
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    collectionTypes_ActionStatus:
+      type: string
+      enum:
+      - SUGGESTED
+      - APPROVED
+      - COMPLETED
+      title: ActionStatus
+    collectionTypes_ActionId:
+      type: string
+      title: ActionId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,513 @@
+openapi: 3.2.0
+info:
+  title: Reference entity > notification-policy API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity > notification-policy
+paths:
+  /entity/{entityId}/notification-policies:
+    get:
+      operationId: entity_notificationPolicy_getAll
+      summary: Get All
+      description: Retrieve all notification policies associated with this entity
+      tags:
+      - entity > notification-policy
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/entityTypes_NotificationPolicyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/notification-policy/{notificationType}:
+    get:
+      operationId: entity_notificationPolicy_get
+      summary: Get
+      description: Retrieve notification policy associated with this entity
+      tags:
+      - entity > notification-policy
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: notificationType
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_NotificationType'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_NotificationPolicyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    post:
+      operationId: entity_notificationPolicy_update
+      summary: Update
+      description: Update notification policy associated with this entity
+      tags:
+      - entity > notification-policy
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: notificationType
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_NotificationType'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_NotificationPolicyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_NotificationPolicyRequest'
+      security:
+      - default: []
+components:
+  schemas:
+    entityTypes_NotificationType:
+      type: string
+      enum:
+      - INVOICE_APPROVAL_NEEDED
+      - INVOICE_APPROVED
+      - INVOICE_REJECTED
+      - INVOICE_SCHEDULED
+      - INVOICE_PENDING
+      - INVOICE_PAID
+      - INVOICE_CANCELED
+      - INVOICE_CREATED
+      - INVOICE_EMAILED
+      - INVOICE_FAILED
+      - COUNTERPARTY_ONBOARDING_COMPLETED
+      title: NotificationType
+    entityTypes_EntityUserId:
+      type: string
+      title: EntityUserId
+    entityTypes_NotificationPolicyRequest:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          description: Set to true if the selected notification type should be disabled for this entity
+        additionalRoles:
+          type: array
+          items:
+            type: string
+          description: List of user roles that should receive notifications in addition to the default users for this notification type
+        additionalUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityUserId'
+          description: List of user IDs that should receive notifications in addition to the default users for this notification type
+        notifyPayeeCounterparty:
+          type: boolean
+          description: Set to true if the selected notification type should be sent to the counterparty if this is a payable invoice.
+        notifyPayorCounterparty:
+          type: boolean
+          description: Set to true if the selected notification type should be sent to the counterparty if this is a receivable invoice.
+      title: NotificationPolicyRequest
+    entityTypes_NotificationPolicyResponse:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          description: True if the selected notification type is disabled for this entity
+        additionalRoles:
+          type: array
+          items:
+            type: string
+          description: List of user roles that should receive notifications in addition to the default users for this notification type
+        additionalUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityUserId'
+          description: List of user IDs that should receive notifications in addition to the default users for this notification type
+        notifyPayeeCounterparty:
+          type: boolean
+          description: True if the selected notification type should be sent to the counterparty if this is a payable invoice.
+        notifyPayorCounterparty:
+          type: boolean
+          description: True if the selected notification type should be sent to the counterparty if this is a receivable invoice.
+        type:
+          $ref: '#/components/schemas/entityTypes_NotificationType'
+      required:
+      - disabled
+      - additionalRoles
+      - additionalUsers
+      - notifyPayeeCounterparty
+      - notifyPayorCounterparty
+      - type
+      title: NotificationPolicyResponse
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

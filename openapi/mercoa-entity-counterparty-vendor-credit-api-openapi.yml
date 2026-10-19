@@ -1,0 +1,1058 @@
+openapi: 3.2.0
+info:
+  title: Reference entity > counterparty > vendor-credit API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity > counterparty > vendor-credit
+paths:
+  /entity/{entityId}/counterparty/{counterpartyId}/vendor-credits:
+    get:
+      operationId: entity_counterparty_vendorCredit_getAll
+      summary: Get All
+      tags:
+      - entity > counterparty > vendor-credit
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: counterpartyId
+        in: path
+        description: Counterparty Entity ID or Counterparty Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendorCreditTypes_FindVendorCreditResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/counterparty/{counterpartyId}/vendor-credit/{vendorCreditId}:
+    get:
+      operationId: entity_counterparty_vendorCredit_get
+      summary: Get
+      tags:
+      - entity > counterparty > vendor-credit
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: counterpartyId
+        in: path
+        description: Counterparty Entity ID or Counterparty Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: vendorCreditId
+        in: path
+        description: ID of the vendor credit to retrieve
+        required: true
+        schema:
+          $ref: '#/components/schemas/vendorCreditTypes_VendorCreditId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendorCreditTypes_VendorCreditResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    delete:
+      operationId: entity_counterparty_vendorCredit_delete
+      summary: Delete
+      tags:
+      - entity > counterparty > vendor-credit
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: counterpartyId
+        in: path
+        description: Counterparty Entity ID or Counterparty Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: vendorCreditId
+        in: path
+        description: ID of the vendor credit to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/vendorCreditTypes_VendorCreditId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /entity/{entityId}/counterparty/{counterpartyId}/vendor-credit:
+    post:
+      operationId: entity_counterparty_vendorCredit_create
+      summary: Create
+      tags:
+      - entity > counterparty > vendor-credit
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: counterpartyId
+        in: path
+        description: Counterparty Entity ID or Counterparty Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendorCreditTypes_VendorCreditResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vendorCreditTypes_VendorCreditRequest'
+      security:
+      - default: []
+  /entity/{entityId}/counterparty/{counterpartyId}/vendor-credits/estimate-usage:
+    get:
+      operationId: entity_counterparty_vendorCredit_estimateUsage
+      summary: Estimate Vendor Credit Usage
+      description: Estimate the usage of vendor credits on an invoice of a given amount
+      tags:
+      - entity > counterparty > vendor-credit
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: counterpartyId
+        in: path
+        description: Counterparty Entity ID or Counterparty Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      - name: amount
+        in: query
+        description: The amount of the invoice to calculate vendor credit usage for.
+        required: true
+        schema:
+          type: number
+          format: double
+      - name: currency
+        in: query
+        description: The currency of the invoice to calculate vendor credit usage for. Defaults to USD.
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+      - name: excludedInvoiceIds
+        in: query
+        description: List of invoice IDs to exclude from the calculation. If not provided or an empty list, no invoices will be excluded. This is useful for recalculating vendor credit usage on invoices that already have vendor credits applied.
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      - name: includedVendorCreditIds
+        in: query
+        description: List of vendor credit IDs to include in the calculation. If not provided, all applicable vendor credits will be included, while an empty list will not include ANY vendor credits.  This is useful for recalculating vendor credit usage on invoices that have a fixed list of applied vendor credits (e.g. a SCHEDULED or PENDING invoice).
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/vendorCreditTypes_VendorCreditId'
+      responses:
+        '200':
+          description: The vendor credit usage estimate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendorCreditTypes_CalculateVendorCreditUsageResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    vendorCreditTypes_VendorCreditResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/vendorCreditTypes_VendorCreditId'
+        memoNumber:
+          type: string
+          description: Memo number for the vendor credit
+        totalAmount:
+          type: number
+          format: double
+          description: Total issued amount of the vendor credit in major units
+        remainingAmount:
+          type: number
+          format: double
+          description: Remaining usable amount in the vendor credit in major units
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: Currency code for the amount. Defaults to USD.
+        vendorId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: ID of the vendor the vendor credit may be used for
+        payerId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: ID of the payer who may use the vendor credit
+        creatorEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: ID of the entity that created this vendor credit
+        note:
+          type: string
+          description: An optional note to attach to the vendor credit
+        invoiceIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+          description: The IDs of the invoices that this vendor credit has been applied to
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - vendorId
+      - payerId
+      - createdAt
+      - updatedAt
+      title: VendorCreditResponse
+    vendorCreditTypes_CalculateVendorCreditUsageResponse:
+      type: object
+      properties:
+        remainingAmount:
+          type: number
+          format: double
+          description: Remaining amount on the invoice after vendor credits are applied in major units.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: Currency code for the amount. Defaults to USD.
+        vendorCredits:
+          type: array
+          items:
+            $ref: '#/components/schemas/vendorCreditTypes_VendorCreditResponse'
+          description: Vendor credits that will be applied to the invoice. The objects returned represent the states each vendor credit will be in AFTER they are applied to the invoice, not their current states.
+      required:
+      - remainingAmount
+      - currency
+      - vendorCredits
+      title: CalculateVendorCreditUsageResponse
+    vendorCreditTypes_VendorCreditRequest:
+      type: object
+      properties:
+        memoNumber:
+          type: string
+          description: Memo number for the vendor credit
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount of the vendor credit in major units
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: Currency code for the amount. Defaults to USD.
+        note:
+          type: string
+          description: An optional note to attach to the vendor credit
+      required:
+      - totalAmount
+      - currency
+      title: VendorCreditRequest
+    vendorCreditTypes_FindVendorCreditResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of vendor credits for the given filters. This value is not limited by the limit parameter. It is provided so that you can determine how many pages of results are available.
+        hasMore:
+          type: boolean
+          description: True if there are more vendor credits available for the given filters.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/vendorCreditTypes_VendorCreditResponse'
+      required:
+      - count
+      - hasMore
+      - data
+      title: FindVendorCreditResponse
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    vendorCreditTypes_VendorCreditId:
+      type: string
+      title: VendorCreditId
+    paymentMethodTypes_CurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - CNY
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      title: CurrencyCode
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

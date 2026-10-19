@@ -1,0 +1,811 @@
+openapi: 3.2.0
+info:
+  title: Reference entity > customization API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity > customization
+paths:
+  /entity/{entityId}/customization:
+    get:
+      operationId: entity_customization_get
+      summary: Get
+      description: Get entity customization.
+      tags:
+      - entity > customization
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EntityCustomizationResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+    post:
+      operationId: entity_customization_update
+      summary: Update
+      description: Update entity customization. This lets you turn off metadata and payment methods for an entity.
+      tags:
+      - entity > customization
+      parameters:
+      - name: entityId
+        in: path
+        description: Entity ID or Entity ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_EntityCustomizationResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityCustomizationRequest'
+      security:
+      - default: []
+components:
+  schemas:
+    customizationTypes_WorkflowCustomizationRequest:
+      type: object
+      properties:
+        autoAdvanceInvoiceStatus:
+          type: boolean
+          description: If true, the invoice will be automatically advanced to the furthest stage in the payment workflow. For example, if the invoice is APPROVED, but has all necessary data to move to SCHEDULED, it will be advanced to SCHEDULED.
+      title: WorkflowCustomizationRequest
+    customizationTypes_NotificationCustomizationRequest:
+      type: object
+      properties:
+        assumeRole:
+          type: string
+          description: If set, notifications to this role will be sent to the email address of the entity. Set as empty string to disable.
+      title: NotificationCustomizationRequest
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    entityTypes_EntityCustomizationRequest:
+      type: object
+      properties:
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_MetadataCustomizationRequest'
+        paymentSource:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_PaymentMethodCustomizationRequest'
+        backupDisbursement:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_PaymentMethodCustomizationRequest'
+        paymentDestination:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_PaymentMethodCustomizationRequest'
+        ocr:
+          $ref: '#/components/schemas/customizationTypes_OcrCustomizationRequest'
+        notifications:
+          $ref: '#/components/schemas/customizationTypes_NotificationCustomizationRequest'
+        workflow:
+          $ref: '#/components/schemas/customizationTypes_WorkflowCustomizationRequest'
+        invoice:
+          $ref: '#/components/schemas/customizationTypes_InvoiceCustomizationRequest'
+        fees:
+          $ref: '#/components/schemas/customizationTypes_FeeCustomizationRequest'
+        rolePermissions:
+          $ref: '#/components/schemas/organizationTypes_RolePermissionRequest'
+      title: EntityCustomizationRequest
+    customizationTypes_InvoiceCustomizationResponse:
+      type: object
+      properties:
+        hideAddress:
+          type: boolean
+          description: If true, the address information will be hidden from generated invoice PDFs. Defaults to false.
+        hideQrCode:
+          type: boolean
+          description: If true, the QR code will be hidden from generated invoice PDFs. Defaults to false.
+        hideBankDetails:
+          type: boolean
+          description: If true, the bank account details will be hidden from generated invoice PDFs. Defaults to false.
+        hidePaymentLink:
+          type: boolean
+          description: If true, the payment link will be hidden from generated invoice PDFs. Defaults to false.
+      required:
+      - hideAddress
+      - hideQrCode
+      - hideBankDetails
+      - hidePaymentLink
+      title: InvoiceCustomizationResponse
+    customizationTypes_PaymentMethodFee:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - percentage
+            description: 'Discriminator value: percentage'
+          amount:
+            type: number
+            format: double
+            description: The percentage of the payment amount that will be charged as a fee. For example, if the fee is 2.5%, set this to 2.5.
+        required:
+        - type
+        - amount
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - flat
+            description: 'Discriminator value: flat'
+          amount:
+            type: number
+            format: double
+            description: The flat amount that will be charged as a fee. For example, if the fee is $2.50, set this to 2.5.
+        required:
+        - type
+        - amount
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - default
+            description: 'Discriminator value: default'
+        required:
+        - type
+        description: The default fee for the payment method based on your organization's default fee.
+      discriminator:
+        propertyName: type
+      title: PaymentMethodFee
+    organizationTypes_Permission:
+      type: string
+      enum:
+      - invoice.all
+      - invoice.view.all
+      - invoice.view.draft
+      - invoice.view.new
+      - invoice.view.approved
+      - invoice.view.scheduled
+      - invoice.view.pending
+      - invoice.view.paid
+      - invoice.view.archived
+      - invoice.view.refused
+      - invoice.view.canceled
+      - invoice.view.failed
+      - invoice.create.all
+      - invoice.create.draft
+      - invoice.create.new
+      - invoice.create.approved
+      - invoice.create.scheduled
+      - invoice.create.archived
+      - invoice.create.cancel
+      - invoice.update.all
+      - invoice.update.draft
+      - invoice.update.new
+      - invoice.update.approved
+      - invoice.update.scheduled
+      - invoice.update.archived
+      - invoice.update.cancel
+      - invoice.delete
+      - invoice.comment.view
+      - invoice.comment.create
+      - invoice.approver.override
+      - invoice.check.print
+      - paymentMethod.all
+      - paymentMethod.view
+      - paymentMethod.create
+      - paymentMethod.update
+      - paymentMethod.delete
+      title: Permission
+    customizationTypes_OcrCustomizationResponse:
+      type: object
+      properties:
+        lineItems:
+          type: boolean
+          description: Extract line items from the invoice. Defaults to true.
+        collapseLineItems:
+          type: boolean
+          description: If true, the line items will be collapsed into a single line item. Defaults to false.
+        invoiceMetadata:
+          type: boolean
+          description: Pull custom metadata at the invoice level. Defaults to true.
+        lineItemMetadata:
+          type: boolean
+          description: Pull custom metadata at the line item level. Defaults to true.
+        lineItemGlAccountId:
+          type: boolean
+          description: Pull GL Account ID at the line item level. Defaults to true.
+        predictMetadata:
+          type: boolean
+          description: Use AI to predict metadata from historical data. Defaults to true.
+        taxAndShippingAsLineItems:
+          type: boolean
+          description: Pull tax and shipping information as line items. Defaults to true. If false, tax and shipping will extracted as invoice level fields.
+        splitDocuments:
+          type: boolean
+          description: Use AI to intelligently split documents into multiple subdocuments. Defaults to false.
+      required:
+      - lineItems
+      - collapseLineItems
+      - invoiceMetadata
+      - lineItemMetadata
+      - lineItemGlAccountId
+      - predictMetadata
+      - taxAndShippingAsLineItems
+      - splitDocuments
+      title: OcrCustomizationResponse
+    invoiceTypes_CheckDeliveryMethod:
+      type: string
+      enum:
+      - PRINT
+      - MAIL
+      - MAIL_PRIORITY
+      - MAIL_UPS_NEXT_DAY
+      title: CheckDeliveryMethod
+    customizationTypes_OcrCustomizationRequest:
+      type: object
+      properties:
+        lineItems:
+          type: boolean
+          description: Extract line items from the invoice. Defaults to true.
+        collapseLineItems:
+          type: boolean
+          description: If true, the line items will be collapsed into a single line item. Defaults to false.
+        invoiceMetadata:
+          type: boolean
+          description: Pull custom metadata at the invoice level. Defaults to true.
+        lineItemMetadata:
+          type: boolean
+          description: Pull custom metadata at the line item level. Defaults to true.
+        lineItemGlAccountId:
+          type: boolean
+          description: Pull GL Account ID at the line item level. Defaults to true.
+        predictMetadata:
+          type: boolean
+          description: Use AI to predict metadata from historical data. Defaults to true.
+        taxAndShippingAsLineItems:
+          type: boolean
+          description: Pull tax and shipping information as line items. Defaults to true. If false, tax and shipping will extracted as invoice level fields.
+        splitDocuments:
+          type: boolean
+          description: Use AI to intelligently split documents into multiple subdocuments. Defaults to false.
+      title: OcrCustomizationRequest
+    customizationTypes_FeeCustomizationRailRequest:
+      type: object
+      properties:
+        ACH_STANDARD:
+          $ref: '#/components/schemas/customizationTypes_PaymentMethodFee'
+          description: The fee for the ACH standard rail.
+        ACH_SAME_DAY:
+          $ref: '#/components/schemas/customizationTypes_PaymentMethodFee'
+          description: The fee for the ACH same day rail.
+        CHECK_PRINT:
+          $ref: '#/components/schemas/customizationTypes_PaymentMethodFee'
+          description: The fee for the check print rail.
+        CHECK_MAIL:
+          $ref: '#/components/schemas/customizationTypes_PaymentMethodFee'
+          description: The fee for the check mail rail.
+        CHECK_MAIL_PRIORITY:
+          $ref: '#/components/schemas/customizationTypes_PaymentMethodFee'
+          description: The fee for the check mail priority rail.
+        CHECK_MAIL_UPS_NEXT_DAY:
+          $ref: '#/components/schemas/customizationTypes_PaymentMethodFee'
+          description: The fee for the check mail UPS next day rail.
+      title: FeeCustomizationRailRequest
+    organizationTypes_RolePermissionRequest:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/organizationTypes_Permission'
+      title: RolePermissionRequest
+    customizationTypes_FeeCustomizationDetailRequest:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/customizationTypes_FeeCustomizationRailRequest'
+          description: Fees to be applied to the source of the transaction.
+        destination:
+          $ref: '#/components/schemas/customizationTypes_FeeCustomizationRailRequest'
+          description: Fees to be applied to the destination of the transaction.
+      title: FeeCustomizationDetailRequest
+    entityTypes_EntityCustomizationResponse:
+      type: object
+      properties:
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_MetadataCustomizationRequest'
+        paymentSource:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_PaymentMethodCustomizationRequest'
+        backupDisbursement:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_PaymentMethodCustomizationRequest'
+        paymentDestination:
+          type: array
+          items:
+            $ref: '#/components/schemas/customizationTypes_PaymentMethodCustomizationRequest'
+        ocr:
+          $ref: '#/components/schemas/customizationTypes_OcrCustomizationResponse'
+        notifications:
+          $ref: '#/components/schemas/customizationTypes_NotificationCustomizationRequest'
+        workflow:
+          $ref: '#/components/schemas/customizationTypes_WorkflowCustomizationRequest'
+        invoice:
+          $ref: '#/components/schemas/customizationTypes_InvoiceCustomizationResponse'
+        fees:
+          $ref: '#/components/schemas/customizationTypes_FeeCustomizationRequest'
+        rolePermissions:
+          $ref: '#/components/schemas/organizationTypes_RolePermissionRequest'
+      required:
+      - metadata
+      - paymentSource
+      - backupDisbursement
+      - paymentDestination
+      - ocr
+      - notifications
+      - workflow
+      - invoice
+      - fees
+      - rolePermissions
+      title: EntityCustomizationResponse
+    customizationTypes_OriginatingCompanyNameOptions:
+      type: string
+      enum:
+      - ENTITY_NAME
+      - BANK_NAME
+      title: OriginatingCompanyNameOptions
+    invoiceTypes_BankDeliveryMethod:
+      type: string
+      enum:
+      - ACH_STANDARD
+      - ACH_SAME_DAY
+      - ACH_ACCELERATED
+      title: BankDeliveryMethod
+    customizationTypes_FeeCustomizationRequest:
+      type: object
+      properties:
+        payable:
+          $ref: '#/components/schemas/customizationTypes_FeeCustomizationDetailRequest'
+          description: When the entity creating the invoice is the payer, these fees will be applied to the transaction.
+        receivable:
+          $ref: '#/components/schemas/customizationTypes_FeeCustomizationDetailRequest'
+          description: When the entity creating the invoice is the payee, these fees will be applied to the transaction.
+      title: FeeCustomizationRequest
+    customizationTypes_InvoiceCustomizationRequest:
+      type: object
+      properties:
+        hideAddress:
+          type: boolean
+          description: If true, the address information will be hidden from generated invoice PDFs. Defaults to false.
+        hideQrCode:
+          type: boolean
+          description: If true, the QR code will be hidden from generated invoice PDFs. Defaults to false.
+        hideBankDetails:
+          type: boolean
+          description: If true, the bank account details will be hidden from generated invoice PDFs. Defaults to false.
+        hidePaymentLink:
+          type: boolean
+          description: If true, the payment link will be hidden from generated invoice PDFs. Defaults to false.
+      title: InvoiceCustomizationRequest
+    customizationTypes_MetadataCustomizationRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the metadata field. This must be defined at the organization level, otherwise an error will be returned.
+        disabled:
+          type: boolean
+          description: If true, this field will not be available to the entity.
+      required:
+      - key
+      - disabled
+      title: MetadataCustomizationRequest
+    customizationTypes_PaymentMethodCustomizationRequest:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+          defaultDeliveryMethod:
+            $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+            description: The default delivery method for this payment method.
+          availableDeliveryMethods:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+            description: The delivery methods that are available for this payment method.
+          originatingCompanyName:
+            $ref: '#/components/schemas/customizationTypes_OriginatingCompanyNameOptions'
+            description: The originating company name for this payment method. If not set, the entity name will be used.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - card
+            description: 'Discriminator value: card'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - virtualCard
+            description: 'Discriminator value: virtualCard'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+          defaultDeliveryMethod:
+            $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+            description: The default delivery method for this payment method.
+          availableDeliveryMethods:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+            description: The delivery methods that are available for this payment method.
+          printDescription:
+            type: boolean
+            description: If true, the check will be printed with the description.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+          schemaId:
+            type: string
+            description: The ID of the schema to use for this payment method.
+        required:
+        - type
+        - disabled
+        - schemaId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bnpl
+            description: 'Discriminator value: bnpl'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - na
+            description: 'Discriminator value: na'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - wallet
+            description: 'Discriminator value: wallet'
+          disabled:
+            type: boolean
+            description: If true, this method will will not be available to the entity.
+        required:
+        - type
+        - disabled
+      discriminator:
+        propertyName: type
+      title: PaymentMethodCustomizationRequest
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

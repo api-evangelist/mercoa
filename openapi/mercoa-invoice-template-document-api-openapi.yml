@@ -1,0 +1,954 @@
+openapi: 3.2.0
+info:
+  title: Reference invoice-template > document API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: invoice-template > document
+paths:
+  /invoice-template/{invoiceTemplateId}/documents:
+    get:
+      operationId: invoiceTemplate_document_getAll
+      summary: Get Attachments
+      description: Get attachments (scanned/uploaded PDFs and images) associated with this invoice template
+      tags:
+      - invoice-template > document
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      - name: type
+        in: query
+        description: Filter by document type
+        required: false
+        schema:
+          $ref: '#/components/schemas/commons_DocumentType'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/commons_DocumentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/document:
+    post:
+      operationId: invoiceTemplate_document_upload
+      summary: Upload Attachment
+      description: Upload documents (scanned/uploaded PDFs and images) associated with this invoice template
+      tags:
+      - invoice-template > document
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: string
+                  description: Base64-encoded string. Supported file types include PNG, JPG, WEBP, PDF, and all Microsoft Office formats (automatically converted to PDF). Max file size 10MB.
+                type:
+                  $ref: '#/components/schemas/commons_DocumentType'
+                  description: Specify Document Type, defaults to INVOICE
+              required:
+              - document
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/document/{documentId}:
+    delete:
+      operationId: invoiceTemplate_document_delete
+      summary: Delete Attachment
+      description: Delete an attachment (scanned/uploaded PDFs and images) associated with this invoice template
+      tags:
+      - invoice-template > document
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      - name: documentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/pdf/generate:
+    get:
+      operationId: invoiceTemplate_document_generateInvoicePdf
+      summary: Get Invoice PDF
+      description: Generate a PDF of the invoice. This PDF is generated from the data in the invoice, not from the uploaded documents.
+      tags:
+      - invoice-template > document
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Link to the PDF file. Will expire after 1 hour.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commons_DocumentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/check/generate:
+    get:
+      operationId: invoiceTemplate_document_generateCheckPdf
+      summary: Get Check PDF
+      description: Get a PDF of the check for the invoice. If the invoice does not have check as the disbursement method, an error will be returned. If the disbursement option for the check is set to 'MAIL', a void copy of the check will be returned. If the disbursement option for the check is set to 'PRINT', a printable check will be returned. If the invoice is NOT marked as PAID, the check will be a void copy.
+      tags:
+      - invoice-template > document
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Link to the PDF file. Will expire after 1 hour.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commons_DocumentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/source-email:
+    get:
+      operationId: invoiceTemplate_document_getSourceEmail
+      summary: Get Source Email
+      description: Get the email subject and body that was used to create this invoice.
+      tags:
+      - invoice-template > document
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/emailLogTypes_EmailLogResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    emailLogTypes_EmailLog:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/emailLogTypes_EmailLogId'
+        status:
+          $ref: '#/components/schemas/emailLogTypes_IncomingEmailLogStatus'
+          description: The status of the email log. If the status is PENDING, the email has not been processed yet. If the status is PROCESSED, the email has been processed and the invoice has been created. If the status is FAILED, the email was not processed due to an error.
+        subject:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        htmlBody:
+          type: string
+        textBody:
+          type: string
+        attachment:
+          $ref: '#/components/schemas/emailLogTypes_EmailLogAttachment'
+        createdAt:
+          type: string
+          format: date-time
+        invoiceId:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      required:
+      - id
+      - status
+      - subject
+      - from
+      - to
+      - htmlBody
+      - textBody
+      - createdAt
+      title: EmailLog
+    emailLogTypes_IncomingEmailLogStatus:
+      type: string
+      enum:
+      - PENDING
+      - PROCESSED
+      - FAILED
+      title: IncomingEmailLogStatus
+    emailLogTypes_EmailLogResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of logs for the given filters. This value is not limited by the limit parameter. It is provided so that you can determine how many pages of results are available.
+        hasMore:
+          type: boolean
+          description: True if there are more logs available for the given filters.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/emailLogTypes_EmailLog'
+      required:
+      - count
+      - hasMore
+      - data
+      title: EmailLogResponse
+    commons_DocumentType:
+      type: string
+      enum:
+      - INVOICE
+      - PAYMENT_CONFIRMATION
+      - TEN_NINETY_NINE
+      - W9
+      - CHECK
+      - BANK_STATEMENT
+      - CONTRACT
+      - OTHER
+      title: DocumentType
+    commons_DocumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the document. If not provided, this is a dynamic document that is generated on the fly.
+        mimeType:
+          type: string
+        type:
+          $ref: '#/components/schemas/commons_DocumentType'
+        uri:
+          type: string
+      required:
+      - mimeType
+      - type
+      - uri
+      title: DocumentResponse
+    invoiceTypes_InvoiceTemplateId:
+      type: string
+      title: InvoiceTemplateId
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    emailLogTypes_EmailLogId:
+      type: string
+      title: EmailLogId
+    emailLogTypes_EmailLogAttachment:
+      type: object
+      properties:
+        filename:
+          type: string
+        contentType:
+          type: string
+      required:
+      - filename
+      - contentType
+      title: EmailLogAttachment
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

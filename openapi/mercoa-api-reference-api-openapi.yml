@@ -1,0 +1,4942 @@
+openapi: 3.2.0
+info:
+  title: API Reference API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: API Reference
+paths: {}
+webhooks:
+  webhooks_counterpartyAdded:
+    post:
+      operationId: webhooks_counterpartyAdded
+      summary: Counterparty Added
+      description: A payee-payor relationship was created
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_CounterpartyWebhook'
+      tags:
+      - API Reference
+  webhooks_counterpartyHidden:
+    post:
+      operationId: webhooks_counterpartyHidden
+      summary: Counterparty Hidden
+      description: A payee-payor relationship was hidden
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_CounterpartyWebhook'
+      tags:
+      - API Reference
+  webhooks_counterpartyOnboardingCompleted:
+    post:
+      operationId: webhooks_counterpartyOnboardingCompleted
+      summary: Counterparty Onboarding Completed
+      description: A payee-payor relationship was updated
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_CounterpartyEventWebhook'
+      tags:
+      - API Reference
+  webhooks_entityCreated:
+    post:
+      operationId: webhooks_entityCreated
+      summary: Entity Created
+      description: A new entity was created
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_EntityWebhook'
+      tags:
+      - API Reference
+  webhooks_entityUpdated:
+    post:
+      operationId: webhooks_entityUpdated
+      summary: Entity Updated
+      description: An entity was updated
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_EntityWebhook'
+      tags:
+      - API Reference
+  webhooks_entityStatusChanged:
+    post:
+      operationId: webhooks_entityStatusChanged
+      summary: Entity Status Changed
+      description: An entity's status was changed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_EntityStatusChangedWebhook'
+      tags:
+      - API Reference
+  webhooks_entityMetadataUpdated:
+    post:
+      operationId: webhooks_entityMetadataUpdated
+      summary: Entity Metadata Updated
+      description: An entity's metadata was updated
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_EntityMetadataUpdatedWebhook'
+      tags:
+      - API Reference
+  webhooks_paymentMethodCreated:
+    post:
+      operationId: webhooks_paymentMethodCreated
+      summary: Payment Method Created
+      description: A new payment method was created
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_PaymentMethodWebhook'
+      tags:
+      - API Reference
+  webhooks_paymentMethodUpdated:
+    post:
+      operationId: webhooks_paymentMethodUpdated
+      summary: Payment Method Updated
+      description: A payment method was updated
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_PaymentMethodWebhook'
+      tags:
+      - API Reference
+  webhooks_paymentMethodDeleted:
+    post:
+      operationId: webhooks_paymentMethodDeleted
+      summary: Payment Method Deleted
+      description: A payment method was deleted
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_PaymentMethodWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceCreated:
+    post:
+      operationId: webhooks_invoiceCreated
+      summary: Invoice Created
+      description: A new invoice was created
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceUpdated:
+    post:
+      operationId: webhooks_invoiceUpdated
+      summary: Invoice Updated
+      description: An invoice was updated
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceDeleted:
+    post:
+      operationId: webhooks_invoiceDeleted
+      summary: Invoice Deleted
+      description: An invoice was deleted
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceCommentCreated:
+    post:
+      operationId: webhooks_invoiceCommentCreated
+      summary: Invoice Comment Created
+      description: A comment was added to an invoice
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceCommentWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceCommentDeleted:
+    post:
+      operationId: webhooks_invoiceCommentDeleted
+      summary: Invoice Comment Deleted
+      description: A comment was deleted from an invoice
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceCommentWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusChanged:
+    post:
+      operationId: webhooks_invoiceStatusChanged
+      summary: Invoice Status Changed
+      description: An invoice's status was changed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceStatusChangedWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceEmail:
+    post:
+      operationId: webhooks_invoiceEmail
+      summary: Incoming Invoice Email
+      description: An email was received to an entity's email inbox
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceEmailWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusDraft:
+    post:
+      operationId: webhooks_invoiceStatusDraft
+      summary: Invoice Status Draft
+      description: An invoice's status was changed to draft
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusNew:
+    post:
+      operationId: webhooks_invoiceStatusNew
+      summary: Invoice Status New
+      description: An invoice's status was changed to new
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusApproved:
+    post:
+      operationId: webhooks_invoiceStatusApproved
+      summary: Invoice Status Approved
+      description: An invoice's status was changed to approved
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusRefused:
+    post:
+      operationId: webhooks_invoiceStatusRefused
+      summary: Invoice Status Refused
+      description: An invoice's status was changed to refused
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusScheduled:
+    post:
+      operationId: webhooks_invoiceStatusScheduled
+      summary: Invoice Status Scheduled
+      description: An invoice's status was changed to scheduled
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusPending:
+    post:
+      operationId: webhooks_invoiceStatusPending
+      summary: Invoice Status Pending
+      description: An invoice's status was changed to pending
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusCanceled:
+    post:
+      operationId: webhooks_invoiceStatusCanceled
+      summary: Invoice Status Canceled
+      description: An invoice's status was changed to canceled
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusPaid:
+    post:
+      operationId: webhooks_invoiceStatusPaid
+      summary: Invoice Status Paid
+      description: An invoice's status was changed to paid
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusFailed:
+    post:
+      operationId: webhooks_invoiceStatusFailed
+      summary: Invoice Status Failed
+      description: An invoice's status was changed to failed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceStatusArchived:
+    post:
+      operationId: webhooks_invoiceStatusArchived
+      summary: Invoice Status Archived
+      description: An invoice's status was changed to archived
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceWebhook'
+      tags:
+      - API Reference
+  webhooks_transactionCreated:
+    post:
+      operationId: webhooks_transactionCreated
+      summary: Transaction Created
+      description: A transaction was created
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_TransactionWebhook'
+      tags:
+      - API Reference
+  webhooks_transactionPending:
+    post:
+      operationId: webhooks_transactionPending
+      summary: Transaction Pending
+      description: A transaction was pending
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_TransactionWebhook'
+      tags:
+      - API Reference
+  webhooks_transactionCompleted:
+    post:
+      operationId: webhooks_transactionCompleted
+      summary: Transaction Completed
+      description: A transaction was completed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_TransactionWebhook'
+      tags:
+      - API Reference
+  webhooks_transactionFailed:
+    post:
+      operationId: webhooks_transactionFailed
+      summary: Transaction Failed
+      description: A transaction was failed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_TransactionWebhook'
+      tags:
+      - API Reference
+  webhooks_transactionReturned:
+    post:
+      operationId: webhooks_transactionReturned
+      summary: Transaction Returned
+      description: A transaction was returned to the payer
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_TransactionWebhook'
+      tags:
+      - API Reference
+  webhooks_bulkInvoicesCreated:
+    post:
+      operationId: webhooks_bulkInvoicesCreated
+      summary: Bulk Invoices Created
+      description: A bulk invoice creation job has completed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_BulkInvoiceCreationWebhook'
+      tags:
+      - API Reference
+  webhooks_bulkInvoicesUpdated:
+    post:
+      operationId: webhooks_bulkInvoicesUpdated
+      summary: Bulk Invoices Updated
+      description: A bulk invoice update job has completed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_BulkInvoiceUpdateWebhook'
+      tags:
+      - API Reference
+  webhooks_bulkInvoicesApproved:
+    post:
+      operationId: webhooks_bulkInvoicesApproved
+      summary: Bulk Invoices Approved
+      description: A bulk invoice approval job has completed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_BulkInvoiceApprovalWebhook'
+      tags:
+      - API Reference
+  webhooks_bulkEntitiesCreated:
+    post:
+      operationId: webhooks_bulkEntitiesCreated
+      summary: Bulk Entities Created
+      description: A bulk entity creation job has completed
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_BulkEntityCreationWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceCollectionEventOverdue:
+    post:
+      operationId: webhooks_invoiceCollectionEventOverdue
+      summary: Invoice Collection Event - Overdue Invoice
+      description: An invoice passes its due date without being paid (in development)
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceCollectionEventWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceCollectionEventEmailSent:
+    post:
+      operationId: webhooks_invoiceCollectionEventEmailSent
+      summary: Invoice Collection Event - Email Sent
+      description: An email was sent to a payee to collect an overdue invoice (in development)
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceCollectionEventWebhook'
+      tags:
+      - API Reference
+  webhooks_invoiceCollectionEventEmailReceived:
+    post:
+      operationId: webhooks_invoiceCollectionEventEmailReceived
+      summary: Invoice Collection Event - Email Received
+      description: An email was received from a payee to collect an overdue invoice (in development)
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_InvoiceCollectionEventWebhook'
+      tags:
+      - API Reference
+  webhooks_ocrJobCompleted:
+    post:
+      operationId: webhooks_ocrJobCompleted
+      summary: OCR Job Completed
+      description: An asynchronous OCR job has completed processing
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_OCRJobCompletedWebhook'
+      tags:
+      - API Reference
+  webhooks_paymentGatewayValidationJobCompleted:
+    post:
+      operationId: webhooks_paymentGatewayValidationJobCompleted
+      summary: Payment Gateway Validation Job Completed
+      description: A payment gateway validation job has completed processing
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_PaymentGatewayValidationJobCompletedWebhook'
+      tags:
+      - API Reference
+  webhooks_paymentGatewayProcessJobCompleted:
+    post:
+      operationId: webhooks_paymentGatewayProcessJobCompleted
+      summary: Payment Gateway Process Job Completed
+      description: A payment gateway processing job has completed processing
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhooks_PaymentGatewayProcessJobCompletedWebhook'
+      tags:
+      - API Reference
+components:
+  schemas:
+    webhooks_InvoiceWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        invoice:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+          description: The invoice involved in the event.
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who initiated the change.
+      required:
+      - eventType
+      - invoice
+      title: InvoiceWebhook
+    transaction_TransactionResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToBankAccount
+            description: 'Discriminator value: bankAccountToBankAccount'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToMailedCheck
+            description: 'Discriminator value: bankAccountToMailedCheck'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          checkNumber:
+            type: integer
+            description: The number of the check
+          mailedOnDate:
+            type: string
+            format: date-time
+            description: The date the check was mailed. If the check was not mailed, this field will be null.
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - checkNumber
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToPrintedCheck
+            description: 'Discriminator value: bankAccountToPrintedCheck'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          checkNumber:
+            type: integer
+            description: The number of the check
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - checkNumber
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToWallet
+            description: 'Discriminator value: bankAccountToWallet'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - cardToBankAccount
+            description: 'Discriminator value: cardToBankAccount'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - cardToWallet
+            description: 'Discriminator value: cardToWallet'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - walletToBankAccount
+            description: 'Discriminator value: walletToBankAccount'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - walletToWallet
+            description: 'Discriminator value: walletToWallet'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          invoices:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+            description: Invoices associated with this transaction
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - invoices
+      discriminator:
+        propertyName: type
+      title: TransactionResponse
+    entityTypes_EntityUserId:
+      type: string
+      title: EntityUserId
+    paymentMethodTypes_BankStatus:
+      type: string
+      enum:
+      - NEW
+      - VERIFIED
+      - VERIFICATION_FAILED
+      - PENDING
+      - ERRORED
+      title: BankStatus
+    entityTypes_CounterpartyCustomizationAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: The ID the counterparty has assigned to this account.
+        postalCode:
+          type: string
+          description: The postal code the counterparty has assigned to this account.
+        nameOnAccount:
+          type: string
+          description: The name on the account the counterparty has assigned to this account.
+      required:
+      - accountId
+      title: CounterpartyCustomizationAccount
+    webhooks_BulkInvoiceUpdateWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_BulkInvoiceUpdateFromObjectResponse'
+          description: A list of bulk invoice update responses.
+      required:
+      - eventType
+      - data
+      title: BulkInvoiceUpdateWebhook
+    paymentGatewayTypes_PaymentGatewayError:
+      type: string
+      enum:
+      - NO_VALID_PAYMENT_GATEWAY_FOUND
+      - PAYMENT_GATEWAY_UNSUPPORTED
+      - CARD_DETAILS_INVALID
+      - CARD_DECLINED
+      - INVOICE_AMOUNT_MISMATCH
+      title: PaymentGatewayError
+    invoiceTypes_ApprovalSlotId:
+      type: string
+      title: ApprovalSlotId
+    ocr_OCRJobId:
+      type: string
+      title: OCRJobId
+    entityTypes_CounterpartyResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        name:
+          type: string
+        email:
+          type: string
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system
+        emailTo:
+          type: string
+          description: Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
+        isCustomer:
+          type: boolean
+          description: True if this entity has a direct relationship with your organization.
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileResponse'
+        logo:
+          type: string
+          description: URL for the entity logo
+        status:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+        oatfiStatus:
+          type: string
+          description: The OatFi status of this entity
+        oatfiUnderwritingResponse:
+          type: object
+          additionalProperties:
+            type: string
+          description: The OatFi underwriting response of this entity
+        acceptedTos:
+          type: boolean
+          description: True if this entity has accepted the terms of service.
+        isPayor:
+          type: boolean
+          description: True if this entity can pay invoices.
+        isPayee:
+          type: boolean
+          description: True if this entity can receive payments.
+        isNetworkPayor:
+          type: boolean
+          description: True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+        isNetworkPayee:
+          type: boolean
+          description: True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_CounterpartyCustomizationAccount'
+          description: If the entity searching for counterparties has any accounts configured in the Payee/Payor relationship, they will be returned
+        paymentMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+        counterpartyType:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_CounterpartyNetworkType'
+        invoiceMetrics:
+          $ref: '#/components/schemas/entityTypes_CounterpartyInvoiceMetricsResponse'
+      required:
+      - id
+      - name
+      - email
+      - isCustomer
+      - accountType
+      - profile
+      - status
+      - acceptedTos
+      - isPayor
+      - isPayee
+      - isNetworkPayor
+      - isNetworkPayee
+      - createdAt
+      - updatedAt
+      title: CounterpartyResponse
+    entityTypes_Rule:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - approver
+            description: 'Discriminator value: approver'
+          numApprovers:
+            type: integer
+            description: Number of approvals required to approve an invoice
+          identifierList:
+            $ref: '#/components/schemas/entityTypes_IdentifierList'
+            description: List of users or roles that should be used to determine eligible approvers
+          autoAssign:
+            type: boolean
+            description: If true, the policy will automatically assign approvers to the invoice. If more than one approver is eligible, the policy will assign all eligible approvers to the invoice.
+        required:
+        - type
+        - numApprovers
+        - identifierList
+        description: A rule that will assign approvers to an invoice.
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - automatic
+            description: 'Discriminator value: automatic'
+        required:
+        - type
+        description: A rule that will automatically approve an invoice, regardless of any other rules that were triggered.
+      discriminator:
+        propertyName: type
+      title: Rule
+    webhooks_InvoiceEmailWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        invoice:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+          description: If an invoice was created from the email, this will be present.
+        existingInvoiceId:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+          description: If an existing invoice already exists for the email, this will be present.
+      required:
+      - eventType
+      title: InvoiceEmailWebhook
+    invoiceTypes_CheckDeliveryMethod:
+      type: string
+      enum:
+      - PRINT
+      - MAIL
+      - MAIL_PRIORITY
+      - MAIL_UPS_NEXT_DAY
+      title: CheckDeliveryMethod
+    transaction_TransactionFailureReason:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The failure reason code.
+        description:
+          type: string
+          description: The failure reason description.
+      title: TransactionFailureReason
+    paymentMethodTypes_CustomPaymentMethodSchemaResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaId'
+        name:
+          type: string
+        isSource:
+          type: boolean
+          description: This payment method can be used as a payment source for an invoice
+        isDestination:
+          type: boolean
+          description: This payment method can be used as a payment destination for an invoice
+        supportedCurrencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: List of currencies that this payment method supports.
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaField'
+        estimatedProcessingTime:
+          type: integer
+          description: Estimated time in days for this payment method to process a payments. 0 is an same-day payment methods, -1 is unknown processing time.
+        maxAmount:
+          type: number
+          format: double
+          description: The maximum amount that can be transferred from this payment method in a single transaction.
+        minAmount:
+          type: number
+          format: double
+          description: The minimum amount that can be transferred from this payment method in a single transaction. Default is 1.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - isSource
+      - isDestination
+      - supportedCurrencies
+      - fields
+      - estimatedProcessingTime
+      - createdAt
+      - updatedAt
+      title: CustomPaymentMethodSchemaResponse
+    webhooks_BulkEntityCreationWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_BulkEntityCreationFromObjectResponse'
+          description: A list of bulk entity creation responses.
+      required:
+      - eventType
+      - data
+      title: BulkEntityCreationWebhook
+    paymentMethodTypes_PaymentMethodId:
+      type: string
+      title: PaymentMethodId
+    entityTypes_EntityUserResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityUserId'
+        foreignId:
+          type: string
+          description: The ID used to identify this user in your system.
+        email:
+          type: string
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roles
+      - createdAt
+      - updatedAt
+      title: EntityUserResponse
+    entityTypes_CounterpartyInvoiceMetricsResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        totalAmount:
+          type: number
+          format: double
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_CounterpartyInvoiceMetricsStatusResponse'
+      required:
+      - totalCount
+      - totalAmount
+      - statuses
+      title: CounterpartyInvoiceMetricsResponse
+    invoiceTypes_InvoiceLineItemResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceLineItemId'
+        amount:
+          type: number
+          format: double
+          description: Total amount of line item in major units.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+        description:
+          type: string
+        name:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+          description: Unit price of line item in major units.
+        category:
+          type: string
+          description: Category of the line item. Defaults to 'EXPENSE'.
+        serviceStartDate:
+          type: string
+          format: date-time
+        serviceEndDate:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        glAccountId:
+          type: string
+          description: ID of general ledger account associated with this line item.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - currency
+      - category
+      - createdAt
+      - updatedAt
+      title: InvoiceLineItemResponse
+    invoiceTypes_BulkInvoiceApprovalFromObjectResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+          description: The ID of the invoice that was approved. If the invoice was not approved, this will be undefined
+        foreignId:
+          type: string
+          description: If provided, this is the foreign ID of the invoice that was approved.
+        error:
+          type: string
+          description: The error message if the invoice was not approved
+      title: BulkInvoiceApprovalFromObjectResponse
+    webhooks_InvoiceCommentWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        invoiceId:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+          description: The ID of the invoice the comment belongs to.
+        comment:
+          $ref: '#/components/schemas/invoiceTypes_CommentResponse'
+          description: The comment that was created or deleted.
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who created or deleted the comment.
+      required:
+      - eventType
+      - invoiceId
+      - comment
+      title: InvoiceCommentWebhook
+    webhooks_EntityMetadataUpdatedWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        entityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity that was updated.
+        foreignId:
+          type: string
+          description: Foreign ID associated with the entity.
+        key:
+          type: string
+          description: The key of the metadata that was updated.
+        value:
+          type: array
+          items:
+            type: string
+          description: A list of new values for the metadata.
+      required:
+      - eventType
+      - entityId
+      - key
+      - value
+      title: EntityMetadataUpdatedWebhook
+    webhooks_OCRJobCompletedWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        jobId:
+          $ref: '#/components/schemas/ocr_OCRJobId'
+          description: The ID of the OCR job that completed.
+        status:
+          $ref: '#/components/schemas/ocr_OCRJobStatus'
+          description: The final status of the OCR job.
+        data:
+          $ref: '#/components/schemas/ocr_OCRResponse'
+          description: The OCR job results. Only present if the job was successful.
+        linkedJobIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ocr_OCRJobId'
+          description: The IDs of any linked OCR jobs that are processing other subdocuments of the same document.
+        pageRange:
+          $ref: '#/components/schemas/ocr_OCRPageRange'
+          description: The start and end page numbers of the corresponding subdocument (zero-indexed, inclusive). If not provided, the document was not split during OCR.
+      required:
+      - eventType
+      - jobId
+      - status
+      title: OCRJobCompletedWebhook
+    invoiceTypes_PaymentSchedule:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - oneTime
+            description: 'Discriminator value: oneTime'
+          repeatEvery:
+            type: integer
+            description: How often to repeat the payments. Defaults to 1. Must be greater than 0. For example, if repeatEvery is set to 2 and this is a daily payment, the payment will be made every other day. If repeatEvery is set to 3 and this is a weekly payment, the payment will be made every third week.
+          ends:
+            $ref: '#/components/schemas/invoiceTypes_PaymentScheduleEndCondition'
+            description: When to end the payments, either a number of occurrences or a date. Defaults to never ending if not specified
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - daily
+            description: 'Discriminator value: daily'
+          repeatEvery:
+            type: integer
+            description: How often to repeat the payments. Defaults to 1. Must be greater than 0. For example, if repeatEvery is set to 2 and this is a daily payment, the payment will be made every other day. If repeatEvery is set to 3 and this is a weekly payment, the payment will be made every third week.
+          ends:
+            $ref: '#/components/schemas/invoiceTypes_PaymentScheduleEndCondition'
+            description: When to end the payments, either a number of occurrences or a date. Defaults to never ending if not specified
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - weekly
+            description: 'Discriminator value: weekly'
+          repeatEvery:
+            type: integer
+            description: How often to repeat the payments. Defaults to 1. Must be greater than 0. For example, if repeatEvery is set to 2 and this is a daily payment, the payment will be made every other day. If repeatEvery is set to 3 and this is a weekly payment, the payment will be made every third week.
+          ends:
+            $ref: '#/components/schemas/invoiceTypes_PaymentScheduleEndCondition'
+            description: When to end the payments, either a number of occurrences or a date. Defaults to never ending if not specified
+          repeatOn:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_DayOfWeek'
+        required:
+        - type
+        - repeatOn
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - monthly
+            description: 'Discriminator value: monthly'
+          repeatEvery:
+            type: integer
+            description: How often to repeat the payments. Defaults to 1. Must be greater than 0. For example, if repeatEvery is set to 2 and this is a daily payment, the payment will be made every other day. If repeatEvery is set to 3 and this is a weekly payment, the payment will be made every third week.
+          ends:
+            $ref: '#/components/schemas/invoiceTypes_PaymentScheduleEndCondition'
+            description: When to end the payments, either a number of occurrences or a date. Defaults to never ending if not specified
+          dayOffset:
+            type: integer
+            description: deprecated. will be removed in the future and will always be 0.
+            deprecated: true
+          repeatOnDay:
+            type: integer
+            description: 'Day of the month to repeat on. Positive values (1-31): Represent the day of the month counting from the start (e.g., 10 is the 10th day of the month). Negative values (-1 to -31): Represent the day of the month counting backward from the end (e.g., -1 is the last day of the month, -2 is the second-to-last day).'
+        required:
+        - type
+        - repeatOnDay
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - yearly
+            description: 'Discriminator value: yearly'
+          repeatEvery:
+            type: integer
+            description: How often to repeat the payments. Defaults to 1. Must be greater than 0. For example, if repeatEvery is set to 2 and this is a daily payment, the payment will be made every other day. If repeatEvery is set to 3 and this is a weekly payment, the payment will be made every third week.
+          ends:
+            $ref: '#/components/schemas/invoiceTypes_PaymentScheduleEndCondition'
+            description: When to end the payments, either a number of occurrences or a date. Defaults to never ending if not specified
+          repeatOnDay:
+            type: integer
+            description: 'Day of the month to repeat on. Positive values (1-31): Represent the day of the month counting from the start (e.g., 10 is the 10th day of the month). Negative values (-1 to -31): Represent the day of the month counting backward from the end (e.g., -1 is the last day of the month, -2 is the second-to-last day).'
+          repeatOnMonth:
+            type: integer
+            description: Month to repeat on (1-12).
+        required:
+        - type
+        - repeatOnDay
+        - repeatOnMonth
+      discriminator:
+        propertyName: type
+      title: PaymentSchedule
+    paymentMethodTypes_CurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - CNY
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      title: CurrencyCode
+    webhooks_InvoiceStatusChangedWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        invoice:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+          description: The invoice involved in the event.
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who initiated the change.
+        newStatus:
+          type: string
+          description: The new status of the invoice.
+        previousStatus:
+          type: string
+          description: The previous status of the invoice.
+      required:
+      - eventType
+      - invoice
+      - newStatus
+      - previousStatus
+      title: InvoiceStatusChangedWebhook
+    entityTypes_TaxID:
+      type: object
+      properties:
+        ein:
+          $ref: '#/components/schemas/entityTypes_Ein'
+      required:
+      - ein
+      title: TaxID
+    invoiceTypes_PaymentDestinationOptions:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          delivery:
+            $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+            description: Delivery method for check disbursements. Defaults to MAIL.
+          printDescription:
+            type: boolean
+            description: If true, prints the invoice description (noteToSelf) on the check note. Defaults to false.
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          delivery:
+            $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+            description: Delivery method for ACH payments. Defaults to ACH_SAME_DAY.
+          description:
+            type: string
+            description: 'ACH Statement Description.
+
+              By default, this will be ''AP'' followed by the first 8 characters of the invoice ID (for a single invoice) or the first 8 characters of the transaction ID (for a batch payment).
+
+              Must be at least 4 characters and no more than 10 characters, and follow this regex pattern `^[a-zA-Z0-9\-#.$&* ]{4,10}$`'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          accountId:
+            type: string
+            description: The ID for the utility account to pay with. Links to accounts listed on payor/payee relationship.
+        required:
+        - type
+        - accountId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          dynamicUrls:
+            type: object
+            additionalProperties:
+              type: string
+            description: Map of field names to dynamic URL values that will be used for dynamicUrl fields in custom payment method schemas
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: PaymentDestinationOptions
+    entityTypes_IndividualProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/commons_FullName'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        birthDateProvided:
+          type: boolean
+        governmentIDProvided:
+          type: boolean
+      required:
+      - name
+      - birthDateProvided
+      - governmentIDProvided
+      title: IndividualProfileResponse
+    paymentMethodTypes_CardBrand:
+      type: string
+      enum:
+      - AmericanExpress
+      - Discover
+      - Mastercard
+      - Visa
+      title: CardBrand
+    webhooks_EntityWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        entity:
+          $ref: '#/components/schemas/entityTypes_EntityResponse'
+          description: The entity involved in the event.
+        updatedByEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: 'The ID of the entity that updated the entity. This will be different from the entityId if the entity was updated by a different entity (e.g. a C2 updating a C3).
+
+            If the entity was created or updated by an admin, this will be ''admin''.'
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who initiated the change.
+      required:
+      - eventType
+      - entity
+      - updatedByEntityId
+      title: EntityWebhook
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    transaction_TransactionId:
+      type: string
+      title: TransactionId
+    vendorCreditTypes_VendorCreditId:
+      type: string
+      title: VendorCreditId
+    paymentMethodTypes_WalletBalance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount in major units of the currency.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+      required:
+      - amount
+      - currency
+      title: WalletBalance
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    ocr_OCRJobStatus:
+      type: string
+      enum:
+      - pending
+      - success
+      - failed
+      title: OCRJobStatus
+    invoiceTypes_InvoiceFailureType:
+      type: string
+      enum:
+      - SOURCE_PAYMENT_ERROR
+      - DESTINATION_PAYMENT_ERROR
+      - REJECTED_HIGH_RISK
+      - INSUFFICIENT_FUNDS
+      - PROCESSING_ERROR
+      title: InvoiceFailureType
+    paymentMethodTypes_CustomPaymentMethodSchemaId:
+      type: string
+      title: CustomPaymentMethodSchemaId
+    webhooks_BulkInvoiceCreationWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_BulkInvoiceCreationFromObjectResponse'
+          description: A list of bulk invoice creation responses.
+      required:
+      - eventType
+      - data
+      title: BulkInvoiceCreationWebhook
+    entityTypes_AccountType:
+      type: string
+      enum:
+      - business
+      - individual
+      title: AccountType
+    webhooks_InvoiceCollectionEventWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        invoice:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+          description: The invoice involved in the event.
+        email:
+          $ref: '#/components/schemas/collectionTypes_EmailMessageResponse'
+          description: Email message related to the invoice collection.
+      required:
+      - eventType
+      - invoice
+      title: InvoiceCollectionEventWebhook
+    invoiceTypes_InvoiceLineItemId:
+      type: string
+      title: InvoiceLineItemId
+    invoiceTypes_InvoiceTemplateId:
+      type: string
+      title: InvoiceTemplateId
+    webhooks_BulkInvoiceApprovalWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_BulkInvoiceApprovalFromObjectResponse'
+          description: A list of bulk invoice approval responses.
+      required:
+      - eventType
+      - data
+      title: BulkInvoiceApprovalWebhook
+    commons_Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateOrProvince:
+          type: string
+          description: State or province code. Must be in the format XX.
+        postalCode:
+          type: string
+          description: Postal code. Must be in the format XXXXX or XXXXX-XXXX.
+        country:
+          type: string
+      required:
+      - addressLine1
+      - city
+      - stateOrProvince
+      - postalCode
+      title: Address
+    invoiceTypes_InvoiceStatus:
+      type: string
+      enum:
+      - UNASSIGNED
+      - DRAFT
+      - NEW
+      - APPROVED
+      - SCHEDULED
+      - PENDING
+      - PAID
+      - ARCHIVED
+      - REFUSED
+      - CANCELED
+      - FAILED
+      title: InvoiceStatus
+    paymentMethodTypes_BankAccountCheckOptions:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: If true, will allow the user to print checks from this bank account
+        initialCheckNumber:
+          type: integer
+          description: If provided, will start the check number sequence at the provided number. If not provided, will start at 5000.
+        routingNumberOverride:
+          type: string
+          description: If provided, will print a check with the provided routing number instead of the one from the bank account
+        accountNumberOverride:
+          type: string
+          description: If provided, will print a check with the provided account number instead of the one from the bank account
+        accountHolderNameOverride:
+          type: string
+          description: If provided, will print a check with the provided account holder name instead of the payer name from the invoice
+        accountHolderAddressOverride:
+          $ref: '#/components/schemas/commons_Address'
+          description: If provided, will print a check with the provided account holder address instead of the payer address from the invoice
+        signatoryName:
+          type: string
+          description: Name of the person who's signature will be printed on the check.
+        signatureImage:
+          type: string
+          description: Base64 encoded image of the signature. If not provided, will use the signatoryName to generate a signature. Mercoa will automatically grayscale, resize, and convert the image to a PNG the image to fit on the check.
+        useSignatureImage:
+          type: boolean
+          description: If true, will print checks with the provided signatureImage. If false, will print checks with a generated signature from the signatoryName. If this parameter is not set the default behavior is to use the signatureImage if provided.
+      required:
+      - signatoryName
+      title: BankAccountCheckOptions
+    entityTypes_Ein:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Must be in the format XX-XXXXXXX.
+      required:
+      - number
+      title: Ein
+    invoiceTypes_BulkInvoiceUpdateFromObjectResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+          description: The ID of the invoice that was updated. If the invoice was not updated, this will be undefined
+        foreignId:
+          type: string
+          description: If provided, this is the foreign ID of the invoice that was updated.
+        error:
+          type: string
+          description: The error message if the invoice was not updated
+      title: BulkInvoiceUpdateFromObjectResponse
+    invoiceTypes_BankDeliveryMethod:
+      type: string
+      enum:
+      - ACH_STANDARD
+      - ACH_SAME_DAY
+      - ACH_ACCELERATED
+      title: BankDeliveryMethod
+    invoiceTypes_InvoiceFeesResponse:
+      type: object
+      properties:
+        sourcePaymentMethodFee:
+          type: number
+          format: double
+          description: Fee charged to the platform (C1) for processing the source payment method. For example, credit card interchange and acquiring fees.
+        sourcePlatformMarkupFee:
+          type: number
+          format: double
+          description: Fee charged to the payer (C2).
+        destinationPaymentMethodFee:
+          type: number
+          format: double
+          description: Fee charged to the platform (C1) for processing the destination payment method. For example, postage for a check payment.
+        destinationPlatformMarkupFee:
+          type: number
+          format: double
+          description: Fee charged to the payee (C3).
+      required:
+      - sourcePaymentMethodFee
+      - sourcePlatformMarkupFee
+      - destinationPaymentMethodFee
+      - destinationPlatformMarkupFee
+      title: InvoiceFeesResponse
+    invoiceTypes_InvoiceResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceStatus'
+        amount:
+          type: number
+          format: double
+          description: Total amount of invoice in major units
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: Currency code for the amount. Defaults to USD.
+        invoiceDate:
+          type: string
+          format: date-time
+          description: Date the invoice was issued.
+        deductionDate:
+          type: string
+          format: date-time
+          description: Initial date when funds are scheduled to be deducted from payer's account. The actual deduction date may differ from this date, and will be reflected in the processedAt field.
+        nextDeductionDate:
+          type: string
+          format: date-time
+          description: For invoice templates, this is the date when the next recurring payment will be scheduled.
+        dueDate:
+          type: string
+          format: date-time
+          description: Due date of invoice.
+        invoiceNumber:
+          type: string
+        noteToSelf:
+          type: string
+        serviceStartDate:
+          type: string
+          format: date-time
+        serviceEndDate:
+          type: string
+          format: date-time
+        netTerms:
+          type: integer
+          description: Net terms in days. Must be a positive number.
+        payerId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        payer:
+          $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+        paymentSource:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+        paymentSourceId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+        paymentSourceOptions:
+          $ref: '#/components/schemas/invoiceTypes_PaymentSourceOptions'
+        vendorId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        vendor:
+          $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+        paymentDestination:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+        paymentDestinationId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+        paymentDestinationOptions:
+          $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+        paymentTiming:
+          $ref: '#/components/schemas/calculate_CalculatePaymentTimingResponse'
+        paymentDestinationConfirmed:
+          type: boolean
+          description: True if the payment destination has been confirmed by the vendor. False if the payment destination has been set (for example, a check to an address) but has not been confirmed by the vendor.
+        batchPayment:
+          type: boolean
+          description: If true, this invoice will be paid as a batch payment. Batches are automatically determined by Mercoa based on the payment source, destination, and scheduled payment date.
+        hasDocuments:
+          type: boolean
+          description: True if the invoice has documents attached.
+        hasSourceEmail:
+          type: boolean
+          description: True if the invoice was created by an incoming email.
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceLineItemResponse'
+        taxAmount:
+          type: number
+          format: double
+          description: Tax amount for this invoice.
+        shippingAmount:
+          type: number
+          format: double
+          description: Shipping amount for this invoice.
+        approvers:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_ApprovalSlot'
+        approvalPolicy:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_ApprovalPolicyResponse'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata associated with this invoice.
+        creatorEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity who created this invoice.
+        entityGroupId:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+          description: The ID of the entity group that created this invoice.
+        entityGroupForeignId:
+          type: string
+          description: The foreign ID of the entity group that created this invoice.
+        creatorUser:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: Entity user who created this invoice.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_CommentResponse'
+        fees:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          description: Fees associated with this invoice.
+        paymentSchedule:
+          $ref: '#/components/schemas/invoiceTypes_PaymentSchedule'
+          description: If this is a recurring invoice, this will be the payment schedule for the invoice. If not provided, this will be a one-time invoice.
+        ocrJobId:
+          $ref: '#/components/schemas/ocr_OCRJobId'
+          description: ID of the OCR job that processed this invoice.
+        recurringTemplateId:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+          description: ID of the invoice template that created this recurring invoice. Only present if the invoice was created from a recurring template.
+        id:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+        processedAt:
+          type: string
+          format: date-time
+          description: Date when the invoice payment was processed.
+        settlementDate:
+          type: string
+          format: date-time
+          description: Date of funds settlement.
+        foreignId:
+          type: string
+          description: The ID used to identify this invoice in your system. This ID must be unique within each creatorEntity in your system, e.g. two invoices with the same creatorEntity may not have the same foreign ID.
+        failureType:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceFailureType'
+          description: If the invoice failed to be paid, this field will be populated with the type of failure.
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction_TransactionResponseWithoutInvoices'
+          description: Transactions associated with this invoice.
+        vendorCreditIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/vendorCreditTypes_VendorCreditId'
+          description: The IDs of the vendor credits that are currently applied to this invoice.
+      required:
+      - status
+      - paymentDestinationConfirmed
+      - hasDocuments
+      - hasSourceEmail
+      - approvers
+      - approvalPolicy
+      - metadata
+      - createdAt
+      - updatedAt
+      - id
+      title: InvoiceResponse
+    transaction_TransactionStatus:
+      type: string
+      enum:
+      - CREATED
+      - PENDING
+      - COMPLETED
+      - FAILED
+      - REVERSED
+      - QUEUED
+      - CANCELED
+      - RETURNED
+      title: TransactionStatus
+    invoiceTypes_PaymentScheduleEndCondition:
+      oneOf:
+      - type: integer
+      - type: string
+        format: date-time
+      title: PaymentScheduleEndCondition
+    entityTypes_CounterpartyNetworkType:
+      type: string
+      enum:
+      - ENTITY
+      - NETWORK
+      title: CounterpartyNetworkType
+    paymentMethodTypes_CardType:
+      type: string
+      enum:
+      - credit
+      - debit
+      - prepaid
+      - unknown
+      title: CardType
+    ocr_OCRPageRange:
+      type: object
+      properties:
+        start:
+          type: integer
+        end:
+          type: integer
+      required:
+      - start
+      - end
+      title: OCRPageRange
+    paymentGatewayTypes_PaymentGatewayJobStatus:
+      type: string
+      enum:
+      - PENDING
+      - COMPLETED
+      - FAILED
+      title: PaymentGatewayJobStatus
+    webhooks_EntityStatusChangedWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        entity:
+          $ref: '#/components/schemas/entityTypes_EntityResponse'
+          description: The entity involved in the event.
+        updatedByEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: 'The ID of the entity that updated the entity. This will be different from the entityId if the entity was updated by a different entity (e.g. a C2 updating a C3).
+
+            If the entity was created or updated by an admin, this will be ''admin''.'
+        newStatus:
+          type: string
+          description: The new status of the entity.
+        previousStatus:
+          type: string
+          description: The previous status of the entity.
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who initiated the change.
+      required:
+      - eventType
+      - entity
+      - updatedByEntityId
+      - newStatus
+      - previousStatus
+      title: EntityStatusChangedWebhook
+    paymentMethodTypes_CheckResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+        isDefaultSource:
+          type: boolean
+          description: Indicates whether this payment method is the default source for the entity
+        isDefaultDestination:
+          type: boolean
+          description: Indicates whether this payment method is the default destination for the entity
+        supportedCurrencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+        externalAccountingSystemId:
+          type: string
+          description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+        frozen:
+          type: boolean
+          description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata associated with this payment method.
+        confirmedByEntity:
+          type: boolean
+          description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        payToTheOrderOf:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateOrProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+      required:
+      - id
+      - isDefaultSource
+      - isDefaultDestination
+      - supportedCurrencies
+      - frozen
+      - metadata
+      - createdAt
+      - updatedAt
+      - payToTheOrderOf
+      - addressLine1
+      - city
+      - stateOrProvince
+      - postalCode
+      - country
+      title: CheckResponse
+    entityTypes_BusinessProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        legalBusinessName:
+          type: string
+        businessType:
+          $ref: '#/components/schemas/entityTypes_BusinessType'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        doingBusinessAs:
+          type: string
+        website:
+          type: string
+        description:
+          type: string
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        ownersProvided:
+          type: boolean
+          description: True if all representatives have been provided for this business.
+        taxIDProvided:
+          type: boolean
+        taxId:
+          $ref: '#/components/schemas/entityTypes_TaxID'
+        formationDate:
+          type: string
+          format: date-time
+        industryCodes:
+          $ref: '#/components/schemas/entityTypes_IndustryCodes'
+        averageMonthlyTransactionVolume:
+          type: number
+          format: double
+        averageTransactionSize:
+          type: number
+          format: double
+        maxTransactionSize:
+          type: number
+          format: double
+      required:
+      - legalBusinessName
+      - taxIDProvided
+      title: BusinessProfileResponse
+    invoiceTypes_BulkInvoiceCreationFromObjectResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the invoice that was created. If the invoice was not created, this will be undefined
+        foreignId:
+          type: string
+          description: If provided, this is the foreign ID of the invoice that was created.
+        error:
+          type: string
+          description: The error message if the invoice was not created
+      title: BulkInvoiceCreationFromObjectResponse
+    invoiceTypes_PaymentSourceOptions:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bnpl
+            description: 'Discriminator value: bnpl'
+          installmentsStartDate:
+            type: string
+            description: The start date for installments in YYYY-MM-DD format
+          defermentWeeks:
+            type: integer
+            description: The number of weeks to defer repayment
+          acceptedTerms:
+            type: boolean
+            description: Whether the user has agreed to the BNPL terms
+          loanId:
+            type: string
+            description: The ID of the loan to use for the BNPL payment.
+          downpaymentId:
+            type: string
+            description: The ID of the downpayment to use for the BNPL payment.
+        required:
+        - type
+        - installmentsStartDate
+        - defermentWeeks
+        - acceptedTerms
+      discriminator:
+        propertyName: type
+      title: PaymentSourceOptions
+    entityTypes_Trigger:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - amount
+            description: 'Discriminator value: amount'
+          amount:
+            type: number
+            format: double
+          currency:
+            $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          comparison:
+            $ref: '#/components/schemas/entityTypes_Comparison'
+            description: The comparison operator to use when comparing the amount to the trigger amount. Defaults to gte.
+        required:
+        - type
+        - amount
+        - currency
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - vendor
+            description: 'Discriminator value: vendor'
+          vendorIds:
+            type: array
+            items:
+              $ref: '#/components/schemas/entityTypes_EntityId'
+        required:
+        - type
+        - vendorIds
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - metadata
+            description: 'Discriminator value: metadata'
+          key:
+            type: string
+            description: The metadata key to match
+          value:
+            type: array
+            items:
+              type: string
+            description: The metadata value the invoice must have to trigger this policy
+        required:
+        - type
+        - key
+        - value
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - catchall
+            description: 'Discriminator value: catchall'
+        required:
+        - type
+        description: A catchall trigger will trigger if no other triggers match.
+      discriminator:
+        propertyName: type
+      title: Trigger
+    invoiceTypes_CommentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+        associatedApprovalAction:
+          $ref: '#/components/schemas/invoiceTypes_AssociatedApprovalAction'
+          description: If an approval action has triggered the generation of this comment, returns the associated approval action and actor
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - text
+      - createdAt
+      - updatedAt
+      title: CommentResponse
+    entityTypes_IdentifierList:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - rolesList
+            description: 'Discriminator value: rolesList'
+          value:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+        - value
+        description: List of entity user roles that should be used to determine approvers
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - userList
+            description: 'Discriminator value: userList'
+          value:
+            type: array
+            items:
+              $ref: '#/components/schemas/entityTypes_EntityUserId'
+        required:
+        - type
+        - value
+        description: List of entity user IDs that should be used to determine approvers
+      discriminator:
+        propertyName: type
+      title: IdentifierList
+    invoiceTypes_AssociatedApprovalAction:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/entityTypes_EntityUserId'
+        action:
+          $ref: '#/components/schemas/invoiceTypes_ApproverAction'
+      required:
+      - userId
+      - action
+      title: AssociatedApprovalAction
+    entityTypes_Comparison:
+      type: string
+      enum:
+      - eq
+      - gt
+      - gte
+      - lt
+      - lte
+      title: Comparison
+    paymentGatewayTypes_ValidatePaymentGatewayCardResponse:
+      type: object
+      properties:
+        eligibility:
+          $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayCardAcceptance'
+          description: Whether the payment gateway accepts card payments
+        fee:
+          $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayCardFee'
+          description: The fee that was extracted from the gateway
+      required:
+      - eligibility
+      - fee
+      title: ValidatePaymentGatewayCardResponse
+    entityTypes_EntityStatus:
+      type: string
+      enum:
+      - unverified
+      - pending
+      - resubmit
+      - review
+      - verified
+      - failed
+      title: EntityStatus
+    entityGroupTypes_EntityGroupId:
+      type: string
+      title: EntityGroupId
+    webhooks_TransactionWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        transaction:
+          $ref: '#/components/schemas/transaction_TransactionResponse'
+          description: The transaction details.
+      required:
+      - eventType
+      - transaction
+      description: A transaction was created, completed, or failed
+      title: TransactionWebhook
+    paymentGatewayTypes_ProcessPaymentGatewayResponse:
+      oneOf:
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - pending
+            description: 'Discriminator value: pending'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway processing job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - success
+            description: 'Discriminator value: success'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway processing job
+          receiptUrl:
+            type: string
+            description: The URL of the receipt that was downloaded from the payment gateway
+          invoiceAmount:
+            type: number
+            format: double
+            description: The invoice amount detected from the payment gateway
+          gatewayAmount:
+            type: number
+            format: double
+            description: The amount displayed on the payment gateway (may include fees)
+          vendorName:
+            type: string
+            description: The vendor name detected from the payment gateway
+          requiredData:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayRequiredData'
+            description: Information about what data is required to proceed with payment
+          attempts:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayAttempt'
+            description: List of payment gateway attempts for this job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - attempts
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - failed
+            description: 'Discriminator value: failed'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway processing job
+          errorType:
+            $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayError'
+            description: The error that occurred during the payment gateway processing job
+          errorMessage:
+            type: string
+            description: The error message that occurred during the payment gateway processing job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - errorType
+        - createdAt
+        - updatedAt
+      discriminator:
+        propertyName: jobStatus
+      title: ProcessPaymentGatewayResponse
+    invoiceTypes_DayOfWeek:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      title: DayOfWeek
+    entityTypes_BulkEntityCreationFromObjectResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the entity that was created. If the entity was not created, this will be undefined
+        foreignId:
+          type: string
+          description: If provided, this is the foreign ID of the entity that was created.
+        error:
+          type: string
+          description: The error message if the entity was not created
+      title: BulkEntityCreationFromObjectResponse
+    calculate_CalculatePaymentTimingResponse:
+      type: object
+      properties:
+        estimatedProcessingDate:
+          type: string
+          format: date-time
+          description: Estimated date the payment will be or was processed.
+        businessDays:
+          type: integer
+          description: Number of business days between the estimated processing date and the estimated settlement date. This does not take into account bank holidays or weekends.
+        estimatedProcessingTime:
+          type: integer
+          description: Estimated payment time in days. This time takes into account bank holidays and weekends.
+        estimatedSettlementDate:
+          type: string
+          format: date-time
+          description: Estimated date the payment will be or was settled. This is the same as the request's deductionDate plus the paymentTiming.
+      required:
+      - estimatedProcessingDate
+      - businessDays
+      - estimatedProcessingTime
+      - estimatedSettlementDate
+      title: CalculatePaymentTimingResponse
+    transaction_TransactionResponseWithoutInvoices:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToBankAccount
+            description: 'Discriminator value: bankAccountToBankAccount'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToMailedCheck
+            description: 'Discriminator value: bankAccountToMailedCheck'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          checkNumber:
+            type: integer
+            description: The number of the check
+          mailedOnDate:
+            type: string
+            format: date-time
+            description: The date the check was mailed. If the check was not mailed, this field will be null.
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - checkNumber
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToPrintedCheck
+            description: 'Discriminator value: bankAccountToPrintedCheck'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          checkNumber:
+            type: integer
+            description: The number of the check
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+        - checkNumber
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccountToWallet
+            description: 'Discriminator value: bankAccountToWallet'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - cardToBankAccount
+            description: 'Discriminator value: cardToBankAccount'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - cardToWallet
+            description: 'Discriminator value: cardToWallet'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - walletToBankAccount
+            description: 'Discriminator value: walletToBankAccount'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          failureReason:
+            $ref: '#/components/schemas/transaction_TransactionFailureReason'
+            description: If the invoice failed to be paid, this field will be populated with the reason of failure.
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - walletToWallet
+            description: 'Discriminator value: walletToWallet'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          id:
+            $ref: '#/components/schemas/transaction_TransactionId'
+          status:
+            $ref: '#/components/schemas/transaction_TransactionStatus'
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+          payerId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          payer:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentSource:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentSourceId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          vendorId:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          vendor:
+            $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+          paymentDestination:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          paymentDestinationId:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          paymentDestinationOptions:
+            $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          fees:
+            $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
+        - payerId
+        - payer
+        - paymentSource
+        - paymentSourceId
+        - vendorId
+        - vendor
+        - paymentDestination
+        - paymentDestinationId
+        - createdAt
+        - updatedAt
+      discriminator:
+        propertyName: type
+      title: TransactionResponseWithoutInvoices
+    paymentMethodTypes_PaymentMethodResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          accountName:
+            type: string
+          bankName:
+            type: string
+          routingNumber:
+            type: string
+          accountNumber:
+            type: string
+          accountType:
+            $ref: '#/components/schemas/paymentMethodTypes_BankType'
+          status:
+            $ref: '#/components/schemas/paymentMethodTypes_BankStatus'
+          checkOptions:
+            $ref: '#/components/schemas/paymentMethodTypes_BankAccountCheckOptions'
+            description: If check printing is enabled for the account, will return the check options for this bank account
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - accountName
+        - bankName
+        - routingNumber
+        - accountNumber
+        - accountType
+        - status
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - card
+            description: 'Discriminator value: card'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          cardType:
+            $ref: '#/components/schemas/paymentMethodTypes_CardType'
+          cardBrand:
+            $ref: '#/components/schemas/paymentMethodTypes_CardBrand'
+          lastFour:
+            type: string
+          expMonth:
+            type: string
+          expYear:
+            type: string
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - cardType
+        - cardBrand
+        - lastFour
+        - expMonth
+        - expYear
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          payToTheOrderOf:
+            type: string
+          addressLine1:
+            type: string
+          addressLine2:
+            type: string
+          city:
+            type: string
+          stateOrProvince:
+            type: string
+          postalCode:
+            type: string
+          country:
+            type: string
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - payToTheOrderOf
+        - addressLine1
+        - city
+        - stateOrProvince
+        - postalCode
+        - country
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          foreignId:
+            type: string
+            description: ID for this payment method in your system
+          accountName:
+            type: string
+          accountNumber:
+            type: string
+          availableBalance:
+            type: number
+            format: double
+            description: The available balance for this payment method.
+          schemaId:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaId'
+            description: Payment method schema used for this payment method. Defines the fields that this payment method contains.
+          schema:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaResponse'
+          data:
+            type: object
+            additionalProperties:
+              type: string
+            description: Object of key/value pairs that matches the keys in the linked payment method schema.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - schemaId
+        - schema
+        - data
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          utilityId:
+            type: string
+            description: The ID of the utility that this payment method is linked to.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - utilityId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - wallet
+            description: 'Discriminator value: wallet'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          availableBalance:
+            $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+            description: The balance available for use in this wallet.
+          pendingBalance:
+            $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+            description: The in-flight balance into/out of this wallet.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - availableBalance
+        - pendingBalance
+      discriminator:
+        propertyName: type
+      title: PaymentMethodResponse
+    webhooks_PaymentMethodWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        entityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: ID of the entity that the payment method belongs to.
+        updatedByEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: 'ID of the entity that created or updated the payment method.
+
+            This will be different from the entityId if the payment method was added by a different entity (e.g. a C2 creating a payment method for a C3).
+
+            If the payment method was created or updated by an admin, this will be ''admin''.'
+        paymentMethod:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+          description: The payment method details.
+        entity:
+          $ref: '#/components/schemas/entityTypes_EntityResponse'
+          description: Entity that the payment method belongs to.
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who initiated the change.
+      required:
+      - eventType
+      - entityId
+      - updatedByEntityId
+      - paymentMethod
+      - entity
+      title: PaymentMethodWebhook
+    paymentGatewayTypes_ValidatePaymentGatewayRequiredData:
+      type: object
+      properties:
+        needsAccountNumber:
+          type: boolean
+          description: Whether the payment gateway requires an account number to proceed
+        needsPostalCode:
+          type: boolean
+          description: Whether the payment gateway requires a postal code to proceed
+        needsEmail:
+          type: boolean
+          description: Whether the payment gateway requires an email address to proceed
+        needsAccountHolderFirstName:
+          type: boolean
+          description: Whether the payment gateway requires the account holder's first name to proceed
+        needsAccountHolderLastName:
+          type: boolean
+          description: Whether the payment gateway requires the account holder's last name to proceed
+        needsFullServiceAddress:
+          type: boolean
+          description: Whether the payment gateway requires a full service address to proceed
+        needsPhoneNumber:
+          type: boolean
+          description: Whether the payment gateway requires a phone number to proceed
+      title: ValidatePaymentGatewayRequiredData
+    collectionTypes_EmailMessageResponse:
+      type: object
+      properties:
+        subject:
+          type: string
+          description: The subject of the email
+        body:
+          type: string
+          description: The body of the email in plaintext
+      required:
+      - subject
+      - body
+      title: EmailMessageResponse
+    entityTypes_CounterpartyInvoiceMetricsStatusResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceStatus'
+        totalCount:
+          type: integer
+        totalAmount:
+          type: number
+          format: double
+      required:
+      - status
+      - totalCount
+      - totalAmount
+      title: CounterpartyInvoiceMetricsStatusResponse
+    entityTypes_ProfileResponse:
+      type: object
+      properties:
+        business:
+          $ref: '#/components/schemas/entityTypes_BusinessProfileResponse'
+          description: Will be set if the entity is a business
+        individual:
+          $ref: '#/components/schemas/entityTypes_IndividualProfileResponse'
+          description: Will be set if the entity is a individual
+      title: ProfileResponse
+    webhooks_PaymentGatewayProcessJobCompletedWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        jobId:
+          type: string
+          description: The ID of the payment gateway process job that completed.
+        data:
+          $ref: '#/components/schemas/paymentGatewayTypes_ProcessPaymentGatewayResponse'
+      required:
+      - eventType
+      - jobId
+      - data
+      title: PaymentGatewayProcessJobCompletedWebhook
+    paymentGatewayTypes_ValidatePaymentGatewayCardAcceptance:
+      type: string
+      enum:
+      - ACCEPTED
+      - NOT_ACCEPTED
+      - UNKNOWN
+      title: ValidatePaymentGatewayCardAcceptance
+    paymentMethodTypes_CustomPaymentMethodSchemaFieldType:
+      type: string
+      enum:
+      - text
+      - number
+      - select
+      - date
+      - phone
+      - email
+      - url
+      - dynamicUrl
+      - embeddedUrl
+      - address
+      - usBankRoutingNumber
+      - usBankAccountNumber
+      title: CustomPaymentMethodSchemaFieldType
+    paymentGatewayTypes_ValidatePaymentGatewayResponse:
+      oneOf:
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - pending
+            description: 'Discriminator value: pending'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway validation job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - success
+            description: 'Discriminator value: success'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway validation job
+          paymentGatewayUrl:
+            type: string
+            description: The payment gateway URL that was found in the document
+          card:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayCardResponse'
+            description: Data on the card payments that were extracted from the gateway
+          invoiceAmount:
+            type: number
+            format: double
+            description: The invoice amount detected from the invoice
+          gatewayAmount:
+            type: number
+            format: double
+            description: The amount displayed on the payment gateway (may include fees)
+          vendorName:
+            type: string
+            description: The vendor name
+          requiredData:
+            $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayRequiredData'
+            description: Information about what data is required to proceed with payment
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          jobStatus:
+            type: string
+            enum:
+            - failed
+            description: 'Discriminator value: failed'
+          jobId:
+            type: string
+            description: The job ID of the payment gateway validation job
+          errorType:
+            $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayError'
+            description: The error that occurred during the payment gateway validation job
+          errorMessage:
+            type: string
+            description: The error message that occurred during the payment gateway validation job
+          createdAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: The timestamp when the job was last updated
+        required:
+        - jobStatus
+        - jobId
+        - errorType
+        - createdAt
+        - updatedAt
+      discriminator:
+        propertyName: jobStatus
+      title: ValidatePaymentGatewayResponse
+    commons_FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        suffix:
+          type: string
+      required:
+      - firstName
+      - lastName
+      title: FullName
+    webhooks_PaymentGatewayValidationJobCompletedWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        jobId:
+          type: string
+          description: The ID of the payment gateway validation job that completed.
+        data:
+          $ref: '#/components/schemas/paymentGatewayTypes_ValidatePaymentGatewayResponse'
+      required:
+      - eventType
+      - jobId
+      - data
+      title: PaymentGatewayValidationJobCompletedWebhook
+    paymentGatewayTypes_PaymentGatewayAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the payment gateway attempt
+        status:
+          $ref: '#/components/schemas/paymentGatewayTypes_PaymentGatewayJobStatus'
+          description: The status of the attempt
+        amount:
+          type: number
+          format: double
+          description: The amount processed in this attempt
+        receiptUrl:
+          type: string
+          description: The URL of the receipt for this attempt
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the attempt was created
+      required:
+      - id
+      - status
+      - createdAt
+      title: PaymentGatewayAttempt
+    entityTypes_ApprovalPolicyId:
+      type: string
+      title: ApprovalPolicyId
+    paymentGatewayTypes_ValidatePaymentGatewayCardFee:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - percentage
+            description: 'Discriminator value: percentage'
+          value:
+            type: number
+            format: double
+            description: The fee percentage in bps. For example, if the fee is 2.5% and the payment amount is $100, set this to 250.
+        required:
+        - type
+        - value
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - flat
+            description: 'Discriminator value: flat'
+          value:
+            type: number
+            format: double
+            description: The fee amount in major units of the invoice currency. For example, if the fee is a flat $2.50, set this to 2.5.
+        required:
+        - type
+        - value
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - none
+            description: 'Discriminator value: none'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ValidatePaymentGatewayCardFee
+    paymentMethodTypes_CustomPaymentMethodSchemaField:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        type:
+          $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaFieldType'
+        optional:
+          type: boolean
+          description: Indicates whether this field is optional
+        useAsAccountName:
+          type: boolean
+          description: Indicates whether this field should be used as the name of the payment method. Only one field can be used as the name. Will set the accountName field of the payment method to the value of this field.
+        useAsAccountNumber:
+          type: boolean
+          description: Indicates whether this field should be used as the account number of the payment method. Only one field can be used as the account number. Will set the accountNumber field of the payment method to the value of this field.
+        options:
+          type: array
+          items:
+            type: string
+          description: When type is 'select', provide options that can be selected
+      required:
+      - name
+      - type
+      - optional
+      title: CustomPaymentMethodSchemaField
+    ocr_OCRResponse:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/ocr_OCRJobId'
+        invoice:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceResponse'
+        vendor:
+          $ref: '#/components/schemas/entityTypes_CounterpartyResponse'
+        check:
+          $ref: '#/components/schemas/paymentMethodTypes_CheckResponse'
+        bankAccount:
+          $ref: '#/components/schemas/paymentMethodTypes_BankAccountResponse'
+        payer:
+          $ref: '#/components/schemas/entityTypes_EntityResponse'
+      required:
+      - jobId
+      - invoice
+      - vendor
+      title: OCRResponse
+    invoiceTypes_ApprovalSlot:
+      type: object
+      properties:
+        upstreamPolicyId:
+          $ref: '#/components/schemas/entityTypes_ApprovalPolicyId'
+          description: The identifier for the upstream policy this slot is associated with.
+        upstreamPoliciesApproved:
+          type: boolean
+          description: Whether all upstream policies are approved.
+        approvalPolicyId:
+          $ref: '#/components/schemas/entityTypes_ApprovalPolicyId'
+          description: The identifier for the approval policy this slot is associated with.
+        approvalSlotId:
+          $ref: '#/components/schemas/invoiceTypes_ApprovalSlotId'
+          description: The identifier for this approval slot
+        assignedUserId:
+          $ref: '#/components/schemas/entityTypes_EntityUserId'
+          description: The ID of the user who is assigned to the approval slot. If undefined, the approval slot is assigned to all eligible approvers.
+        action:
+          $ref: '#/components/schemas/invoiceTypes_ApproverAction'
+        eligibleRoles:
+          type: array
+          items:
+            type: string
+        eligibleUserIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityUserId'
+        date:
+          type: string
+          format: date-time
+          description: Either the date the invoice was created, date the approver was assigned, or date of last action by approver, whichever is latest.
+      required:
+      - approvalPolicyId
+      - approvalSlotId
+      - action
+      - eligibleRoles
+      - eligibleUserIds
+      - date
+      title: ApprovalSlot
+    entityTypes_ApprovalPolicyResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_ApprovalPolicyId'
+        trigger:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_Trigger'
+        rule:
+          $ref: '#/components/schemas/entityTypes_Rule'
+        upstreamPolicyId:
+          $ref: '#/components/schemas/entityTypes_ApprovalPolicyId'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - trigger
+      - rule
+      - upstreamPolicyId
+      - createdAt
+      - updatedAt
+      title: ApprovalPolicyResponse
+    invoiceTypes_ApproverAction:
+      type: string
+      enum:
+      - NONE
+      - APPROVE
+      - REJECT
+      title: ApproverAction
+    entityTypes_IndustryCodes:
+      type: object
+      properties:
+        mcc:
+          type: string
+      title: IndustryCodes
+    webhooks_CounterpartyEventWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        entityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity that owns the counterparty relationship
+        counterpartyId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the counterparty
+      required:
+      - eventType
+      - entityId
+      - counterpartyId
+      title: CounterpartyEventWebhook
+    entityTypes_EntityResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        name:
+          type: string
+        email:
+          type: string
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system
+        emailTo:
+          type: string
+          description: Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
+        isCustomer:
+          type: boolean
+          description: True if this entity has a direct relationship with your organization.
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileResponse'
+        logo:
+          type: string
+          description: URL for the entity logo
+        status:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+        oatfiStatus:
+          type: string
+          description: The OatFi status of this entity
+        oatfiUnderwritingResponse:
+          type: object
+          additionalProperties:
+            type: string
+          description: The OatFi underwriting response of this entity
+        acceptedTos:
+          type: boolean
+          description: True if this entity has accepted the terms of service.
+        isPayor:
+          type: boolean
+          description: True if this entity can pay invoices.
+        isPayee:
+          type: boolean
+          description: True if this entity can receive payments.
+        isNetworkPayor:
+          type: boolean
+          description: True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+        isNetworkPayee:
+          type: boolean
+          description: True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - email
+      - isCustomer
+      - accountType
+      - profile
+      - status
+      - acceptedTos
+      - isPayor
+      - isPayee
+      - isNetworkPayor
+      - isNetworkPayee
+      - createdAt
+      - updatedAt
+      title: EntityResponse
+    paymentMethodTypes_BankAccountResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+        isDefaultSource:
+          type: boolean
+          description: Indicates whether this payment method is the default source for the entity
+        isDefaultDestination:
+          type: boolean
+          description: Indicates whether this payment method is the default destination for the entity
+        supportedCurrencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+        externalAccountingSystemId:
+          type: string
+          description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+        frozen:
+          type: boolean
+          description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata associated with this payment method.
+        confirmedByEntity:
+          type: boolean
+          description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        accountName:
+          type: string
+        bankName:
+          type: string
+        routingNumber:
+          type: string
+        accountNumber:
+          type: string
+        accountType:
+          $ref: '#/components/schemas/paymentMethodTypes_BankType'
+        status:
+          $ref: '#/components/schemas/paymentMethodTypes_BankStatus'
+        checkOptions:
+          $ref: '#/components/schemas/paymentMethodTypes_BankAccountCheckOptions'
+          description: If check printing is enabled for the account, will return the check options for this bank account
+      required:
+      - id
+      - isDefaultSource
+      - isDefaultDestination
+      - supportedCurrencies
+      - frozen
+      - metadata
+      - createdAt
+      - updatedAt
+      - accountName
+      - bankName
+      - routingNumber
+      - accountNumber
+      - accountType
+      - status
+      title: BankAccountResponse
+    commons_PhoneNumber:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+      - countryCode
+      - number
+      title: PhoneNumber
+    paymentMethodTypes_BankType:
+      type: string
+      enum:
+      - CHECKING
+      - SAVINGS
+      - UNKNOWN
+      title: BankType
+    webhooks_CounterpartyWebhook:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: The type of the event.
+        payeeId:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: A list of IDs for the payees involved.
+        payorId:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: A list of IDs for the payors involved.
+        user:
+          $ref: '#/components/schemas/entityTypes_EntityUserResponse'
+          description: User who initiated the change.
+      required:
+      - eventType
+      - payeeId
+      - payorId
+      title: CounterpartyWebhook
+    entityTypes_BusinessType:
+      type: string
+      enum:
+      - soleProprietorship
+      - unincorporatedAssociation
+      - trust
+      - publicCorporation
+      - privateCorporation
+      - llc
+      - partnership
+      - unincorporatedNonProfit
+      - incorporatedNonProfit
+      title: BusinessType
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

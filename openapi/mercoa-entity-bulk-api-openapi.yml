@@ -1,0 +1,708 @@
+openapi: 3.2.0
+info:
+  title: Reference entity > bulk API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity > bulk
+paths:
+  /entities:
+    post:
+      operationId: entity_bulk_create
+      summary: Create Bulk Entities (Sync)
+      description: Create multiple entities in bulk. This endpoint will process synchronously and return a list of entities that were created or failed to create.
+      tags:
+      - entity > bulk
+      parameters:
+      - name: emitWebhooks
+        in: query
+        description: If true, webhooks will be emitted for each entity that is created. By default, webhooks are not emitted.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entityTypes_BulkEntityCreationResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_BulkEntityCreationRequest'
+      security:
+      - default: []
+  /entities/download:
+    get:
+      operationId: entity_bulk_download
+      summary: Download Bulk Entities (Sync)
+      description: Get a URL to download a bulk entity as a CSV/JSON file.
+      tags:
+      - entity > bulk
+      parameters:
+      - name: format
+        in: query
+        description: Format of the file to download. Defaults to CSV.
+        required: false
+        schema:
+          $ref: '#/components/schemas/commons_BulkDownloadFormat'
+      - name: paymentMethods
+        in: query
+        description: If true, will include entity payment methods as part of the response
+        required: false
+        schema:
+          type: boolean
+      - name: isCustomer
+        in: query
+        description: If true, only entities with a direct relationship to the requesting organization will be returned. If false or not provided, all entities will be returned.
+        required: false
+        schema:
+          type: boolean
+      - name: foreignId
+        in: query
+        description: ID used to identify this entity in your system
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+      - name: isPayee
+        in: query
+        description: 'If true, entities that are marked as payees will be returned.
+
+          If false or not provided, entities that are marked as payees will not be returned.'
+        required: false
+        schema:
+          type: boolean
+      - name: isPayor
+        in: query
+        description: 'If true or not provided, entities that are marked as payors will be returned.
+
+          If false, entities that are marked as payors will not be returned.'
+        required: false
+        schema:
+          type: boolean
+      - name: name
+        in: query
+        description: Use search instead. Deprecated. Filter entities by name. Partial matches are supported.
+        required: false
+        schema:
+          type: string
+        deprecated: true
+      - name: search
+        in: query
+        description: Find entities by name, email, emailTo, entity ID, or foreign ID. Partial matches are supported for name, email, and emailTo. Exact matches are used for entity ID and foreign ID.
+        required: false
+        schema:
+          type: string
+      - name: metadata
+        in: query
+        description: Filter entities by simple key/value metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
+        required: false
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_MetadataFilter'
+      - name: returnMetadata
+        in: query
+        description: Return simple key/value metadata for the specified keys for the entities. For more complex metadata, use the Metadata API.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of entities to return. Limit can range between 1 and 100, and the default is 10.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the entity to start after. If not provided, the first page of entities will be returned.
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commons_BulkDownloadResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    commons_BulkDownloadFormat:
+      type: string
+      enum:
+      - CSV
+      - JSON
+      title: BulkDownloadFormat
+    entityTypes_TaxID:
+      type: object
+      properties:
+        ein:
+          $ref: '#/components/schemas/entityTypes_Ein'
+      required:
+      - ein
+      title: TaxID
+    entityTypes_IndividualProfileRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/commons_FullName'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        birthDate:
+          $ref: '#/components/schemas/commons_BirthDate'
+        governmentID:
+          $ref: '#/components/schemas/commons_IndividualGovernmentID'
+      required:
+      - name
+      title: IndividualProfileRequest
+    entityTypes_EntityCreationRequest:
+      type: object
+      properties:
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system. This ID must be unique across all entities in your system.
+        emailTo:
+          type: string
+          description: Sets the email address to which to send invoices to be added to the Invoice Inbox. Only provide the local-part/username of the email address, do not include the @domain.com
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias. Include the full email address.
+        isCustomer:
+          type: boolean
+          description: If this entity has a direct relationship with your organization (e.g your direct customer or client), set this to true. Otherwise, set to false (e.g your customer's vendors).
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileRequest'
+        isPayor:
+          type: boolean
+          description: If this entity will be paying invoices, set this to true.
+        isPayee:
+          type: boolean
+          description: If this entity will be receiving payments, set this to true.
+        isNetworkPayor:
+          type: boolean
+          description: Control if this entity should be available as a payor to any entity on your platform. If set to false, this entity will only be available as a payor to entities that have a direct relationship with this entity. Defaults to false.
+        isNetworkPayee:
+          type: boolean
+          description: Control if this entity should be available as a payee to any entity on your platform. If set to false, this entity will only be available as a payee to entities that have a direct relationship with this entity. Defaults to false.
+        logo:
+          type: string
+          description: Base64 data URL of the entity logo. Must be in the `data:image/*;base64,XXXX` format. We recommend a PNG image under 100KB. Supported file types are `png`, `jpeg`, `gif`, `svg`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+      required:
+      - isCustomer
+      - accountType
+      - profile
+      - isPayor
+      - isPayee
+      title: EntityCreationRequest
+    commons_BulkDownloadResponse:
+      type: object
+      properties:
+        url:
+          type: string
+        mimeType:
+          type: string
+      required:
+      - url
+      - mimeType
+      title: BulkDownloadResponse
+    commons_BirthDate:
+      type: object
+      properties:
+        day:
+          type: string
+        month:
+          type: string
+        year:
+          type: string
+      title: BirthDate
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    invoiceTypes_MetadataFilter:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          $ref: '#/components/schemas/commons_StringOrStringArray'
+          description: If multiple values are provided, the filter will match if any of the values match (OR filter). To filter for the absence of a key, use the value 'NULL'. To filter for the presence of a key, use the value 'NOT NULL'.
+      required:
+      - key
+      - value
+      title: MetadataFilter
+    entityTypes_IndustryCodes:
+      type: object
+      properties:
+        mcc:
+          type: string
+      title: IndustryCodes
+    entityTypes_AccountType:
+      type: string
+      enum:
+      - business
+      - individual
+      title: AccountType
+    commons_Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateOrProvince:
+          type: string
+          description: State or province code. Must be in the format XX.
+        postalCode:
+          type: string
+          description: Postal code. Must be in the format XXXXX or XXXXX-XXXX.
+        country:
+          type: string
+      required:
+      - addressLine1
+      - city
+      - stateOrProvince
+      - postalCode
+      title: Address
+    entityTypes_BulkConnectedEntity:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: The ID of the entity to connect to.
+        linkCreatedAsPayor:
+          type: boolean
+          description: If true, the created entities will be linked to the connected entity as a payor (customer).
+        linkCreatedAsPayee:
+          type: boolean
+          description: If true, the created entities will be linked to the connected entity as a payee (vendor).
+      required:
+      - id
+      - linkCreatedAsPayor
+      - linkCreatedAsPayee
+      title: BulkConnectedEntity
+    entityTypes_EntityStatus:
+      type: string
+      enum:
+      - unverified
+      - pending
+      - resubmit
+      - review
+      - verified
+      - failed
+      title: EntityStatus
+    entityTypes_BusinessProfileRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address for the business. Required for KYB.
+        legalBusinessName:
+          type: string
+        businessType:
+          $ref: '#/components/schemas/entityTypes_BusinessType'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+          description: Phone number for the business. Required for KYB.
+        doingBusinessAs:
+          type: string
+        website:
+          type: string
+          description: Website URL for the business. Must be in the format http://www.example.com. Required for KYB if description is not provided.
+        description:
+          type: string
+          description: Description of the business. Required for KYB if website is not provided.
+        address:
+          $ref: '#/components/schemas/commons_Address'
+          description: Address for the business. Required for KYB.
+        taxId:
+          $ref: '#/components/schemas/entityTypes_TaxID'
+          description: Tax ID for the business. Currently only EIN is supported. Required for KYB.
+        formationDate:
+          type: string
+          format: date-time
+          description: Date of business formation
+        industryCodes:
+          $ref: '#/components/schemas/entityTypes_IndustryCodes'
+          description: Industry code for the business. Required to collect funds.
+        averageMonthlyTransactionVolume:
+          type: number
+          format: double
+          description: Average monthly transaction volume for the business. Required to collect funds.
+        averageTransactionSize:
+          type: number
+          format: double
+          description: Average transaction size for the business. Required to collect funds.
+        maxTransactionSize:
+          type: number
+          format: double
+          description: Maximum transaction size for the business. Required to collect funds.
+      required:
+      - legalBusinessName
+      title: BusinessProfileRequest
+    entityTypes_BulkEntityCreationFromObjectResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the entity that was created. If the entity was not created, this will be undefined
+        foreignId:
+          type: string
+          description: If provided, this is the foreign ID of the entity that was created.
+        error:
+          type: string
+          description: The error message if the entity was not created
+      title: BulkEntityCreationFromObjectResponse
+    commons_PhoneNumber:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+      - countryCode
+      - number
+      title: PhoneNumber
+    entityTypes_Ein:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Must be in the format XX-XXXXXXX.
+      required:
+      - number
+      title: Ein
+    entityTypes_BulkEntityCreationFromObject:
+      type: object
+      properties:
+        connectedEntity:
+          $ref: '#/components/schemas/entityTypes_BulkConnectedEntity'
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityCreationRequest'
+      required:
+      - entities
+      title: BulkEntityCreationFromObject
+    entityTypes_BusinessType:
+      type: string
+      enum:
+      - soleProprietorship
+      - unincorporatedAssociation
+      - trust
+      - publicCorporation
+      - privateCorporation
+      - llc
+      - partnership
+      - unincorporatedNonProfit
+      - incorporatedNonProfit
+      title: BusinessType
+    entityTypes_BulkEntityCreationResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_BulkEntityCreationFromObjectResponse'
+      required:
+      - data
+      title: BulkEntityCreationResponse
+    entityTypes_ProfileRequest:
+      type: object
+      properties:
+        business:
+          $ref: '#/components/schemas/entityTypes_BusinessProfileRequest'
+          description: If this entity is a business, set this field
+        individual:
+          $ref: '#/components/schemas/entityTypes_IndividualProfileRequest'
+          description: If this entity is a individual, set this field
+      title: ProfileRequest
+    commons_IndividualGovernmentID:
+      type: object
+      properties:
+        ssn:
+          type: string
+          description: Full Social Security Number. Must be in the format 123-45-6789.
+      required:
+      - ssn
+      title: IndividualGovernmentID
+    entityTypes_BulkEntityCreationRequest:
+      oneOf:
+      - $ref: '#/components/schemas/entityTypes_BulkEntityCreationFromObject'
+      title: BulkEntityCreationRequest
+    commons_FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        suffix:
+          type: string
+      required:
+      - firstName
+      - lastName
+      title: FullName
+    commons_StringOrStringArray:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      title: StringOrStringArray
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

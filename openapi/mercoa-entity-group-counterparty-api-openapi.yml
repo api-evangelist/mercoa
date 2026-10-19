@@ -1,0 +1,648 @@
+openapi: 3.2.0
+info:
+  title: Reference entity-group > counterparty API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: entity-group > counterparty
+paths:
+  /entityGroup/{entityGroupId}/addPayees:
+    post:
+      operationId: entityGroup_counterparty_addPayees
+      summary: Link Payees to Group
+      description: Create association between all entities in the group and a given list of Payees. If a Payee has previously been archived, unarchive the Payee.
+      tags:
+      - entity-group > counterparty
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityAddPayeesRequest'
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}/hidePayees:
+    post:
+      operationId: entityGroup_counterparty_hidePayees
+      summary: Hide Payees from Group
+      description: Marks Payees as unsearchable by all entities in the group via Counterparty search. Invoices associated with these Payees will still be searchable via Invoice search.
+      tags:
+      - entity-group > counterparty
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityHidePayeesRequest'
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}/addPayors:
+    post:
+      operationId: entityGroup_counterparty_addPayors
+      summary: Link Payors to Group
+      description: Create association between all entities in the group and a given list of Payors. If a Payor has previously been archived, unarchive the Payor.
+      tags:
+      - entity-group > counterparty
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityAddPayorsRequest'
+      security:
+      - default: []
+  /entityGroup/{entityGroupId}/hidePayors:
+    post:
+      operationId: entityGroup_counterparty_hidePayors
+      summary: Hide Payors from Group
+      description: Marks Payors as unsearchable by all entities in the group via Counterparty search. Invoices associated with these Payors will still be searchable via Invoice search.
+      tags:
+      - entity-group > counterparty
+      parameters:
+      - name: entityGroupId
+        in: path
+        description: Entity Group ID or Entity Group ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/entityGroupTypes_EntityGroupId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/entityTypes_EntityHidePayorsRequest'
+      security:
+      - default: []
+components:
+  schemas:
+    entityTypes_EntityHidePayorsRequest:
+      type: object
+      properties:
+        payors:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of payor entity IDs or foreign IDs to hide
+      required:
+      - payors
+      title: EntityHidePayorsRequest
+    entityGroupTypes_EntityGroupId:
+      type: string
+      title: EntityGroupId
+    entityTypes_EntityAddPayorsRequest:
+      type: object
+      properties:
+        payors:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of payor entity IDs or foreign IDs to associate with the entity
+        customizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_CounterpartyCustomizationRequest'
+          description: List of customizations to apply to the payors. If the payor is not currently a counterparty of the entity, the counterparty will be created with the provided customizations.
+      required:
+      - payors
+      title: EntityAddPayorsRequest
+    entityTypes_CounterpartyCustomizationAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: The ID the counterparty has assigned to this account.
+        postalCode:
+          type: string
+          description: The postal code the counterparty has assigned to this account.
+        nameOnAccount:
+          type: string
+          description: The name on the account the counterparty has assigned to this account.
+      required:
+      - accountId
+      title: CounterpartyCustomizationAccount
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    entityTypes_EntityAddPayeesRequest:
+      type: object
+      properties:
+        payees:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of payee entity IDs or foreign IDs to associate with the entity
+        customizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_CounterpartyCustomizationRequest'
+          description: List of customizations to apply to the payees. If the payee is not currently a counterparty of the entity, the counterparty will be created with the provided customizations.
+      required:
+      - payees
+      title: EntityAddPayeesRequest
+    entityTypes_EntityHidePayeesRequest:
+      type: object
+      properties:
+        payees:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_EntityId'
+          description: List of payee entity IDs or foreign IDs to hide
+      required:
+      - payees
+      title: EntityHidePayeesRequest
+    entityTypes_CounterpartyCustomizationRequest:
+      type: object
+      properties:
+        counterpartyId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/entityTypes_CounterpartyCustomizationAccount'
+          description: The list of accounts the entity has with the counterparty.
+      required:
+      - counterpartyId
+      title: CounterpartyCustomizationRequest
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

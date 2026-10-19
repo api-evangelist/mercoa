@@ -1,103 +1,1271 @@
 openapi: 3.2.0
 info:
-  title: Mercoa Payment Methods API
-  description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
-
-    workflows inside vertical SaaS platforms. This spec is a curated subset of
-
-    the canonical Mercoa OpenAPI document
-
-    (https://github.com/mercoa-finance/openapi). All requests authenticate with
-
-    a Bearer token (API key or JWT) in the Authorization header.'
-  version: '1.0'
-  contact:
-    name: Mercoa
-    url: https://docs.mercoa.com/
+  title: Reference Payment Methods API
+  version: 1.0.0
 servers:
 - url: https://api.mercoa.com
   description: Production
-security:
-- bearerAuth: []
 tags:
 - name: Payment Methods
 paths:
-  /entity/{entityId}/paymentMethods:
-    parameters:
-    - $ref: '#/components/parameters/EntityId'
+  /paymentMethods:
     get:
+      operationId: paymentMethods_find
+      summary: Find
       tags:
       - Payment Methods
-      summary: List payment methods for entity
+      parameters:
+      - name: limit
+        in: query
+        description: Number of payment methods to return. Limit can range between 1 and 100, and the default is 10.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the payment method to start after. If not provided, the first page of payment methods will be returned.
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+      - name: type
+        in: query
+        description: Type of payment method to filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodType'
+      - name: entityId
+        in: query
+        description: Entity ID to filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/entityTypes_EntityId'
       responses:
         '200':
-          description: Payment methods
-      operationId: getEntityByEntityIdPaymentMethods
-      x-operation-id-source: derived
-  /entity/{entityId}/paymentMethod:
-    parameters:
-    - $ref: '#/components/parameters/EntityId'
-    post:
-      tags:
-      - Payment Methods
-      summary: Create payment method
-      responses:
-        '201':
-          description: Created
-      operationId: postEntityByEntityIdPaymentMethod
-      x-operation-id-source: derived
-  /entity/{entityId}/paymentMethod/{paymentMethodId}:
-    parameters:
-    - $ref: '#/components/parameters/EntityId'
-    - name: paymentMethodId
-      in: path
-      required: true
-      schema:
-        type: string
-    get:
-      tags:
-      - Payment Methods
-      summary: Get payment method
-      responses:
-        '200':
-          description: Payment method
-      operationId: getEntityByEntityIdPaymentMethodByPaymentMethodId
-      x-operation-id-source: derived
-    put:
-      tags:
-      - Payment Methods
-      summary: Update payment method
-      responses:
-        '200':
-          description: Updated
-      operationId: putEntityByEntityIdPaymentMethodByPaymentMethodId
-      x-operation-id-source: derived
-    delete:
-      tags:
-      - Payment Methods
-      summary: Delete payment method
-      responses:
-        '204':
-          description: Deleted
-      operationId: deleteEntityByEntityIdPaymentMethodByPaymentMethodId
-      x-operation-id-source: derived
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodWithEntityFindResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
 components:
-  parameters:
-    EntityId:
-      name: entityId
-      in: path
-      required: true
-      schema:
-        type: string
+  schemas:
+    entityTypes_TaxID:
+      type: object
+      properties:
+        ein:
+          $ref: '#/components/schemas/entityTypes_Ein'
+      required:
+      - ein
+      title: TaxID
+    paymentMethodTypes_CustomPaymentMethodSchemaField:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        type:
+          $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaFieldType'
+        optional:
+          type: boolean
+          description: Indicates whether this field is optional
+        useAsAccountName:
+          type: boolean
+          description: Indicates whether this field should be used as the name of the payment method. Only one field can be used as the name. Will set the accountName field of the payment method to the value of this field.
+        useAsAccountNumber:
+          type: boolean
+          description: Indicates whether this field should be used as the account number of the payment method. Only one field can be used as the account number. Will set the accountNumber field of the payment method to the value of this field.
+        options:
+          type: array
+          items:
+            type: string
+          description: When type is 'select', provide options that can be selected
+      required:
+      - name
+      - type
+      - optional
+      title: CustomPaymentMethodSchemaField
+    paymentMethodTypes_CardType:
+      type: string
+      enum:
+      - credit
+      - debit
+      - prepaid
+      - unknown
+      title: CardType
+    paymentMethodTypes_CardBrand:
+      type: string
+      enum:
+      - AmericanExpress
+      - Discover
+      - Mastercard
+      - Visa
+      title: CardBrand
+    entityTypes_IndividualProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          $ref: '#/components/schemas/commons_FullName'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        birthDateProvided:
+          type: boolean
+        governmentIDProvided:
+          type: boolean
+      required:
+      - name
+      - birthDateProvided
+      - governmentIDProvided
+      title: IndividualProfileResponse
+    paymentMethodTypes_BankStatus:
+      type: string
+      enum:
+      - NEW
+      - VERIFIED
+      - VERIFICATION_FAILED
+      - PENDING
+      - ERRORED
+      title: BankStatus
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    paymentMethodTypes_WalletBalance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount in major units of the currency.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+      required:
+      - amount
+      - currency
+      title: WalletBalance
+    entityTypes_BusinessProfileResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        legalBusinessName:
+          type: string
+        businessType:
+          $ref: '#/components/schemas/entityTypes_BusinessType'
+        phone:
+          $ref: '#/components/schemas/commons_PhoneNumber'
+        doingBusinessAs:
+          type: string
+        website:
+          type: string
+        description:
+          type: string
+        address:
+          $ref: '#/components/schemas/commons_Address'
+        ownersProvided:
+          type: boolean
+          description: True if all representatives have been provided for this business.
+        taxIDProvided:
+          type: boolean
+        taxId:
+          $ref: '#/components/schemas/entityTypes_TaxID'
+        formationDate:
+          type: string
+          format: date-time
+        industryCodes:
+          $ref: '#/components/schemas/entityTypes_IndustryCodes'
+        averageMonthlyTransactionVolume:
+          type: number
+          format: double
+        averageTransactionSize:
+          type: number
+          format: double
+        maxTransactionSize:
+          type: number
+          format: double
+      required:
+      - legalBusinessName
+      - taxIDProvided
+      title: BusinessProfileResponse
+    entityTypes_IndustryCodes:
+      type: object
+      properties:
+        mcc:
+          type: string
+      title: IndustryCodes
+    paymentMethodTypes_CustomPaymentMethodSchemaId:
+      type: string
+      title: CustomPaymentMethodSchemaId
+    entityTypes_EntityResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        name:
+          type: string
+        email:
+          type: string
+        foreignId:
+          type: string
+          description: The ID used to identify this entity in your system
+        emailTo:
+          type: string
+          description: Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
+        emailToAlias:
+          type: array
+          items:
+            type: string
+          description: Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
+        isCustomer:
+          type: boolean
+          description: True if this entity has a direct relationship with your organization.
+        accountType:
+          $ref: '#/components/schemas/entityTypes_AccountType'
+        profile:
+          $ref: '#/components/schemas/entityTypes_ProfileResponse'
+        logo:
+          type: string
+          description: URL for the entity logo
+        status:
+          $ref: '#/components/schemas/entityTypes_EntityStatus'
+        oatfiStatus:
+          type: string
+          description: The OatFi status of this entity
+        oatfiUnderwritingResponse:
+          type: object
+          additionalProperties:
+            type: string
+          description: The OatFi underwriting response of this entity
+        acceptedTos:
+          type: boolean
+          description: True if this entity has accepted the terms of service.
+        isPayor:
+          type: boolean
+          description: True if this entity can pay invoices.
+        isPayee:
+          type: boolean
+          description: True if this entity can receive payments.
+        isNetworkPayor:
+          type: boolean
+          description: True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+        isNetworkPayee:
+          type: boolean
+          description: True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - email
+      - isCustomer
+      - accountType
+      - profile
+      - status
+      - acceptedTos
+      - isPayor
+      - isPayee
+      - isNetworkPayor
+      - isNetworkPayee
+      - createdAt
+      - updatedAt
+      title: EntityResponse
+    entityTypes_AccountType:
+      type: string
+      enum:
+      - business
+      - individual
+      title: AccountType
+    paymentMethodTypes_PaymentMethodWithEntityResponse:
+      type: object
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodResponse'
+        entity:
+          $ref: '#/components/schemas/entityTypes_EntityResponse'
+      required:
+      - paymentMethod
+      - entity
+      title: PaymentMethodWithEntityResponse
+    paymentMethodTypes_PaymentMethodWithEntityFindResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodWithEntityResponse'
+      required:
+      - count
+      - hasMore
+      - data
+      title: PaymentMethodWithEntityFindResponse
+    commons_Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        stateOrProvince:
+          type: string
+          description: State or province code. Must be in the format XX.
+        postalCode:
+          type: string
+          description: Postal code. Must be in the format XXXXX or XXXXX-XXXX.
+        country:
+          type: string
+      required:
+      - addressLine1
+      - city
+      - stateOrProvince
+      - postalCode
+      title: Address
+    entityTypes_EntityStatus:
+      type: string
+      enum:
+      - unverified
+      - pending
+      - resubmit
+      - review
+      - verified
+      - failed
+      title: EntityStatus
+    paymentMethodTypes_PaymentMethodType:
+      type: string
+      enum:
+      - custom
+      - check
+      - bankAccount
+      - na
+      - card
+      - bnpl
+      - virtualCard
+      - offPlatform
+      - utility
+      - wallet
+      title: PaymentMethodType
+    paymentMethodTypes_BankAccountCheckOptions:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: If true, will allow the user to print checks from this bank account
+        initialCheckNumber:
+          type: integer
+          description: If provided, will start the check number sequence at the provided number. If not provided, will start at 5000.
+        routingNumberOverride:
+          type: string
+          description: If provided, will print a check with the provided routing number instead of the one from the bank account
+        accountNumberOverride:
+          type: string
+          description: If provided, will print a check with the provided account number instead of the one from the bank account
+        accountHolderNameOverride:
+          type: string
+          description: If provided, will print a check with the provided account holder name instead of the payer name from the invoice
+        accountHolderAddressOverride:
+          $ref: '#/components/schemas/commons_Address'
+          description: If provided, will print a check with the provided account holder address instead of the payer address from the invoice
+        signatoryName:
+          type: string
+          description: Name of the person who's signature will be printed on the check.
+        signatureImage:
+          type: string
+          description: Base64 encoded image of the signature. If not provided, will use the signatoryName to generate a signature. Mercoa will automatically grayscale, resize, and convert the image to a PNG the image to fit on the check.
+        useSignatureImage:
+          type: boolean
+          description: If true, will print checks with the provided signatureImage. If false, will print checks with a generated signature from the signatoryName. If this parameter is not set the default behavior is to use the signatureImage if provided.
+      required:
+      - signatoryName
+      title: BankAccountCheckOptions
+    paymentMethodTypes_BankType:
+      type: string
+      enum:
+      - CHECKING
+      - SAVINGS
+      - UNKNOWN
+      title: BankType
+    paymentMethodTypes_CustomPaymentMethodSchemaResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaId'
+        name:
+          type: string
+        isSource:
+          type: boolean
+          description: This payment method can be used as a payment source for an invoice
+        isDestination:
+          type: boolean
+          description: This payment method can be used as a payment destination for an invoice
+        supportedCurrencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: List of currencies that this payment method supports.
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaField'
+        estimatedProcessingTime:
+          type: integer
+          description: Estimated time in days for this payment method to process a payments. 0 is an same-day payment methods, -1 is unknown processing time.
+        maxAmount:
+          type: number
+          format: double
+          description: The maximum amount that can be transferred from this payment method in a single transaction.
+        minAmount:
+          type: number
+          format: double
+          description: The minimum amount that can be transferred from this payment method in a single transaction. Default is 1.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - isSource
+      - isDestination
+      - supportedCurrencies
+      - fields
+      - estimatedProcessingTime
+      - createdAt
+      - updatedAt
+      title: CustomPaymentMethodSchemaResponse
+    commons_PhoneNumber:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+      - countryCode
+      - number
+      title: PhoneNumber
+    entityTypes_Ein:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Must be in the format XX-XXXXXXX.
+      required:
+      - number
+      title: Ein
+    paymentMethodTypes_PaymentMethodResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          accountName:
+            type: string
+          bankName:
+            type: string
+          routingNumber:
+            type: string
+          accountNumber:
+            type: string
+          accountType:
+            $ref: '#/components/schemas/paymentMethodTypes_BankType'
+          status:
+            $ref: '#/components/schemas/paymentMethodTypes_BankStatus'
+          checkOptions:
+            $ref: '#/components/schemas/paymentMethodTypes_BankAccountCheckOptions'
+            description: If check printing is enabled for the account, will return the check options for this bank account
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - accountName
+        - bankName
+        - routingNumber
+        - accountNumber
+        - accountType
+        - status
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - card
+            description: 'Discriminator value: card'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          cardType:
+            $ref: '#/components/schemas/paymentMethodTypes_CardType'
+          cardBrand:
+            $ref: '#/components/schemas/paymentMethodTypes_CardBrand'
+          lastFour:
+            type: string
+          expMonth:
+            type: string
+          expYear:
+            type: string
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - cardType
+        - cardBrand
+        - lastFour
+        - expMonth
+        - expYear
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          payToTheOrderOf:
+            type: string
+          addressLine1:
+            type: string
+          addressLine2:
+            type: string
+          city:
+            type: string
+          stateOrProvince:
+            type: string
+          postalCode:
+            type: string
+          country:
+            type: string
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - payToTheOrderOf
+        - addressLine1
+        - city
+        - stateOrProvince
+        - postalCode
+        - country
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          foreignId:
+            type: string
+            description: ID for this payment method in your system
+          accountName:
+            type: string
+          accountNumber:
+            type: string
+          availableBalance:
+            type: number
+            format: double
+            description: The available balance for this payment method.
+          schemaId:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaId'
+            description: Payment method schema used for this payment method. Defines the fields that this payment method contains.
+          schema:
+            $ref: '#/components/schemas/paymentMethodTypes_CustomPaymentMethodSchemaResponse'
+          data:
+            type: object
+            additionalProperties:
+              type: string
+            description: Object of key/value pairs that matches the keys in the linked payment method schema.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - schemaId
+        - schema
+        - data
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          utilityId:
+            type: string
+            description: The ID of the utility that this payment method is linked to.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - utilityId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - wallet
+            description: 'Discriminator value: wallet'
+          id:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          isDefaultSource:
+            type: boolean
+            description: Indicates whether this payment method is the default source for the entity
+          isDefaultDestination:
+            type: boolean
+            description: Indicates whether this payment method is the default destination for the entity
+          supportedCurrencies:
+            type: array
+            items:
+              $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          externalAccountingSystemId:
+            type: string
+            description: ID for this payment method in the external accounting system (e.g Rutter or Codat)
+          frozen:
+            type: boolean
+            description: Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+          metadata:
+            type: object
+            additionalProperties:
+              type: string
+            description: Metadata associated with this payment method.
+          confirmedByEntity:
+            type: boolean
+            description: (ALPHA, MAY BE REMOVED) Indicates whether the payment method has been verified by the entity. This is useful if another entity has added this payment method to this entity, and you want the owner of the payment method to verify it is correct.
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+          availableBalance:
+            $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+            description: The balance available for use in this wallet.
+          pendingBalance:
+            $ref: '#/components/schemas/paymentMethodTypes_WalletBalance'
+            description: The in-flight balance into/out of this wallet.
+        required:
+        - type
+        - id
+        - isDefaultSource
+        - isDefaultDestination
+        - supportedCurrencies
+        - frozen
+        - metadata
+        - createdAt
+        - updatedAt
+        - availableBalance
+        - pendingBalance
+      discriminator:
+        propertyName: type
+      title: PaymentMethodResponse
+    paymentMethodTypes_PaymentMethodId:
+      type: string
+      title: PaymentMethodId
+    entityTypes_ProfileResponse:
+      type: object
+      properties:
+        business:
+          $ref: '#/components/schemas/entityTypes_BusinessProfileResponse'
+          description: Will be set if the entity is a business
+        individual:
+          $ref: '#/components/schemas/entityTypes_IndividualProfileResponse'
+          description: Will be set if the entity is a individual
+      title: ProfileResponse
+    entityTypes_BusinessType:
+      type: string
+      enum:
+      - soleProprietorship
+      - unincorporatedAssociation
+      - trust
+      - publicCorporation
+      - privateCorporation
+      - llc
+      - partnership
+      - unincorporatedNonProfit
+      - incorporatedNonProfit
+      title: BusinessType
+    paymentMethodTypes_CustomPaymentMethodSchemaFieldType:
+      type: string
+      enum:
+      - text
+      - number
+      - select
+      - date
+      - phone
+      - email
+      - url
+      - dynamicUrl
+      - embeddedUrl
+      - address
+      - usBankRoutingNumber
+      - usBankAccountNumber
+      title: CustomPaymentMethodSchemaFieldType
+    commons_FullName:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        suffix:
+          type: string
+      required:
+      - firstName
+      - lastName
+      title: FullName
+    paymentMethodTypes_CurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - CNY
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      title: CurrencyCode
   securitySchemes:
-    bearerAuth:
+    default:
       type: http
       scheme: bearer
-      bearerFormat: token
-      description: 'Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
-
-        are issued from the Mercoa Dashboard and are backend-only. JWTs scope
-
-        access to an entity or entity group.
-
-        '

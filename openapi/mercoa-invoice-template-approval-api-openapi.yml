@@ -1,0 +1,455 @@
+openapi: 3.2.0
+info:
+  title: Reference invoice-template > approval API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: invoice-template > approval
+paths:
+  /invoice-template/{invoiceTemplateId}/add-approver:
+    post:
+      operationId: invoiceTemplate_approval_addApprover
+      summary: Add Approver
+      description: Adds an approver to the invoice template. Will select the first available approver slot that is not already filled and assign the approver to it. If no approver slots are available, an error will be returned. An explicit approver slot can be specified by setting the `approverSlot` field.
+      tags:
+      - invoice-template > approval
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoiceTypes_AddApproverRequest'
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/approve:
+    post:
+      operationId: invoiceTemplate_approval_approve
+      summary: Approve
+      tags:
+      - invoice-template > approval
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoiceTypes_ApprovalRequest'
+      security:
+      - default: []
+  /invoice-template/{invoiceTemplateId}/reject:
+    post:
+      operationId: invoiceTemplate_approval_reject
+      summary: Reject
+      tags:
+      - invoice-template > approval
+      parameters:
+      - name: invoiceTemplateId
+        in: path
+        description: Invoice Template ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceTemplateId'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoiceTypes_ApprovalRequest'
+      security:
+      - default: []
+components:
+  schemas:
+    invoiceTypes_ApprovalSlotId:
+      type: string
+      title: ApprovalSlotId
+    entityTypes_EntityUserId:
+      type: string
+      title: EntityUserId
+    invoiceTypes_ApprovalRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Comment associated with this approval action.
+        userId:
+          $ref: '#/components/schemas/entityTypes_EntityUserId'
+          description: The ID or the Foreign ID of the user
+      required:
+      - userId
+      title: ApprovalRequest
+    invoiceTypes_AddApproverRequest:
+      type: object
+      properties:
+        approvalSlotId:
+          $ref: '#/components/schemas/invoiceTypes_ApprovalSlotId'
+          description: The identifier for the approval slot this user is assigned to.
+        userId:
+          $ref: '#/components/schemas/entityTypes_EntityUserId'
+          description: The ID or the Foreign ID of the user to add to the approval slot.
+      required:
+      - userId
+      title: AddApproverRequest
+    invoiceTypes_InvoiceTemplateId:
+      type: string
+      title: InvoiceTemplateId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,56 +1,1877 @@
 openapi: 3.2.0
 info:
-  title: Mercoa Organization API
-  description: 'The Mercoa REST API powers embedded accounts payable and accounts receivable
-
-    workflows inside vertical SaaS platforms. This spec is a curated subset of
-
-    the canonical Mercoa OpenAPI document
-
-    (https://github.com/mercoa-finance/openapi). All requests authenticate with
-
-    a Bearer token (API key or JWT) in the Authorization header.'
-  version: '1.0'
-  contact:
-    name: Mercoa
-    url: https://docs.mercoa.com/
+  title: Reference Organization API
+  version: 1.0.0
 servers:
 - url: https://api.mercoa.com
   description: Production
-security:
-- bearerAuth: []
 tags:
 - name: Organization
 paths:
   /organization:
     get:
+      operationId: organization_get
+      summary: Get
+      description: Get current organization information
       tags:
       - Organization
-      summary: Get organization
+      parameters:
+      - name: paymentMethods
+        in: query
+        description: include supported payment methods in response
+        required: false
+        schema:
+          type: boolean
+      - name: emailProvider
+        in: query
+        description: include email provider info in response
+        required: false
+        schema:
+          type: boolean
+      - name: externalAccountingSystemProvider
+        in: query
+        description: include external accounting system provider info in response
+        required: false
+        schema:
+          type: boolean
+      - name: colorScheme
+        in: query
+        description: include color scheme info in response
+        required: false
+        schema:
+          type: boolean
+      - name: payeeOnboardingOptions
+        in: query
+        description: include payee onboarding options in response
+        required: false
+        schema:
+          type: boolean
+      - name: payorOnboardingOptions
+        in: query
+        description: include payor onboarding options in response
+        required: false
+        schema:
+          type: boolean
+      - name: metadataSchema
+        in: query
+        description: include metadata schema in response
+        required: false
+        schema:
+          type: boolean
+      - name: notificationEmailTemplate
+        in: query
+        description: include notification-email-template in response
+        required: false
+        schema:
+          type: boolean
+      - name: rolePermissions
+        in: query
+        description: include role permission config in response
+        required: false
+        schema:
+          type: boolean
+      - name: customDomains
+        in: query
+        description: include custom domains in response
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
-          description: Organization
-      operationId: getOrganization
-      x-operation-id-source: derived
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizationTypes_OrganizationResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
     post:
+      operationId: organization_update
+      summary: Update
+      description: Update current organization
       tags:
       - Organization
-      summary: Update organization
       responses:
         '200':
-          description: Updated
-      operationId: postOrganization
-      x-operation-id-source: derived
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizationTypes_OrganizationResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organizationTypes_OrganizationRequest'
+      security:
+      - default: []
+  /organization/emailLog:
+    get:
+      operationId: organization_emailLog
+      summary: Email Log
+      description: Get log of all emails sent to this organization. Content format subject to change.
+      tags:
+      - Organization
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: from
+        in: query
+        description: Filter by sender email address
+        required: false
+        schema:
+          type: string
+      - name: to
+        in: query
+        description: Filter by recipient email address
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of logs to return. Limit can range between 1 and 100, and the default is 10.
+        required: false
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        description: The ID of the log to start after. If not provided, the first page of logs will be returned.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/emailLogTypes_EmailLogResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+  /organization/invalidateTokens:
+    post:
+      operationId: organization_invalidateTokens
+      summary: Invalidate Tokens
+      description: Invalidate all JWT tokens for the current organization. This is considered a break-glass action and should be used only if tokens have been compromised. All tokens will be invalidated, including tokens on links, emails, and currently logged in sessions. API keys are not affected by this action. This action may take 60 seconds to propagate.
+      tags:
+      - Organization
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionId:
+                  type: array
+                  items:
+                    type: string
+                  description: Optional list of session IDs to invalidate. If not provided, all sessions will be invalidated.
+      security:
+      - default: []
 components:
+  schemas:
+    emailLogTypes_IncomingEmailLogStatus:
+      type: string
+      enum:
+      - PENDING
+      - PROCESSED
+      - FAILED
+      title: IncomingEmailLogStatus
+    organizationTypes_BusinessOnboardingOptionsResponse:
+      type: object
+      properties:
+        termsOfService:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        email:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        name:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        address:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        phone:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        tenNinetyNine:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        w9:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        bankStatement:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        type:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        doingBusinessAs:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        ein:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        mcc:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        formationDate:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        website:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        description:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        representatives:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        logo:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        averageTransactionSize:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        averageMonthlyTransactionVolume:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        maxTransactionSize:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+      required:
+      - termsOfService
+      - email
+      - name
+      - address
+      - phone
+      - tenNinetyNine
+      - w9
+      - bankStatement
+      - type
+      - doingBusinessAs
+      - ein
+      - mcc
+      - formationDate
+      - website
+      - description
+      - representatives
+      - logo
+      - averageTransactionSize
+      - averageMonthlyTransactionVolume
+      - maxTransactionSize
+      title: BusinessOnboardingOptionsResponse
+    organizationTypes_PaymentRailResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+          availableDeliveryMethods:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+          defaultDeliveryMethod:
+            $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+        required:
+        - type
+        - name
+        - active
+        - availableDeliveryMethods
+        - defaultDeliveryMethod
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - card
+            description: 'Discriminator value: card'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - virtualCard
+            description: 'Discriminator value: virtualCard'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+          availableDeliveryMethods:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+          defaultDeliveryMethod:
+            $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+          printDescription:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+        - availableDeliveryMethods
+        - defaultDeliveryMethod
+        - printDescription
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+          schemaId:
+            type: string
+        required:
+        - type
+        - name
+        - active
+        - schemaId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bnpl
+            description: 'Discriminator value: bnpl'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - na
+            description: 'Discriminator value: na'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - wallet
+            description: 'Discriminator value: wallet'
+          name:
+            type: string
+            description: unused
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - name
+        - active
+      discriminator:
+        propertyName: type
+      title: PaymentRailResponse
+    organizationTypes_EmailProviderRequest:
+      type: object
+      properties:
+        sender:
+          $ref: '#/components/schemas/organizationTypes_EmailSenderRequest'
+        inboxDomain:
+          type: string
+        alternativeInboxDomains:
+          type: array
+          items:
+            type: string
+      required:
+      - sender
+      - inboxDomain
+      title: EmailProviderRequest
+    organizationTypes_ColorSchemeRequest:
+      type: object
+      properties:
+        primaryColor:
+          type: string
+        secondaryColor:
+          type: string
+        logoBackgroundColor:
+          type: string
+        roundedCorners:
+          type: integer
+        fontFamily:
+          type: string
+        fontSize:
+          type: string
+      title: ColorSchemeRequest
+    organizationTypes_PaymentMethodsRequest:
+      type: object
+      properties:
+        payerPayments:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_PaymentRailRequest'
+          description: List of payment methods that can be used to pay invoices.
+        backupDisbursements:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_PaymentRailRequest'
+          description: List of payment methods that can be created by a payor to send disbursements.
+        vendorDisbursements:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_PaymentRailRequest'
+          description: List of payment methods that can be created by a payee to receive disbursements.
+      required:
+      - payerPayments
+      - backupDisbursements
+      - vendorDisbursements
+      title: PaymentMethodsRequest
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    emailLogTypes_EmailLog:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/emailLogTypes_EmailLogId'
+        status:
+          $ref: '#/components/schemas/emailLogTypes_IncomingEmailLogStatus'
+          description: The status of the email log. If the status is PENDING, the email has not been processed yet. If the status is PROCESSED, the email has been processed and the invoice has been created. If the status is FAILED, the email was not processed due to an error.
+        subject:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        htmlBody:
+          type: string
+        textBody:
+          type: string
+        attachment:
+          $ref: '#/components/schemas/emailLogTypes_EmailLogAttachment'
+        createdAt:
+          type: string
+          format: date-time
+        invoiceId:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      required:
+      - id
+      - status
+      - subject
+      - from
+      - to
+      - htmlBody
+      - textBody
+      - createdAt
+      title: EmailLog
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    organizationTypes_PaymentRailRequest:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+          availableDeliveryMethods:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+          defaultDeliveryMethod:
+            $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - card
+            description: 'Discriminator value: card'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - virtualCard
+            description: 'Discriminator value: virtualCard'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+          availableDeliveryMethods:
+            type: array
+            items:
+              $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+          defaultDeliveryMethod:
+            $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+          printDescription:
+            type: boolean
+            description: If true, invoices default to printing the invoice description (noteToSelf) on the check note.
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+          schemaId:
+            type: string
+        required:
+        - type
+        - active
+        - schemaId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bnpl
+            description: 'Discriminator value: bnpl'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offPlatform
+            description: 'Discriminator value: offPlatform'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - na
+            description: 'Discriminator value: na'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - wallet
+            description: 'Discriminator value: wallet'
+          name:
+            type: string
+            deprecated: true
+          active:
+            type: boolean
+        required:
+        - type
+        - active
+      discriminator:
+        propertyName: type
+      title: PaymentRailRequest
+    organizationTypes_NotificationEmailTemplateRequest:
+      type: object
+      properties:
+        backgroundStyle:
+          type: string
+        header:
+          type: string
+        body:
+          type: string
+        signature:
+          type: string
+        footer:
+          type: string
+        button:
+          type: string
+      title: NotificationEmailTemplateRequest
+    organizationTypes_PaymentMethodsResponse:
+      type: object
+      properties:
+        payerPayments:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_PaymentRailResponse'
+          description: List of payment methods that can be used to pay invoices.
+        backupDisbursements:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_PaymentRailResponse'
+          description: List of payment methods that can be created by a payor to send disbursements.
+        vendorDisbursements:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_PaymentRailResponse'
+          description: List of payment methods that can be created by a payee to receive disbursements.
+      required:
+      - payerPayments
+      - backupDisbursements
+      - vendorDisbursements
+      title: PaymentMethodsResponse
+    organizationTypes_MetadataOcrRules:
+      type: object
+      properties:
+        extractFromDocument:
+          type: boolean
+          description: Attempt to extract this field from reading the document. Only applicable to line item metadata fields. Defaults to false.
+        predictFromHistory:
+          type: boolean
+          description: Attempt to predict this field from historical invoice metadata. Only applicable to line item metadata fields. Defaults to true.
+      title: MetadataOcrRules
+    organizationTypes_EmailProviderResponse:
+      type: object
+      properties:
+        sender:
+          $ref: '#/components/schemas/organizationTypes_EmailSenderResponse'
+        inboxDomain:
+          type: string
+        alternativeInboxDomains:
+          type: array
+          items:
+            type: string
+      required:
+      - sender
+      - inboxDomain
+      - alternativeInboxDomains
+      title: EmailProviderResponse
+    organizationTypes_ExternalAccountingSystemProviderResponse:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - none
+            description: 'Discriminator value: none'
+          hasApiKey:
+            type: boolean
+        required:
+        - type
+        - hasApiKey
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - codat
+            description: 'Discriminator value: codat'
+          hasApiKey:
+            type: boolean
+        required:
+        - type
+        - hasApiKey
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - rutter
+            description: 'Discriminator value: rutter'
+          hasClientId:
+            type: boolean
+          hasClientSecret:
+            type: boolean
+        required:
+        - type
+        - hasClientId
+        - hasClientSecret
+      discriminator:
+        propertyName: type
+      title: ExternalAccountingSystemProviderResponse
+    organizationTypes_Permission:
+      type: string
+      enum:
+      - invoice.all
+      - invoice.view.all
+      - invoice.view.draft
+      - invoice.view.new
+      - invoice.view.approved
+      - invoice.view.scheduled
+      - invoice.view.pending
+      - invoice.view.paid
+      - invoice.view.archived
+      - invoice.view.refused
+      - invoice.view.canceled
+      - invoice.view.failed
+      - invoice.create.all
+      - invoice.create.draft
+      - invoice.create.new
+      - invoice.create.approved
+      - invoice.create.scheduled
+      - invoice.create.archived
+      - invoice.create.cancel
+      - invoice.update.all
+      - invoice.update.draft
+      - invoice.update.new
+      - invoice.update.approved
+      - invoice.update.scheduled
+      - invoice.update.archived
+      - invoice.update.cancel
+      - invoice.delete
+      - invoice.comment.view
+      - invoice.comment.create
+      - invoice.approver.override
+      - invoice.check.print
+      - paymentMethod.all
+      - paymentMethod.view
+      - paymentMethod.create
+      - paymentMethod.update
+      - paymentMethod.delete
+      title: Permission
+    organizationTypes_EmailSenderRequest:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/organizationTypes_EmailSenderProvider'
+        fromEmail:
+          type: string
+        fromName:
+          type: string
+        apiKey:
+          type: string
+        useSmartReplyTo:
+          type: boolean
+      required:
+      - provider
+      - fromEmail
+      - fromName
+      title: EmailSenderRequest
+    organizationTypes_EmailSenderResponse:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/organizationTypes_EmailSenderProvider'
+        fromEmail:
+          type: string
+        fromName:
+          type: string
+        hasApiKey:
+          type: boolean
+        useSmartReplyTo:
+          type: boolean
+      required:
+      - provider
+      - fromEmail
+      - fromName
+      - hasApiKey
+      title: EmailSenderResponse
+    organizationTypes_OrganizationResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/organizationTypes_OrganizationId'
+        sandbox:
+          type: boolean
+        name:
+          type: string
+        logoUrl:
+          type: string
+        faviconUrl:
+          type: string
+        websiteUrl:
+          type: string
+        supportEmail:
+          type: string
+        paymentMethods:
+          $ref: '#/components/schemas/organizationTypes_PaymentMethodsResponse'
+        emailProvider:
+          $ref: '#/components/schemas/organizationTypes_EmailProviderResponse'
+        externalAccountingSystemProvider:
+          $ref: '#/components/schemas/organizationTypes_ExternalAccountingSystemProviderResponse'
+        colorScheme:
+          $ref: '#/components/schemas/organizationTypes_ColorSchemeResponse'
+        payeeOnboardingOptions:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionsResponse'
+        payorOnboardingOptions:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionsResponse'
+        metadataSchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_MetadataSchema'
+        notificationEmailTemplate:
+          $ref: '#/components/schemas/organizationTypes_NotificationEmailTemplateResponse'
+        customDomains:
+          type: array
+          items:
+            type: string
+        organizationEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+        rolePermissions:
+          $ref: '#/components/schemas/organizationTypes_RolePermissionResponse'
+        notificationsDisabled:
+          type: boolean
+      required:
+      - id
+      - sandbox
+      - name
+      title: OrganizationResponse
+    invoiceTypes_CheckDeliveryMethod:
+      type: string
+      enum:
+      - PRINT
+      - MAIL
+      - MAIL_PRIORITY
+      - MAIL_UPS_NEXT_DAY
+      title: CheckDeliveryMethod
+    organizationTypes_OnboardingOptionRequest:
+      type: object
+      properties:
+        show:
+          type: boolean
+        edit:
+          type: boolean
+        required:
+          type: boolean
+      description: How this field will be shown on the onboarding page.  If `show`, `edit`, or `required` are not specified, they will default to `false`. Note that `required` implies `edit`, and `edit` implies `show`.
+      title: OnboardingOptionRequest
+    organizationTypes_RolePermissionResponse:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/organizationTypes_Permission'
+      title: RolePermissionResponse
+    organizationTypes_OnboardingOptionsRequest:
+      type: object
+      properties:
+        enableBusiness:
+          type: boolean
+        enableIndividual:
+          type: boolean
+        paymentMethod:
+          type: boolean
+        business:
+          $ref: '#/components/schemas/organizationTypes_BusinessOnboardingOptionsRequest'
+        individual:
+          $ref: '#/components/schemas/organizationTypes_IndividualOnboardingOptionsRequest'
+      title: OnboardingOptionsRequest
+    paymentMethodTypes_PaymentMethodType:
+      type: string
+      enum:
+      - custom
+      - check
+      - bankAccount
+      - na
+      - card
+      - bnpl
+      - virtualCard
+      - offPlatform
+      - utility
+      - wallet
+      title: PaymentMethodType
+    organizationTypes_MetadataShowConditions:
+      type: object
+      properties:
+        alwaysHide:
+          type: boolean
+          description: Always hide this field. Useful for getting data from OCR and AI predictions that you don't want to show in the UI.
+        hasOptions:
+          type: boolean
+          description: Show this field only if the entity has values set for the metadata key.
+        hasDocument:
+          type: boolean
+          description: Show this field only if a document has been attached.
+        hasNoLineItems:
+          type: boolean
+          description: Show this field only if the invoice has no line items. Useful for showing a field that applies to the entire invoice but overridden by line items if present.
+        paymentSourceTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodType'
+          description: Show this field only if the payment source type is in this list.
+        paymentSourceCustomSchemaIds:
+          type: array
+          items:
+            type: string
+          description: Show this field only if the payment source schema ID is in this list of payment source schema IDs. This is only applicable if paymentSourceTypes contains CUSTOM.
+        paymentDestinationTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodType'
+          description: Show this field only if the payment destination type is in this list.
+        paymentDestinationCustomSchemaIds:
+          type: array
+          items:
+            type: string
+          description: Show this field only if the payment destination schema ID is in this list of payment destination schema IDs. This is only applicable if paymentDestinationTypes contains CUSTOM.
+      title: MetadataShowConditions
+    organizationTypes_RolePermissionRequest:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/organizationTypes_Permission'
+      title: RolePermissionRequest
+    organizationTypes_BusinessOnboardingOptionsRequest:
+      type: object
+      properties:
+        termsOfService:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        email:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        name:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        address:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        phone:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        tenNinetyNine:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        w9:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        bankStatement:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        type:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        doingBusinessAs:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        ein:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        mcc:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        formationDate:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        website:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        description:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        representatives:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        logo:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        averageTransactionSize:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        averageMonthlyTransactionVolume:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        maxTransactionSize:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+      title: BusinessOnboardingOptionsRequest
+    organizationTypes_MetadataSchema:
+      type: object
+      properties:
+        key:
+          type: string
+        displayName:
+          type: string
+        description:
+          type: string
+        lineItem:
+          type: boolean
+          description: Whether or not this field should be shown on line items. If true, this field will be shown on each line item. If false, the field will be shown on the invoice level. Defaults to false.
+        type:
+          $ref: '#/components/schemas/organizationTypes_MetadataType'
+        allowMultiple:
+          type: boolean
+          description: Whether or not multiple values are allowed for this field. Defaults to false. If true, the value will be a list of the specified type.
+        validationRules:
+          $ref: '#/components/schemas/organizationTypes_MetadataValidationRule'
+          description: Validation rules are currently only supported for STRING types.
+        showConditions:
+          $ref: '#/components/schemas/organizationTypes_MetadataShowConditions'
+          description: A list of conditional rules that determine whether or not this field should be shown. The field will only be shown if all of the conditions are met. If no conditions are specified, the field will always be shown.
+        ocrRules:
+          $ref: '#/components/schemas/organizationTypes_MetadataOcrRules'
+          description: A collection of rules that determine how this field is populated during OCR.
+      required:
+      - key
+      - displayName
+      - type
+      title: MetadataSchema
+    invoiceTypes_BankDeliveryMethod:
+      type: string
+      enum:
+      - ACH_STANDARD
+      - ACH_SAME_DAY
+      - ACH_ACCELERATED
+      title: BankDeliveryMethod
+    emailLogTypes_EmailLogId:
+      type: string
+      title: EmailLogId
+    organizationTypes_OnboardingOptionsResponse:
+      type: object
+      properties:
+        enableBusiness:
+          type: boolean
+        enableIndividual:
+          type: boolean
+        paymentMethod:
+          type: boolean
+        business:
+          $ref: '#/components/schemas/organizationTypes_BusinessOnboardingOptionsResponse'
+        individual:
+          $ref: '#/components/schemas/organizationTypes_IndividualOnboardingOptionsResponse'
+      required:
+      - enableBusiness
+      - enableIndividual
+      - paymentMethod
+      - business
+      - individual
+      title: OnboardingOptionsResponse
+    emailLogTypes_EmailLogAttachment:
+      type: object
+      properties:
+        filename:
+          type: string
+        contentType:
+          type: string
+      required:
+      - filename
+      - contentType
+      title: EmailLogAttachment
+    organizationTypes_EmailSenderProvider:
+      type: string
+      enum:
+      - none
+      - sendgrid
+      - ses
+      - resend
+      - cloudmailin
+      title: EmailSenderProvider
+    organizationTypes_MetadataType:
+      type: string
+      enum:
+      - STRING
+      - NUMBER
+      - DATE
+      - BOOLEAN
+      - KEY_VALUE
+      title: MetadataType
+    emailLogTypes_EmailLogResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of logs for the given filters. This value is not limited by the limit parameter. It is provided so that you can determine how many pages of results are available.
+        hasMore:
+          type: boolean
+          description: True if there are more logs available for the given filters.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/emailLogTypes_EmailLog'
+      required:
+      - count
+      - hasMore
+      - data
+      title: EmailLogResponse
+    organizationTypes_ExternalAccountingSystemProviderRequest:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - none
+            description: 'Discriminator value: none'
+          apiKey:
+            type: string
+        required:
+        - type
+        - apiKey
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - codat
+            description: 'Discriminator value: codat'
+          apiKey:
+            type: string
+        required:
+        - type
+        - apiKey
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - rutter
+            description: 'Discriminator value: rutter'
+          clientId:
+            type: string
+          clientSecret:
+            type: string
+        required:
+        - type
+        - clientId
+        - clientSecret
+      discriminator:
+        propertyName: type
+      title: ExternalAccountingSystemProviderRequest
+    organizationTypes_IndividualOnboardingOptionsResponse:
+      type: object
+      properties:
+        termsOfService:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        email:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        name:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        address:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        phone:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        tenNinetyNine:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        w9:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        bankStatement:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        dateOfBirth:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+        ssn:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionResponse'
+      required:
+      - termsOfService
+      - email
+      - name
+      - address
+      - phone
+      - tenNinetyNine
+      - w9
+      - bankStatement
+      - dateOfBirth
+      - ssn
+      title: IndividualOnboardingOptionsResponse
+    organizationTypes_MetadataValidationRule:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - regex
+            description: 'Discriminator value: regex'
+          regex:
+            type: string
+            description: A regular expression that the value must match.
+          errorMessage:
+            type: string
+            description: The error message to display if the value does not match the regular expression.
+        required:
+        - type
+        - regex
+        - errorMessage
+      discriminator:
+        propertyName: type
+      title: MetadataValidationRule
+    organizationTypes_OrganizationRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        logo:
+          type: string
+          description: Base64 encoded logo image.
+        favicon:
+          type: string
+          description: Base64 encoded favicon image.
+        websiteUrl:
+          type: string
+        supportEmail:
+          type: string
+        paymentMethods:
+          $ref: '#/components/schemas/organizationTypes_PaymentMethodsRequest'
+        emailProvider:
+          $ref: '#/components/schemas/organizationTypes_EmailProviderRequest'
+        externalAccountingSystemProvider:
+          $ref: '#/components/schemas/organizationTypes_ExternalAccountingSystemProviderRequest'
+        colorScheme:
+          $ref: '#/components/schemas/organizationTypes_ColorSchemeRequest'
+        payeeOnboardingOptions:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionsRequest'
+        payorOnboardingOptions:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionsRequest'
+        metadataSchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationTypes_MetadataSchema'
+        notificationEmailTemplate:
+          $ref: '#/components/schemas/organizationTypes_NotificationEmailTemplateRequest'
+        customDomains:
+          type: array
+          items:
+            type: string
+        rolePermissions:
+          $ref: '#/components/schemas/organizationTypes_RolePermissionRequest'
+        notificationsDisabled:
+          type: boolean
+          description: If true, all notifications for this organization will be disabled.
+      title: OrganizationRequest
+    organizationTypes_ColorSchemeResponse:
+      type: object
+      properties:
+        primaryColor:
+          type: string
+        secondaryColor:
+          type: string
+        logoBackgroundColor:
+          type: string
+        roundedCorners:
+          type: integer
+        fontFamily:
+          type: string
+        fontSize:
+          type: string
+      title: ColorSchemeResponse
+    organizationTypes_NotificationEmailTemplateResponse:
+      type: object
+      properties:
+        backgroundStyle:
+          type: string
+        header:
+          type: string
+        body:
+          type: string
+        signature:
+          type: string
+        footer:
+          type: string
+        button:
+          type: string
+      title: NotificationEmailTemplateResponse
+    organizationTypes_OnboardingOptionResponse:
+      type: object
+      properties:
+        show:
+          type: boolean
+        edit:
+          type: boolean
+        required:
+          type: boolean
+      required:
+      - show
+      - edit
+      - required
+      description: How this field will be shown on the onboarding page. Note that `required` implies `edit`, and `edit` implies `show`.
+      title: OnboardingOptionResponse
+    organizationTypes_OrganizationId:
+      type: string
+      title: OrganizationId
+    organizationTypes_IndividualOnboardingOptionsRequest:
+      type: object
+      properties:
+        termsOfService:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        email:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        name:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        address:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        phone:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        tenNinetyNine:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        w9:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        bankStatement:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        dateOfBirth:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+        ssn:
+          $ref: '#/components/schemas/organizationTypes_OnboardingOptionRequest'
+      title: IndividualOnboardingOptionsRequest
   securitySchemes:
-    bearerAuth:
+    default:
       type: http
       scheme: bearer
-      bearerFormat: token
-      description: 'Mercoa API key or JWT. Send as "Authorization: Bearer {token}". API keys
-
-        are issued from the Mercoa Dashboard and are backend-only. JWTs scope
-
-        access to an entity or entity group.
-
-        '

@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.mercoa.com/openapi/api-reference-2.yaml",
+ "final": "https://docs.mercoa.com/openapi/api-reference-2.yaml",
+ "status": 200,
+ "content_type": "application/x-yaml; charset=utf-8",
+ "bytes": 1307034,
+ "sha256": "00a8e403ae189f6171bdc9144294a877c6148eed894bd930d7584e985bec14e6",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

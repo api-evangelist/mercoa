@@ -1,0 +1,605 @@
+openapi: 3.2.0
+info:
+  title: Reference invoice > bnpl API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: invoice > bnpl
+paths:
+  /invoice/{invoiceId}/bnpl/offer:
+    post:
+      operationId: invoice_bnpl_offer
+      summary: Get BNPL Offer
+      description: Get a BNPL offer for an invoice
+      tags:
+      - invoice > bnpl
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice ID or Invoice ForeignID
+        required: true
+        schema:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceTypes_BnplOfferResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoiceTypes_BnplOfferRequest'
+      security:
+      - default: []
+  /bnpl/loan/{loanId}:
+    get:
+      operationId: invoice_bnpl_loan
+      summary: Get BNPL Loan
+      description: Get information about a specific BNPL loan by loan ID
+      tags:
+      - invoice > bnpl
+      parameters:
+      - name: loanId
+        in: path
+        description: The ID of the loan to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceTypes_BnplLoanResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      security:
+      - default: []
+components:
+  schemas:
+    invoiceTypes_BnplLoanStatus:
+      type: string
+      enum:
+      - PENDING
+      - ACTIVE
+      - PAID_OFF
+      - DELINQUENT
+      title: BnplLoanStatus
+    invoiceTypes_BnplOfferRequest:
+      type: object
+      properties:
+        cadence:
+          $ref: '#/components/schemas/invoiceTypes_BnplCadence'
+          description: The payment cadence for the BNPL offer
+        installmentsStartDate:
+          type: string
+          description: The start date for installments in YYYY-MM-DD format
+        numberOfInstallments:
+          type: integer
+          description: The number of installments
+        paymentDayOfWeek:
+          $ref: '#/components/schemas/invoiceTypes_BnplDayOfWeek'
+          description: The day of the week for payments
+        downPaymentDueDate:
+          type: string
+          description: The due date for the down payment in YYYY-MM-DD format
+      required:
+      - cadence
+      - installmentsStartDate
+      - numberOfInstallments
+      - paymentDayOfWeek
+      - downPaymentDueDate
+      title: BnplOfferRequest
+    invoiceTypes_BnplInstallment:
+      type: object
+      properties:
+        number:
+          type: integer
+        dueDate:
+          type: string
+        amount:
+          type: integer
+        type:
+          $ref: '#/components/schemas/invoiceTypes_BnplInstallmentType'
+      required:
+      - number
+      - dueDate
+      - amount
+      - type
+      title: BnplInstallment
+    invoiceTypes_BnplOfferResponse:
+      type: object
+      properties:
+        invoiceAmount:
+          type: integer
+          description: The total amount of the invoice in cents.
+        totalRepaymentAmount:
+          type: integer
+          description: Total amount to be repaid, including fees. In cents.
+        currency:
+          type: string
+          description: The currency code for the amount
+        downPaymentAmount:
+          type: integer
+          description: The down payment amount in cents
+        numberOfPayments:
+          type: integer
+          description: The number of payments/installments
+        firstPaymentDate:
+          type: string
+          description: The date of the first payment in YYYY-MM-DD format
+        finalPaymentDate:
+          type: string
+          description: The date of the final payment in YYYY-MM-DD format
+        fees:
+          $ref: '#/components/schemas/invoiceTypes_BnplFees'
+          description: The fees associated with the offer
+        termsLink:
+          type: string
+          description: A link to the terms and conditions for the offer
+        installments:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_BnplInstallment'
+          description: A list of all installments, including down payment.
+        paymentDayOfWeek:
+          $ref: '#/components/schemas/invoiceTypes_BnplDayOfWeek'
+          description: The day of the week for payments, e.g. "Wednesday"
+        installmentAmount:
+          type: integer
+          description: The amount for each regular installment. The last installment may have a different amount. In cents.
+        financeFeeRate:
+          type: string
+          description: e.g. "1.5% per 28 days"
+      required:
+      - invoiceAmount
+      - totalRepaymentAmount
+      - currency
+      - downPaymentAmount
+      - numberOfPayments
+      - firstPaymentDate
+      - finalPaymentDate
+      - fees
+      - installments
+      - paymentDayOfWeek
+      - installmentAmount
+      - financeFeeRate
+      title: BnplOfferResponse
+    invoiceTypes_BnplLoanResponse:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The unique identifier for the loan
+        businessExternalId:
+          type: string
+          description: The external ID of the business entity
+        dueDate:
+          type: integer
+          description: The final due date as timestamp in milliseconds
+        originalPrincipalBalance:
+          type: integer
+          description: The original principal balance in cents
+        drawDate:
+          type: integer
+          description: The date the loan was drawn as timestamp in milliseconds
+        repaidAmount:
+          type: integer
+          description: The total amount repaid in cents
+        paymentMethodId:
+          type: string
+          description: The ID of the payment method used
+        repaymentMethodId:
+          type: string
+          description: The ID of the repayment method
+        status:
+          $ref: '#/components/schemas/invoiceTypes_BnplLoanStatus'
+          description: The current status of the loan
+        outstandingBalance:
+          $ref: '#/components/schemas/invoiceTypes_BnplOutstandingBalance'
+          description: The current outstanding balance breakdown
+        termsAgreementFile:
+          type: string
+          description: URL to the terms agreement file
+        invoiceUrl:
+          type: string
+          description: URL to the invoice PDF
+        invoiceAmount:
+          type: integer
+          description: The original invoice amount in cents
+        invoiceExternalId:
+          type: string
+          description: The external ID of the associated invoice
+        invoiceDueDate:
+          type: integer
+          description: The original invoice due date as timestamp in milliseconds
+        downPaymentAmount:
+          type: integer
+          description: The down payment amount in cents
+        installments:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceTypes_BnplLoanInstallment'
+          description: List of all installments for this loan
+        cadence:
+          $ref: '#/components/schemas/invoiceTypes_BnplCadence'
+          description: The payment cadence for the loan
+        baseFeeRate:
+          type: number
+          format: double
+          description: The base fee rate as a percentage
+      required:
+      - loanId
+      - businessExternalId
+      - dueDate
+      - originalPrincipalBalance
+      - drawDate
+      - repaidAmount
+      - paymentMethodId
+      - repaymentMethodId
+      - status
+      - outstandingBalance
+      - invoiceAmount
+      - invoiceExternalId
+      - invoiceDueDate
+      - downPaymentAmount
+      - installments
+      - cadence
+      - baseFeeRate
+      title: BnplLoanResponse
+    invoiceTypes_BnplLoanInstallment:
+      type: object
+      properties:
+        number:
+          type: integer
+          description: Installment number (0 for down payment)
+        startDate:
+          type: integer
+          description: Start date as timestamp in milliseconds
+        dueDate:
+          type: integer
+          description: Due date as timestamp in milliseconds
+        maturityDate:
+          type: integer
+          description: Maturity date as timestamp in milliseconds
+        outstandingBalance:
+          type: integer
+          description: Outstanding balance for this installment in cents
+        amount:
+          type: integer
+          description: Total amount for this installment in cents
+        status:
+          $ref: '#/components/schemas/invoiceTypes_BnplLoanStatus'
+          description: Status of this installment
+        type:
+          $ref: '#/components/schemas/invoiceTypes_BnplInstallmentType'
+          description: Type of installment
+        totalPaid:
+          $ref: '#/components/schemas/invoiceTypes_BnplInstallmentTotalPaid'
+          description: Total amounts paid for this installment
+      required:
+      - number
+      - startDate
+      - dueDate
+      - maturityDate
+      - outstandingBalance
+      - amount
+      - status
+      - type
+      - totalPaid
+      title: BnplLoanInstallment
+    invoiceTypes_BnplInstallmentTotalPaid:
+      type: object
+      properties:
+        principalBalance:
+          type: integer
+          description: Total principal paid in cents
+        dueInterest:
+          type: integer
+          description: Total interest paid in cents
+        totalLateFees:
+          type: integer
+          description: Total late fees paid in cents
+        feeAmount:
+          type: integer
+          description: Total fees paid in cents
+      required:
+      - principalBalance
+      - dueInterest
+      - totalLateFees
+      - feeAmount
+      title: BnplInstallmentTotalPaid
+    invoiceTypes_BnplDayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      title: BnplDayOfWeek
+    invoiceTypes_BnplInstallmentType:
+      type: string
+      enum:
+      - DOWN_PAYMENT
+      - REGULAR
+      title: BnplInstallmentType
+    invoiceTypes_BnplFees:
+      type: object
+      properties:
+        baseFeeAmount:
+          type: integer
+          description: Total fees in cents
+        baseFeePercentage:
+          type: number
+          format: double
+          description: Fee percentage as a decimal (e.g., 1.4 for 1.4%)
+      required:
+      - baseFeeAmount
+      - baseFeePercentage
+      title: BnplFees
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    invoiceTypes_BnplCadence:
+      type: string
+      enum:
+      - WEEKLY
+      - BIWEEKLY
+      - MONTHLY
+      title: BnplCadence
+    invoiceTypes_BnplOutstandingBalance:
+      type: object
+      properties:
+        principalBalance:
+          type: integer
+          description: Outstanding principal balance in cents
+        feeBalance:
+          type: integer
+          description: Outstanding fee balance in cents
+        totalBalance:
+          type: integer
+          description: Total outstanding balance in cents
+        lateFeeBalance:
+          type: integer
+          description: Outstanding late fee balance in cents
+      required:
+      - principalBalance
+      - feeBalance
+      - totalBalance
+      - lateFeeBalance
+      title: BnplOutstandingBalance
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

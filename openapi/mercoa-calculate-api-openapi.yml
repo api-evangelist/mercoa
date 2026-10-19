@@ -1,0 +1,678 @@
+openapi: 3.2.0
+info:
+  title: Reference Calculate API
+  version: 1.0.0
+servers:
+- url: https://api.mercoa.com
+  description: Production
+tags:
+- name: calculate
+paths:
+  /fees:
+    post:
+      operationId: calculate_fee
+      summary: Calculate fees
+      description: Calculate the estimated fees associated with an payment given the amount, payment source, and disbursement method. Can be used to calculate fees for a payment before creating an invoice.
+      tags:
+      - calculate
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceTypes_InvoiceFeesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/calculate_CalculateFeesRequest'
+      security:
+      - default: []
+  /paymentTiming:
+    post:
+      operationId: calculate_paymentTiming
+      summary: Calculate payment timing
+      description: Calculate the estimated payment timing given the deduction date, payment source, and disbursement method. Can be used to calculate timing for a payment.
+      tags:
+      - calculate
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calculate_CalculatePaymentTimingResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - BadRequest
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unauthorized
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Forbidden
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - NotFound
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Conflict
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - InternalServerError
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+        '501':
+          description: Error response with status 501
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorName:
+                    type: string
+                    enum:
+                    - Unimplemented
+                  content:
+                    type: string
+                required:
+                - errorName
+                - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/calculate_CalculatePaymentTimingRequest'
+      security:
+      - default: []
+components:
+  schemas:
+    invoiceTypes_InvoiceFeesResponse:
+      type: object
+      properties:
+        sourcePaymentMethodFee:
+          type: number
+          format: double
+          description: Fee charged to the platform (C1) for processing the source payment method. For example, credit card interchange and acquiring fees.
+        sourcePlatformMarkupFee:
+          type: number
+          format: double
+          description: Fee charged to the payer (C2).
+        destinationPaymentMethodFee:
+          type: number
+          format: double
+          description: Fee charged to the platform (C1) for processing the destination payment method. For example, postage for a check payment.
+        destinationPlatformMarkupFee:
+          type: number
+          format: double
+          description: Fee charged to the payee (C3).
+      required:
+      - sourcePaymentMethodFee
+      - sourcePlatformMarkupFee
+      - destinationPaymentMethodFee
+      - destinationPlatformMarkupFee
+      title: InvoiceFeesResponse
+    calculate_InvoiceTiming:
+      type: object
+      properties:
+        invoiceId:
+          $ref: '#/components/schemas/invoiceTypes_InvoiceId'
+      required:
+      - invoiceId
+      title: InvoiceTiming
+    calculate_FeeCalculationType:
+      type: string
+      enum:
+      - PAYABLE
+      - RECEIVABLE
+      description: Type of payment to calculate fees for.
+      title: FeeCalculationType
+    invoiceTypes_PaymentDestinationOptions:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - check
+            description: 'Discriminator value: check'
+          delivery:
+            $ref: '#/components/schemas/invoiceTypes_CheckDeliveryMethod'
+            description: Delivery method for check disbursements. Defaults to MAIL.
+          printDescription:
+            type: boolean
+            description: If true, prints the invoice description (noteToSelf) on the check note. Defaults to false.
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - bankAccount
+            description: 'Discriminator value: bankAccount'
+          delivery:
+            $ref: '#/components/schemas/invoiceTypes_BankDeliveryMethod'
+            description: Delivery method for ACH payments. Defaults to ACH_SAME_DAY.
+          description:
+            type: string
+            description: 'ACH Statement Description.
+
+              By default, this will be ''AP'' followed by the first 8 characters of the invoice ID (for a single invoice) or the first 8 characters of the transaction ID (for a batch payment).
+
+              Must be at least 4 characters and no more than 10 characters, and follow this regex pattern `^[a-zA-Z0-9\-#.$&* ]{4,10}$`'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - utility
+            description: 'Discriminator value: utility'
+          accountId:
+            type: string
+            description: The ID for the utility account to pay with. Links to accounts listed on payor/payee relationship.
+        required:
+        - type
+        - accountId
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - custom
+            description: 'Discriminator value: custom'
+          dynamicUrls:
+            type: object
+            additionalProperties:
+              type: string
+            description: Map of field names to dynamic URL values that will be used for dynamicUrl fields in custom payment method schemas
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: PaymentDestinationOptions
+    paymentMethodTypes_CurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - CNY
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VED
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      title: CurrencyCode
+    calculate_CalculateFeesRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Total amount in major units. If the entered amount has more decimal places than the currency supports, trailing decimals will be truncated.
+        currency:
+          $ref: '#/components/schemas/paymentMethodTypes_CurrencyCode'
+          description: Currency code for the amount. Defaults to USD.
+        creatorEntityId:
+          $ref: '#/components/schemas/entityTypes_EntityId'
+          description: ID of the entity creating the invoice. If not provided, the fees will be calculated with the default pricing for the organization.
+        paymentSourceId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          description: ID of payment source.
+        paymentDestinationId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          description: ID of payment destination.
+        paymentDestinationOptions:
+          $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          description: Options for the payment destination. Depending on the payment destination, this may include things such as check delivery method.
+        type:
+          $ref: '#/components/schemas/calculate_FeeCalculationType'
+          description: Type of payment to calculate fees for. Defaults to PAYABLE (Accounts Payable).
+      required:
+      - amount
+      - paymentSourceId
+      - paymentDestinationId
+      title: CalculateFeesRequest
+    calculate_CalculatePaymentTimingResponse:
+      type: object
+      properties:
+        estimatedProcessingDate:
+          type: string
+          format: date-time
+          description: Estimated date the payment will be or was processed.
+        businessDays:
+          type: integer
+          description: Number of business days between the estimated processing date and the estimated settlement date. This does not take into account bank holidays or weekends.
+        estimatedProcessingTime:
+          type: integer
+          description: Estimated payment time in days. This time takes into account bank holidays and weekends.
+        estimatedSettlementDate:
+          type: string
+          format: date-time
+          description: Estimated date the payment will be or was settled. This is the same as the request's deductionDate plus the paymentTiming.
+      required:
+      - estimatedProcessingDate
+      - businessDays
+      - estimatedProcessingTime
+      - estimatedSettlementDate
+      title: CalculatePaymentTimingResponse
+    invoiceTypes_CheckDeliveryMethod:
+      type: string
+      enum:
+      - PRINT
+      - MAIL
+      - MAIL_PRIORITY
+      - MAIL_UPS_NEXT_DAY
+      title: CheckDeliveryMethod
+    entityTypes_EntityId:
+      type: string
+      title: EntityId
+    invoiceTypes_InvoiceId:
+      type: string
+      title: InvoiceId
+    paymentMethodTypes_PaymentMethodId:
+      type: string
+      title: PaymentMethodId
+    invoiceTypes_BankDeliveryMethod:
+      type: string
+      enum:
+      - ACH_STANDARD
+      - ACH_SAME_DAY
+      - ACH_ACCELERATED
+      title: BankDeliveryMethod
+    calculate_EstimatedTiming:
+      type: object
+      properties:
+        estimatedDeductionDate:
+          type: string
+          format: date-time
+          description: Date the payment is scheduled to be deducted from the payer's account. Use this field if the payment has not yet been deducted.
+        processedAt:
+          type: string
+          format: date-time
+          description: Date the payment was processed. Use this field if the payment has already been deducted.
+        paymentSourceId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          description: ID of payment source.
+        paymentDestinationId:
+          $ref: '#/components/schemas/paymentMethodTypes_PaymentMethodId'
+          description: ID of payment destination.
+        paymentDestinationOptions:
+          $ref: '#/components/schemas/invoiceTypes_PaymentDestinationOptions'
+          description: Options for the payment destination. Depending on the payment destination, this may include things such as check delivery method.
+      required:
+      - paymentSourceId
+      - paymentDestinationId
+      title: EstimatedTiming
+    calculate_CalculatePaymentTimingRequest:
+      oneOf:
+      - $ref: '#/components/schemas/calculate_EstimatedTiming'
+      - $ref: '#/components/schemas/calculate_InvoiceTiming'
+      title: CalculatePaymentTimingRequest
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
