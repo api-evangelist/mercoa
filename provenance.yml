@@ -9,30 +9,33 @@ artifacts:
   authentication/mercoa-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  capabilities/mercoa-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-entities-api.opencollection.json:
-    method: derived
-    evidence: openapi/mercoa-entities-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-entities-api.postman_collection.json:
-    method: derived
-    evidence: openapi/mercoa-entities-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-entity-groups-api.opencollection.json:
-    method: derived
-    evidence: openapi/mercoa-entity-groups-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-entity-groups-api.postman_collection.json:
-    method: derived
-    evidence: openapi/mercoa-entity-groups-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-invoice-templates-api.opencollection.json:
-    method: derived
-    evidence: openapi/mercoa-invoice-templates-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-invoice-templates-api.postman_collection.json:
-    method: derived
-    evidence: openapi/mercoa-invoice-templates-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-invoices-api.opencollection.json:
-    method: derived
-    evidence: openapi/mercoa-invoices-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-invoices-api.postman_collection.json:
-    method: derived
-    evidence: openapi/mercoa-invoices-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-ocr-api.opencollection.json:
     method: derived
     evidence: openapi/mercoa-ocr-api
@@ -46,11 +49,11 @@ artifacts:
     method: derived
     evidence: openapi/mercoa-organization-api
   collections/mercoa-payment-gateway-api.opencollection.json:
-    method: derived
-    evidence: openapi/mercoa-payment-gateway-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-payment-gateway-api.postman_collection.json:
-    method: derived
-    evidence: openapi/mercoa-payment-gateway-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-payment-methods-api.opencollection.json:
     method: derived
     evidence: openapi/mercoa-payment-methods-api
@@ -58,11 +61,11 @@ artifacts:
     method: derived
     evidence: openapi/mercoa-payment-methods-api
   collections/mercoa-transactions-api.opencollection.json:
-    method: derived
-    evidence: openapi/mercoa-transactions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa-transactions-api.postman_collection.json:
-    method: derived
-    evidence: openapi/mercoa-transactions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/mercoa.opencollection.json:
     method: derived
     evidence: openapi/mercoa
@@ -70,132 +73,12 @@ artifacts:
     method: derived
     evidence: openapi/mercoa
   finops/mercoa-finops.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -279,23 +162,161 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   llms/mercoa-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
+  mcp/mercoa-mcp-tools.json:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/mercoa-mcp.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/_original/mercoa-openapi.yml:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/mercoa-entities-api-openapi.yml:
+    evidence: byte-identical to https://docs.mercoa.com/openapi/api-reference-2.yaml (sha256 00a8e403ae18,
+      fetched 2026-10-19)
+  openapi/mercoa-api-reference-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/mercoa-bank-lookup-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/mercoa-entity-groups-api-openapi.yml:
+  openapi/mercoa-calculate-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/mercoa-invoice-templates-api-openapi.yml:
+  openapi/mercoa-custom-payment-method-schema-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/mercoa-invoices-api-openapi.yml:
+  openapi/mercoa-entity-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-approval-policy-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-bnpl-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-bulk-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-counterparty-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-counterparty-bulk-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-counterparty-vendor-credit-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-customization-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-document-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-email-log-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-email-template-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-external-accounting-system-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-group-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-group-counterparty-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-group-invoice-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-group-user-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-invoice-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-metadata-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-notification-policy-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-payment-method-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-payment-method-bank-account-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-payment-method-wallet-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-representative-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-user-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-user-notification-policy-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-entity-user-notifications-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-approval-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-bnpl-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-bulk-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-collection-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-comment-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-document-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-line-item-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-payment-links-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-template-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-template-approval-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-template-document-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-invoice-template-line-item-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/mercoa-ocr-api-openapi.yml:
@@ -304,21 +325,30 @@ artifacts:
   openapi/mercoa-organization-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/mercoa-payment-gateway-api-openapi.yml:
+  openapi/mercoa-organization-notification-configuration-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-payment-gateway-process-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/mercoa-payment-gateway-validate-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/mercoa-payment-methods-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/mercoa-transactions-api-openapi.yml:
+  openapi/mercoa-transaction-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/mercoa-plans-pricing.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   rate-limits/mercoa-rate-limits.yml:
+    method: generated
+    evidence: declared in the artifact
+  security/mercoa-domain-security.yml:
     method: unknown
     evidence: no authorship recorded
-  security/mercoa-domain-security.yml:
+  vendors/mercoa-vendors.yml:
     method: unknown
     evidence: no authorship recorded
