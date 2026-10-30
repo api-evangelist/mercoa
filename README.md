@@ -1,4 +1,4 @@
-# Mercoa (mercoa)
+# Mercoa
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,74 +66,140 @@
 
 Mercoa is an embedded AP and AR platform that vertical SaaS companies use to launch AI-powered BillPay and invoicing inside their own products. The platform handles bill ingestion via intelligent email inboxes, vendor onboarding, approval workflows, payment scheduling, branded invoicing, AI-driven collection reminders, and disbursement across ACH, check, virtual card, and BNPL. Builders can choose React components, a hosted iFrame, or pure REST APIs and SDKs depending on how much UI control they need. Mercoa publishes official SDKs for TypeScript, Python, and Java and is backed by Y Combinator. Customers monetize Mercoa through per-user pricing, transaction fees, and premium payment option margins.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/mercoa/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/mercoa/refs/heads/main/apis.yml)
+**Areas:** Mercoa · Embedded Finance · Accounts Payable · Accounts Receivable · Bill Pay · Invoicing · Payments · Vertical SaaS · Vendors · Approvals · Disbursements · Virtual Cards
 
-## Scope
+## Mercoa on APIs.io
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for Mercoa is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mercoa/](https://apis.io/providers/mercoa/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- Mercoa
-- Embedded Finance
-- Accounts Payable
-- Accounts Receivable
-- BillPay
-- Invoicing
-- Payments
-- Vertical SaaS
-- Vendors
-- Approvals
-- Disbursements
-- Virtual Cards
+- [Mercoa API](https://apis.io/apis/mercoa/mercoa-api/) — REST API and SDK suite for embedding accounts payable and accounts receivable into vertical SaaS platforms. Exposes resources for entities, users, invoices,…
+- [Mercoa Entities API](https://apis.io/apis/mercoa/mercoa-entities-api/) — The Entities API from Mercoa — 7 operation(s) for entities.
+- [Mercoa Entity Groups API](https://apis.io/apis/mercoa/mercoa-entity-groups-api/) — The Entity Groups API from Mercoa — 5 operation(s) for entity groups.
+- [Mercoa Invoice Templates API](https://apis.io/apis/mercoa/mercoa-invoice-templates-api/) — The Invoice Templates API from Mercoa — 3 operation(s) for invoice templates.
+- [Mercoa Invoices API](https://apis.io/apis/mercoa/mercoa-invoices-api/) — The Invoices API from Mercoa — 8 operation(s) for invoices.
+- [Mercoa OCR API](https://apis.io/apis/mercoa/mercoa-ocr-api/) — The OCR API from Mercoa — 3 operation(s) for ocr.
+- [Mercoa Organization API](https://apis.io/apis/mercoa/mercoa-organization-api/) — The Organization API from Mercoa — 1 operation(s) for organization.
+- [Mercoa Payment Gateway API](https://apis.io/apis/mercoa/mercoa-payment-gateway-api/) — The Payment Gateway API from Mercoa — 2 operation(s) for payment gateway.
+- [Mercoa Payment Methods API](https://apis.io/apis/mercoa/mercoa-payment-methods-api/) — The Payment Methods API from Mercoa — 3 operation(s) for payment methods.
+- [Mercoa Transactions API](https://apis.io/apis/mercoa/mercoa-transactions-api/) — The Transactions API from Mercoa — 2 operation(s) for transactions.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-23
-- **Modified:** 2026-05-23
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Mercoa API
+Model Context Protocol servers that expose the API to agents.
 
-REST API and SDK suite for embedding accounts payable and accounts receivable into vertical SaaS platforms. Exposes resources for entities, users, invoices, bills, vendors, approval policies, payment methods, and disbursements, with webhooks for event-driven workflows. Mercoa offers official SDKs for TypeScript, Python, and Java, plus React components and a hosted iFrame for white-labeled AP/AR experiences.
+- [Moved to /providers/mercoa/](https://apis.io/servers/mercoa/mercoa/)
 
-- **Human URL:** [https://docs.mercoa.com/](https://docs.mercoa.com/)
-- **Base URL:** `https://api.mercoa.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- AP
-- AR
-- Invoices
-- Bills
-- Vendors
-- Payments
-- Approvals
-- Entities
+- [Mercoa Agentic Access](https://apis.io/agentic-access/mercoa/mercoa-agentic-access/)
 
-#### Properties
+#### Collections (10)
 
-- [Documentation](https://docs.mercoa.com/)
-- [Getting Started](https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-1-get-api-keys)
-- [Authentication](https://docs.mercoa.com/embedded-ap-ar/home/getting-started/step-1-get-api-keys)
-- [Source Code](https://github.com/mercoa-finance)
-- [SDK](https://github.com/mercoa-finance)
-- [Sign Up](https://mercoa.com/)
-- [Postman Collection](collections/mercoa.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mercoa.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Mercoa API](https://apis.io/collections/mercoa/open-mercoa/)
+- [Mercoa Entities API](https://apis.io/collections/mercoa/open-mercoa-entities-api/)
+- [Mercoa Entities Entity Groups API](https://apis.io/collections/mercoa/open-mercoa-entity-groups-api/)
+- [Mercoa Entities Invoice Templates API](https://apis.io/collections/mercoa/open-mercoa-invoice-templates-api/)
+- [Mercoa Entities Invoices API](https://apis.io/collections/mercoa/open-mercoa-invoices-api/)
+- [Mercoa Entities OCR API](https://apis.io/collections/mercoa/open-mercoa-ocr-api/)
+- [Mercoa Entities Organization API](https://apis.io/collections/mercoa/open-mercoa-organization-api/)
+- [Mercoa Entities Payment Gateway API](https://apis.io/collections/mercoa/open-mercoa-payment-gateway-api/)
+- [Mercoa Entities Payment Methods API](https://apis.io/collections/mercoa/open-mercoa-payment-methods-api/)
+- [Mercoa Entities Transactions API](https://apis.io/collections/mercoa/open-mercoa-transactions-api/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Mercoa Authentication](https://apis.io/security/mercoa/mercoa-authentication/)
+- [Mercoa Domain Security](https://apis.io/security/mercoa/mercoa-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Mercoa Plans Pricing](https://apis.io/plans/mercoa/mercoa-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Mercoa Rate Limits](https://apis.io/rate-limits/mercoa/mercoa-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Mercoa Finops](https://apis.io/finops/mercoa/mercoa-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://mercoa.com/)
 - [Documentation](https://docs.mercoa.com/)
-- [Source Code](https://github.com/mercoa-finance)
-- [Sign Up](https://mercoa.com/)
-- [L L Ms Txt](https://docs.mercoa.com/llms.txt)
+- [Blog](https://mercoa.com/blog)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.3** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 48.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 18.4 |
+
+**Agent readiness 28.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mercoa/](https://apis.io/providers/mercoa/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mercoa: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mercoa/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
